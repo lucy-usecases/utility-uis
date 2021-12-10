@@ -1,0 +1,13 @@
+{
+    "id": "86b70895-f91a-419f-9eca-0425e5d8ca17",
+    "author": "dinesh",
+    "widgets": [],
+    "sidebarLinks": [],
+    "uis": [
+        {
+            "id": "sensor-space-coordinate-editor",
+            "label": "Sensor,space coordinate editor interface"
+        }
+    ],
+    "menuItems": []
+}

@@ -1,0 +1,37 @@
+{
+    "id": "44bd0b59-ecaa-4fc7-c90e-9dcc56379933",
+    "author": "",
+    "widgets": [
+        {
+            "id": "LocationMarkerUI",
+            "name": "LocationMarkerUI",
+            "description": "A sample widget",
+            "icon": "",
+            "tags":[]
+        }
+    ],
+    "sidebarLinks": [
+        {
+            "id": "LocationMarkerUILink",
+            "label": "",
+            "description": "",
+            "target": "",
+            "icon": "",
+            "roles":[]
+        }
+    ],
+    "uis": [
+        {
+            "id": "LocationMarkerUILink",
+            "label":"",
+            "description": "",
+            "roles": []
+        }
+    ],
+    "menuItems": [
+        {
+            "id": "LocationMarkerUILink",
+            "title": "LocationMarkerUI"
+        }
+    ]
+}
