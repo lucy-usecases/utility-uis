@@ -1,6 +1,6 @@
 import * as React from "react";
 import { registerWidget, registerLink, registerUI, IContextProvider, } from './uxp';
-import { TitleBar, FilterPanel, WidgetWrapper, FormField, Select, Label, Input, MapComponent, IMarker, Popover, IconButton, Button, AsyncButton, ConfirmButton, Loading } from "uxp/components";
+import { TitleBar, FilterPanel, WidgetWrapper, FormField, Select, Label, Input, MapComponent, IMarker, Popover, IconButton, Button, AsyncButton, ConfirmButton, Loading, useToast } from "uxp/components";
 import './styles.scss';
 
 interface IWidgetProps {
@@ -55,6 +55,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
     let [loading, setLoading] = React.useState(true)
     let [saving, setSaving] = React.useState(false)
     let [confirming, setConfirming] = React.useState(false)
+
+    let toast = useToast()
 
 
     React.useEffect(() => {
@@ -135,8 +137,10 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             setLoading(false)
         }
         catch (e) {
+            setFloors([])
             console.log("unable to get floors ", e)
             setLoading(false)
+            // toast.error("Unable to get floors. Something went wrong")
         }
     }
 
@@ -152,7 +156,9 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             setLoading(false)
         }
         catch (e) {
+            setSpaces([])
             console.log("unable to get spaces ", e)
+            // toast.error("Unable to get spaces. Something went wrong")
         }
     }
 
@@ -177,6 +183,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         }
         catch (e) {
             console.log("Unable to save ", e)
+            toast.error("Unable to save changes. Something went wrong")
         }
     }
 
@@ -216,25 +223,30 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                 },
                 renderPopup: {
                     content: () => <div>
-                        <IconButton
-                            type="copy"
-                            size="small"
-                            onClick={() => {
-                                // duplicate the marker 
-                                let _region = [...region]
-                                _region.splice(i, 0, { x: pos.x + 1, y: pos.y + 1 })
-                                setRegion(_region)
-                            }} />
+                        {editRegion ?
+                            <>
+                                <IconButton
+                                    type="copy"
+                                    size="small"
+                                    onClick={() => {
+                                        // duplicate the marker 
+                                        let _region = [...region]
+                                        _region.splice(i, 0, { x: pos.x + 1, y: pos.y + 1 })
+                                        setRegion(_region)
+                                    }} />
 
-                        <IconButton
-                            type="delete"
-                            size="small"
-                            onClick={() => {
-                                let _region = [...region]
-                                _region.splice(i, 1)
-                                setRegion(_region)
-                            }} />
-
+                                <IconButton
+                                    type="delete"
+                                    size="small"
+                                    onClick={() => {
+                                        let _region = [...region]
+                                        _region.splice(i, 1)
+                                        setRegion(_region)
+                                    }} />
+                            </>
+                            :
+                            <div> Click on "Edit Coordinates" to start editing </div>
+                        }
                     </div>
                 }
             }
@@ -386,7 +398,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                                     </>
                                     :
                                     <Button
-                                        title="Edit Region"
+                                        title="Edit Coordinates"
                                         onClick={() => setEditRegion(true)}
                                     />
                                 }
