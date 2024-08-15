@@ -1,2 +1,936 @@
-(()=>{var e={99:(e,t,n)=>{(t=n(495)(!1)).push([e.id,'.location-marker-ui-container{width:100%;height:100%;position:relative;padding:80px 0 0 250px}.location-marker-ui-container>.lmui-sidebar{position:absolute;top:0;left:0;width:250px;height:100%;background-color:#fff;border-right:1px solid silver;padding-top:80px}.location-marker-ui-container>.lmui-sidebar>.title{position:absolute;top:0;left:0;width:250px;height:80px;display:flex;align-items:center;justify-content:center;font-weight:900;text-transform:uppercase;border-bottom:1px solid silver}.location-marker-ui-container>.lmui-sidebar>.content{width:100%;height:100%;overflow-y:auto;padding:10px}.location-marker-ui-container>.lmui-sidebar>.content>.space{width:100%;height:auto;padding:10px;font-size:12px;overflow:hidden;cursor:pointer;margin-bottom:8px;border-radius:5px;background-color:#d8d8d8}.location-marker-ui-container>.lmui-sidebar>.content>.space.active{background-color:#52c4c9;color:#fff}.location-marker-ui-container>.lmui-toolbar{position:absolute;top:0;left:250px;right:0;height:80px;padding:20px;background-color:#fff;display:flex;align-items:center;justify-content:flex-end;border-bottom:1px solid silver}.location-marker-ui-container>.lmui-toolbar>.floor-filter{width:auto}.location-marker-ui-container>.lmui-toolbar>.floor-filter .uxp-form-select{max-width:250px;margin:0}.location-marker-ui-container>.lmui-map-container{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}.location-marker-ui-container>.lmui-map-container>.no-map{font-weight:900;font-size:20px;color:#868686}.location-marker-ui-container>.lmui-map-container>.toolbar{position:absolute;top:20px;right:20px;background-color:rgba(0,0,0,.5);border:2px solid #000;padding:15px 20px;border-radius:10px;display:flex;align-items:center;justify-content:space-between;z-index:999}.location-marker-ui-container>.lmui-map-container>.toolbar>.uxp-button{margin:0 4px}.location-marker-ui-container>.lmui-map-container>.toolbar>.uxp-button.confirm-button{background-color:#52c4c9;color:#fff}.location-marker-ui-container>.lmui-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;z-index:100%}.location-marker-config-row>.row{display:flex;align-items:center;justify-content:space-between}.location-marker-config-row>.row>.uxp-input-container{margin:4px}.lmui-custom-marker{background-color:transparent}.lmui-custom-marker>div{width:30px;height:30px;border:2px solid #52c4c9;background-color:#51d2d757;transform:translate(-9px, -9px);border-radius:50%;position:relative}.lmui-custom-marker>div::before{content:"";width:5px;height:5px;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);background-color:#52c4c9}',""]),e.exports=t},495:e=>{"use strict";e.exports=function(e){var t=[];return t.toString=function(){return this.map((function(t){var n=function(e,t){var n,o,i,r=e[1]||"",a=e[3];if(!a)return r;if(t&&"function"==typeof btoa){var l=(n=a,o=btoa(unescape(encodeURIComponent(JSON.stringify(n)))),i="sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(o),"/*# ".concat(i," */")),s=a.sources.map((function(e){return"/*# sourceURL=".concat(a.sourceRoot||"").concat(e," */")}));return[r].concat(s).concat([l]).join("\n")}return[r].join("\n")}(t,e);return t[2]?"@media ".concat(t[2]," {").concat(n,"}"):n})).join("")},t.i=function(e,n,o){"string"==typeof e&&(e=[[null,e,""]]);var i={};if(o)for(var r=0;r<this.length;r++){var a=this[r][0];null!=a&&(i[a]=!0)}for(var l=0;l<e.length;l++){var s=[].concat(e[l]);o&&i[s[0]]||(n&&(s[2]?s[2]="".concat(n," and ").concat(s[2]):s[2]=n),t.push(s))}},t}},264:(e,t,n)=>{"use strict";var o,i=function(){var e={};return function(t){if(void 0===e[t]){var n=document.querySelector(t);if(window.HTMLIFrameElement&&n instanceof window.HTMLIFrameElement)try{n=n.contentDocument.head}catch(e){n=null}e[t]=n}return e[t]}}(),r=[];function a(e){for(var t=-1,n=0;n<r.length;n++)if(r[n].identifier===e){t=n;break}return t}function l(e,t){for(var n={},o=[],i=0;i<e.length;i++){var l=e[i],s=t.base?l[0]+t.base:l[0],c=n[s]||0,u="".concat(s," ").concat(c);n[s]=c+1;var d=a(u),m={css:l[1],media:l[2],sourceMap:l[3]};-1!==d?(r[d].references++,r[d].updater(m)):r.push({identifier:u,updater:p(m,t),references:1}),o.push(u)}return o}function s(e){var t=document.createElement("style"),o=e.attributes||{};if(void 0===o.nonce){var r=n.nc;r&&(o.nonce=r)}if(Object.keys(o).forEach((function(e){t.setAttribute(e,o[e])})),"function"==typeof e.insert)e.insert(t);else{var a=i(e.insert||"head");if(!a)throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");a.appendChild(t)}return t}var c,u=(c=[],function(e,t){return c[e]=t,c.filter(Boolean).join("\n")});function d(e,t,n,o){var i=n?"":o.media?"@media ".concat(o.media," {").concat(o.css,"}"):o.css;if(e.styleSheet)e.styleSheet.cssText=u(t,i);else{var r=document.createTextNode(i),a=e.childNodes;a[t]&&e.removeChild(a[t]),a.length?e.insertBefore(r,a[t]):e.appendChild(r)}}function m(e,t,n){var o=n.css,i=n.media,r=n.sourceMap;if(i?e.setAttribute("media",i):e.removeAttribute("media"),r&&"undefined"!=typeof btoa&&(o+="\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(r))))," */")),e.styleSheet)e.styleSheet.cssText=o;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(o))}}var f=null,g=0;function p(e,t){var n,o,i;if(t.singleton){var r=g++;n=f||(f=s(t)),o=d.bind(null,n,r,!1),i=d.bind(null,n,r,!0)}else n=s(t),o=m.bind(null,n,t),i=function(){!function(e){if(null===e.parentNode)return!1;e.parentNode.removeChild(e)}(n)};return o(e),function(t){if(t){if(t.css===e.css&&t.media===e.media&&t.sourceMap===e.sourceMap)return;o(e=t)}else i()}}e.exports=function(e,t){(t=t||{}).singleton||"boolean"==typeof t.singleton||(t.singleton=(void 0===o&&(o=Boolean(window&&document&&document.all&&!window.atob)),o));var n=l(e=e||[],t);return function(e){if(e=e||[],"[object Array]"===Object.prototype.toString.call(e)){for(var o=0;o<n.length;o++){var i=a(n[o]);r[i].references--}for(var s=l(e,t),c=0;c<n.length;c++){var u=a(n[c]);0===r[u].references&&(r[u].updater(),r.splice(u,1))}n=s}}}},273:(e,t,n)=>{var o=n(264),i=n(99);"string"==typeof(i=i.__esModule?i.default:i)&&(i=[[e.id,i,""]]);o(i,{insert:"head",singleton:!1}),e.exports=i.locals||{}},629:function(e,t,n){"use strict";var o=this&&this.__createBinding||(Object.create?function(e,t,n,o){void 0===o&&(o=n),Object.defineProperty(e,o,{enumerable:!0,get:function(){return t[n]}})}:function(e,t,n,o){void 0===o&&(o=n),e[o]=t[n]}),i=this&&this.__setModuleDefault||(Object.create?function(e,t){Object.defineProperty(e,"default",{enumerable:!0,value:t})}:function(e,t){e.default=t}),r=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var t={};if(null!=e)for(var n in e)"default"!==n&&Object.hasOwnProperty.call(e,n)&&o(t,e,n);return i(t,e),t},a=this&&this.__awaiter||function(e,t,n,o){return new(n||(n=Promise))((function(i,r){function a(e){try{s(o.next(e))}catch(e){r(e)}}function l(e){try{s(o.throw(e))}catch(e){r(e)}}function s(e){var t;e.done?i(e.value):(t=e.value,t instanceof n?t:new n((function(e){e(t)}))).then(a,l)}s((o=o.apply(e,t||[])).next())}))};Object.defineProperty(t,"__esModule",{value:!0});const l=r(n(363)),s=n(484),c=n(432);n(273),s.registerUI({id:"sensor-space-coordinate-editor",component:e=>{let[t,n]=l.useState([]),[o,i]=l.useState(null),[r,s]=l.useState([]),[u,d]=l.useState(null),[m,f]=l.useState({floors:{model:"",action:""},spaces:{model:"",action:""},setRegion:{model:"",action:""}}),[g,p]=l.useState([]),[h,b]=l.useState(!1),[v,x]=l.useState(!0),[w,y]=l.useState(!1),[j,k]=l.useState(!1),E=c.useToast();function O(){if(o){let e=o.coordinates||[];0==e.length&&(e=[C()]),p(e)}}function C(){let e=r.find((e=>e.id==u)),t=.5*(null==e?void 0:e.layout.width)||0;return{x:.5*(null==e?void 0:e.layout.height)||0,y:t}}function S(){return a(this,void 0,void 0,(function*(){try{x(!0);let{model:t,action:o}=m.spaces;if(t.trim().length>0&&o.trim().length>0){let i=yield e.uxpContext.executeAction(t,o,{},{json:!0});n(i.spaces||[]),console.log("spaces ",i.spaces)}x(!1)}catch(e){n([]),console.log("unable to get spaces ",e)}}))}l.useEffect((()=>{let e=new URLSearchParams(window.location.search);console.log("params ",e);let t=e.get("flm")||"",n=e.get("fla")||"",o=e.get("asm")||"",i=e.get("asa")||"",r=e.get("ucm")||"",a=e.get("uca")||"";f({floors:{model:t,action:n},spaces:{model:o,action:i},setRegion:{model:r,action:a}})}),[window.location]),l.useEffect((()=>{!function(){a(this,void 0,void 0,(function*(){try{x(!0);let{model:t,action:n}=m.floors;if(t.trim().length>0&&n.trim().length>0){let o=yield e.uxpContext.executeAction(t,n,{},{json:!0});s(o.floors||[])}x(!1)}catch(e){s([]),console.log("unable to get floors ",e),x(!1)}}))}()}),[m.floors]),l.useEffect((()=>{r.length>0&&d(r[0].id)}),[r]),l.useEffect((()=>{S()}),[m.spaces]),l.useEffect((()=>{t.length>0&&i(t[0])}),[t]),l.useEffect((()=>{O()}),[o]);let N=r.find((e=>e.id==u)),I={position:{latitude:.5*(null==N?void 0:N.layout.width),longitude:.5*(null==N?void 0:N.layout.height)},renderMarker:!1},M=[];if(N)for(let e=0;e<g.length;e++){let t=g[e],n={latitude:N.layout.height-t.y,longitude:t.x,draggable:h,ondragstart:e=>console.log("Drag start ",e),ondragend:t=>{let{lat:n,lng:o}=t.target._latlng,i=[...g];i[e]={x:Number(o),y:Number(N.layout.height-n)},p(i)},customHTMLIcon:{className:"lmui-custom-marker",html:"<div></div>"},renderPopup:{content:()=>l.createElement("div",null,h?l.createElement(l.Fragment,null,l.createElement(c.IconButton,{type:"copy",size:"small",onClick:()=>{let n=[...g];n.splice(e,0,{x:t.x+1,y:t.y+1}),p(n)}}),l.createElement(c.IconButton,{type:"delete",size:"small",onClick:()=>{let t=[...g];t.splice(e,1),p(t)}})):l.createElement("div",null,' Click on "Edit Coordinates" to start editing '))}};M.push(n)}return l.createElement("div",{className:"location-marker-ui-container"},l.createElement("div",{className:"lmui-sidebar"},l.createElement("div",{className:"title"}," Spaces "),l.createElement("div",{className:"content"},t.map(((e,t)=>l.createElement("div",{className:`space ${(null==o?void 0:o.id)==e.id&&"active"} `,key:t,onClick:()=>i(e)}," ",e.name," "))))),l.createElement("div",{className:"lmui-toolbar"},l.createElement(c.FormField,{className:"floor-filter"},l.createElement(c.Select,{selected:u||"",onChange:d,options:r,labelField:"name",valueField:"id",placeholder:"Select a floor"})),l.createElement(c.FilterPanel,null,l.createElement(c.FormField,{className:"location-marker-config-row"},l.createElement(c.Label,null,"Get Floors "),l.createElement("div",{className:"row"},l.createElement(c.Input,{value:m.floors.model||"",onChange:e=>{f((t=>Object.assign(Object.assign({},t),{floors:Object.assign(Object.assign({},t.floors),{model:e})})))},placeholder:"Model name"}),l.createElement(c.Input,{value:m.floors.action||"",onChange:e=>{f((t=>Object.assign(Object.assign({},t),{floors:Object.assign(Object.assign({},t.floors),{action:e})})))},placeholder:"Action name"}))),l.createElement(c.FormField,{className:"location-marker-config-row"},l.createElement(c.Label,null,"Get Spaces "),l.createElement("div",{className:"row"},l.createElement(c.Input,{value:m.spaces.model||"",onChange:e=>{f((t=>Object.assign(Object.assign({},t),{spaces:Object.assign(Object.assign({},t.spaces),{model:e})})))},placeholder:"Model name"}),l.createElement(c.Input,{value:m.spaces.action||"",onChange:e=>{f((t=>Object.assign(Object.assign({},t),{spaces:Object.assign(Object.assign({},t.spaces),{action:e})})))},placeholder:"Action name"}))),l.createElement(c.FormField,{className:"location-marker-config-row"},l.createElement(c.Label,null,"Set Coordinates "),l.createElement("div",{className:"row"},l.createElement(c.Input,{value:m.setRegion.model||"",onChange:e=>{f((t=>Object.assign(Object.assign({},t),{setRegion:Object.assign(Object.assign({},t.setRegion),{model:e})})))},placeholder:"Model name"}),l.createElement(c.Input,{value:m.setRegion.action||"",onChange:e=>{f((t=>Object.assign(Object.assign({},t),{setRegion:Object.assign(Object.assign({},t.setRegion),{action:e})})))},placeholder:"Action name"}))))),l.createElement("div",{className:"lmui-map-container"},N&&N.layout.floorPlan?l.createElement(l.Fragment,null,l.createElement(c.MapComponent,{zoom:3,minZoom:3,center:I,regions:[{type:"polygon",color:"#DDBC52FF",fillColor:"#DDBC52FF",bounds:g.map((e=>[e.x,e.y])),imageCoordinates:!0}],staticImage:{url:N.layout.floorPlan||"",width:N.layout.width,height:N.layout.height},onRegionClick:(e,t)=>{},markers:M,onMarkerClick:()=>{},mapUrl:"",onClick:e=>console.log("cliked",e)}),o&&l.createElement("div",{className:"toolbar"},h?l.createElement(l.Fragment,null,j?l.createElement(c.AsyncButton,{title:"Confirm",loadingTitle:"Saving...",onClick:function(){return a(this,void 0,void 0,(function*(){try{let{model:t,action:n}=m.setRegion;if(t.trim().length>0&&n.trim().length>0&&o){if(w)return;y(!0);let i={id:o.id,coordinates:JSON.stringify(g)};yield e.uxpContext.executeAction(t,n,i,{json:!0}),yield S(),b(!1),k(!1),y(!1)}}catch(e){console.log("Unable to save ",e),E.error("Unable to save changes. Something went wrong")}}))},className:"confirm-button"}):l.createElement(c.Button,{title:"Save Changes",loadingTitle:"Saving Changes....",onClick:()=>k(!0),className:"confirm-button"}),!w&&l.createElement(c.Button,{title:"Cancel",onClick:()=>{b(!1),O()}})):l.createElement(c.Button,{title:"Edit Coordinates",onClick:()=>b(!0)}))):l.createElement("div",{className:"no-map"},"Select a floor to get started")),v&&l.createElement("div",{className:"lmui-overlay"}," ",l.createElement(c.Loading,null)," "))}})},484:function(e,t,n){"use strict";var o=this&&this.__importDefault||function(e){return e&&e.__esModule?e:{default:e}};Object.defineProperty(t,"__esModule",{value:!0}),t.registerUI=t.registerMenuItem=t.registerLink=t.registerWidget=void 0;const i=o(n(354));t.registerWidget=function(e){var t;let n=(i.default.id+"/widget/"+e.id).toLowerCase();if(!window.registerWidget)return void console.error("This code is not being run within the context of UXP");let o=null===(t=i.default.widgets)||void 0===t?void 0:t.find((t=>t.id==e.id));if(!o)throw console.log("Please update the bundle.json"),"Error: The widget you are trying to register is not in the bundle.json. Please update the bundle.json before continue";let r=Object.assign(Object.assign(Object.assign({},e),o),{id:n});window.registerWidget(r)},t.registerLink=function(e){var t;let n=(i.default.id+"/sidebarlink/"+e.id).toLowerCase();if(!window.registerLink)return void console.error("This is not is not being run within the UXP context");console.log("registering link....",n);let o=null===(t=i.default.sidebarLinks)||void 0===t?void 0:t.find((t=>t.id==e.id));if(!o)throw console.log("Please update the bundle.json"),"Error: The sidebar link you are trying to register is not in the bundle.json. Please update the bundle.json before continue";let r=Object.assign(Object.assign(Object.assign({},e),o),{id:n});window.registerLink(r)},t.registerMenuItem=function(e){let t=(i.default.id+"/menuitem/"+e.id).toLowerCase();if(!window.registerMenuItem)return void console.error("This is not is not being run within the UXP context");console.log("registering menu item....",t);let n=i.default.menuItems.find((t=>t.id==e.id));if(!n)throw console.log("Please update the bundle.json"),"Error: The menu item you are trying to register is not in the bundle.json. Please update the bundle.json before continue";let o=Object.assign(Object.assign(Object.assign({},e),n),{id:t});window.registerMenuItem(o)},t.registerUI=function(e){let t=(i.default.id+"/ui/"+e.id).toLowerCase();if(!window.registerUI)return void console.error("This is not is not being run within the UXP context");console.log("registering link....",t);let n=i.default.uis.find((t=>t.id==e.id));if(!n)throw console.log("Please update the bundle.json"),"Error: The ui you are trying to register is not in the bundle.json. Please update the bundle.json before continue";let o=Object.assign(Object.assign(Object.assign({},e),n),{id:t});window.registerUI(o)}},363:e=>{"use strict";e.exports=React},432:e=>{"use strict";e.exports=UXPComponents},354:e=>{"use strict";e.exports=JSON.parse('{"id":"86b70895-f91a-419f-9eca-0425e5d8ca17","author":"dinesh","widgets":[],"sidebarLinks":[],"uis":[{"id":"sensor-space-coordinate-editor","label":"Sensor,space coordinate editor interface"}],"menuItems":[]}')}},t={};!function n(o){var i=t[o];if(void 0!==i)return i.exports;var r=t[o]={id:o,exports:{}};return e[o].call(r.exports,r,r.exports,n),r.exports}(629)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles.scss":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles.scss ***!
+  \******************************************************************************************************/
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, ".location-marker-ui-container {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  padding: 80px 0 0 250px;\n}\n.location-marker-ui-container > .lmui-sidebar {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  background-color: white;\n  border-right: 1px solid silver;\n  padding-top: 80px;\n}\n.location-marker-ui-container > .lmui-sidebar > .title {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 80px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-weight: 900;\n  text-transform: uppercase;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-sidebar > .content {\n  width: 100%;\n  height: 100%;\n  overflow-y: auto;\n  padding: 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search {\n  width: 100%;\n  height: auto;\n  padding: 20px 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search .uxp-search-box-container .search-box-container .uxp-input-container input {\n  min-width: 165px !important;\n}\n.location-marker-ui-container > .lmui-sidebar > .content > .space {\n  width: 100%;\n  height: auto;\n  padding: 10px;\n  font-size: 12px;\n  overflow: hidden;\n  cursor: pointer;\n  margin-bottom: 8px;\n  border-radius: 5px;\n  background-color: #d8d8d8;\n}\n.location-marker-ui-container > .lmui-sidebar > .content > .space.active {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-toolbar {\n  position: absolute;\n  top: 0;\n  left: 250px;\n  right: 0;\n  height: 80px;\n  padding: 20px;\n  background-color: white;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter {\n  width: auto;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter .uxp-form-select {\n  max-width: 250px;\n  margin: 0;\n}\n.location-marker-ui-container > .lmui-map-container {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n}\n.location-marker-ui-container > .lmui-map-container > .no-map {\n  font-weight: 900;\n  font-size: 20px;\n  color: #868686;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar {\n  position: absolute;\n  top: 20px;\n  right: 20px;\n  background-color: rgba(0, 0, 0, 0.5);\n  border: 2px solid black;\n  padding: 15px 20px;\n  border-radius: 10px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  z-index: 999;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar > .uxp-button {\n  margin: 0 4px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar > .uxp-button.confirm-button {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.12);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 100%;\n}\n\n.location-marker-config-row > .row {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.location-marker-config-row > .row > .uxp-input-container {\n  margin: 4px;\n}\n\n.lmui-custom-marker {\n  background-color: transparent;\n}\n.lmui-custom-marker > div {\n  width: 30px;\n  height: 30px;\n  border: 2px solid #52c4c9;\n  background-color: #51d2d757;\n  transform: translate(-9px, -9px);\n  border-radius: 50%;\n  position: relative;\n}\n.lmui-custom-marker > div::before {\n  content: \"\";\n  width: 5px;\n  height: 5px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  background-color: #52c4c9;\n}", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/api.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+// eslint-disable-next-line func-names
+module.exports = function (useSourceMap) {
+  var list = []; // return the list of modules as css string
+
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = cssWithMappingToString(item, useSourceMap);
+
+      if (item[2]) {
+        return "@media ".concat(item[2], " {").concat(content, "}");
+      }
+
+      return content;
+    }).join('');
+  }; // import a list of modules into the list
+  // eslint-disable-next-line func-names
+
+
+  list.i = function (modules, mediaQuery, dedupe) {
+    if (typeof modules === 'string') {
+      // eslint-disable-next-line no-param-reassign
+      modules = [[null, modules, '']];
+    }
+
+    var alreadyImportedModules = {};
+
+    if (dedupe) {
+      for (var i = 0; i < this.length; i++) {
+        // eslint-disable-next-line prefer-destructuring
+        var id = this[i][0];
+
+        if (id != null) {
+          alreadyImportedModules[id] = true;
+        }
+      }
+    }
+
+    for (var _i = 0; _i < modules.length; _i++) {
+      var item = [].concat(modules[_i]);
+
+      if (dedupe && alreadyImportedModules[item[0]]) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      if (mediaQuery) {
+        if (!item[2]) {
+          item[2] = mediaQuery;
+        } else {
+          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
+        }
+      }
+
+      list.push(item);
+    }
+  };
+
+  return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
+
+  var cssMapping = item[3];
+
+  if (!cssMapping) {
+    return content;
+  }
+
+  if (useSourceMap && typeof btoa === 'function') {
+    var sourceMapping = toComment(cssMapping);
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  }
+
+  return [content].join('\n');
+} // Adapted from convert-source-map (MIT)
+
+
+function toComment(sourceMap) {
+  // eslint-disable-next-line no-undef
+  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+  return "/*# ".concat(data, " */");
+}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
+  \****************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var isOldIE = function isOldIE() {
+  var memo;
+  return function memorize() {
+    if (typeof memo === 'undefined') {
+      // Test for IE <= 9 as proposed by Browserhacks
+      // @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
+      // Tests for existence of standard globals is to allow style-loader
+      // to operate correctly into non-standard environments
+      // @see https://github.com/webpack-contrib/style-loader/issues/177
+      memo = Boolean(window && document && document.all && !window.atob);
+    }
+
+    return memo;
+  };
+}();
+
+var getTarget = function getTarget() {
+  var memo = {};
+  return function memorize(target) {
+    if (typeof memo[target] === 'undefined') {
+      var styleTarget = document.querySelector(target); // Special case to return head of iframe instead of iframe itself
+
+      if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+        try {
+          // This will throw an exception if access to iframe is blocked
+          // due to cross-origin restrictions
+          styleTarget = styleTarget.contentDocument.head;
+        } catch (e) {
+          // istanbul ignore next
+          styleTarget = null;
+        }
+      }
+
+      memo[target] = styleTarget;
+    }
+
+    return memo[target];
+  };
+}();
+
+var stylesInDom = [];
+
+function getIndexByIdentifier(identifier) {
+  var result = -1;
+
+  for (var i = 0; i < stylesInDom.length; i++) {
+    if (stylesInDom[i].identifier === identifier) {
+      result = i;
+      break;
+    }
+  }
+
+  return result;
+}
+
+function modulesToDom(list, options) {
+  var idCountMap = {};
+  var identifiers = [];
+
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i];
+    var id = options.base ? item[0] + options.base : item[0];
+    var count = idCountMap[id] || 0;
+    var identifier = "".concat(id, " ").concat(count);
+    idCountMap[id] = count + 1;
+    var index = getIndexByIdentifier(identifier);
+    var obj = {
+      css: item[1],
+      media: item[2],
+      sourceMap: item[3]
+    };
+
+    if (index !== -1) {
+      stylesInDom[index].references++;
+      stylesInDom[index].updater(obj);
+    } else {
+      stylesInDom.push({
+        identifier: identifier,
+        updater: addStyle(obj, options),
+        references: 1
+      });
+    }
+
+    identifiers.push(identifier);
+  }
+
+  return identifiers;
+}
+
+function insertStyleElement(options) {
+  var style = document.createElement('style');
+  var attributes = options.attributes || {};
+
+  if (typeof attributes.nonce === 'undefined') {
+    var nonce =  true ? __webpack_require__.nc : 0;
+
+    if (nonce) {
+      attributes.nonce = nonce;
+    }
+  }
+
+  Object.keys(attributes).forEach(function (key) {
+    style.setAttribute(key, attributes[key]);
+  });
+
+  if (typeof options.insert === 'function') {
+    options.insert(style);
+  } else {
+    var target = getTarget(options.insert || 'head');
+
+    if (!target) {
+      throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");
+    }
+
+    target.appendChild(style);
+  }
+
+  return style;
+}
+
+function removeStyleElement(style) {
+  // istanbul ignore if
+  if (style.parentNode === null) {
+    return false;
+  }
+
+  style.parentNode.removeChild(style);
+}
+/* istanbul ignore next  */
+
+
+var replaceText = function replaceText() {
+  var textStore = [];
+  return function replace(index, replacement) {
+    textStore[index] = replacement;
+    return textStore.filter(Boolean).join('\n');
+  };
+}();
+
+function applyToSingletonTag(style, index, remove, obj) {
+  var css = remove ? '' : obj.media ? "@media ".concat(obj.media, " {").concat(obj.css, "}") : obj.css; // For old IE
+
+  /* istanbul ignore if  */
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = replaceText(index, css);
+  } else {
+    var cssNode = document.createTextNode(css);
+    var childNodes = style.childNodes;
+
+    if (childNodes[index]) {
+      style.removeChild(childNodes[index]);
+    }
+
+    if (childNodes.length) {
+      style.insertBefore(cssNode, childNodes[index]);
+    } else {
+      style.appendChild(cssNode);
+    }
+  }
+}
+
+function applyToTag(style, options, obj) {
+  var css = obj.css;
+  var media = obj.media;
+  var sourceMap = obj.sourceMap;
+
+  if (media) {
+    style.setAttribute('media', media);
+  } else {
+    style.removeAttribute('media');
+  }
+
+  if (sourceMap && typeof btoa !== 'undefined') {
+    css += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), " */");
+  } // For old IE
+
+  /* istanbul ignore if  */
+
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    while (style.firstChild) {
+      style.removeChild(style.firstChild);
+    }
+
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var singleton = null;
+var singletonCounter = 0;
+
+function addStyle(obj, options) {
+  var style;
+  var update;
+  var remove;
+
+  if (options.singleton) {
+    var styleIndex = singletonCounter++;
+    style = singleton || (singleton = insertStyleElement(options));
+    update = applyToSingletonTag.bind(null, style, styleIndex, false);
+    remove = applyToSingletonTag.bind(null, style, styleIndex, true);
+  } else {
+    style = insertStyleElement(options);
+    update = applyToTag.bind(null, style, options);
+
+    remove = function remove() {
+      removeStyleElement(style);
+    };
+  }
+
+  update(obj);
+  return function updateStyle(newObj) {
+    if (newObj) {
+      if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap) {
+        return;
+      }
+
+      update(obj = newObj);
+    } else {
+      remove();
+    }
+  };
+}
+
+module.exports = function (list, options) {
+  options = options || {}; // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+  // tags it will allow on a page
+
+  if (!options.singleton && typeof options.singleton !== 'boolean') {
+    options.singleton = isOldIE();
+  }
+
+  list = list || [];
+  var lastIdentifiers = modulesToDom(list, options);
+  return function update(newList) {
+    newList = newList || [];
+
+    if (Object.prototype.toString.call(newList) !== '[object Array]') {
+      return;
+    }
+
+    for (var i = 0; i < lastIdentifiers.length; i++) {
+      var identifier = lastIdentifiers[i];
+      var index = getIndexByIdentifier(identifier);
+      stylesInDom[index].references--;
+    }
+
+    var newLastIdentifiers = modulesToDom(newList, options);
+
+    for (var _i = 0; _i < lastIdentifiers.length; _i++) {
+      var _identifier = lastIdentifiers[_i];
+
+      var _index = getIndexByIdentifier(_identifier);
+
+      if (stylesInDom[_index].references === 0) {
+        stylesInDom[_index].updater();
+
+        stylesInDom.splice(_index, 1);
+      }
+    }
+
+    lastIdentifiers = newLastIdentifiers;
+  };
+};
+
+/***/ }),
+
+/***/ "./src/styles.scss":
+/*!*************************!*\
+  !*** ./src/styles.scss ***!
+  \*************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var api = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !!../node_modules/css-loader/dist/cjs.js!../node_modules/sass-loader/dist/cjs.js!./styles.scss */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles.scss");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.id, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+
+
+module.exports = content.locals || {};
+
+/***/ }),
+
+/***/ "./src/index.tsx":
+/*!***********************!*\
+  !*** ./src/index.tsx ***!
+  \***********************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const React = __importStar(__webpack_require__(/*! react */ "react"));
+const uxp_1 = __webpack_require__(/*! ./uxp */ "./src/uxp.ts");
+const components_1 = __webpack_require__(/*! uxp/components */ "uxp/components");
+__webpack_require__(/*! ./styles.scss */ "./src/styles.scss");
+const SensorSpaceCoordinateEditor = (props) => {
+    const [filteredSpace, setFilteredSpace] = React.useState([]);
+    const [query, setQuery] = React.useState('');
+    let [spaces, setSpaces] = React.useState([]);
+    let [space, setSpace] = React.useState(null);
+    let [floors, setFloors] = React.useState([]);
+    let [floor, setFloor] = React.useState(null);
+    let [config, setConfig] = React.useState({
+        floors: { model: "", action: "" },
+        spaces: { model: "", action: "" },
+        setRegion: { model: "", action: "" },
+    });
+    let [region, setRegion] = React.useState([]);
+    let [editRegion, setEditRegion] = React.useState(false);
+    let [loading, setLoading] = React.useState(true);
+    let [saving, setSaving] = React.useState(false);
+    let [confirming, setConfirming] = React.useState(false);
+    let toast = components_1.useToast();
+    React.useEffect(() => {
+        let params = new URLSearchParams(window.location.search);
+        console.log("params ", params);
+        let flm = params.get("flm") || "";
+        let fla = params.get("fla") || "";
+        let asm = params.get("asm") || "";
+        let asa = params.get("asa") || "";
+        let ucm = params.get("ucm") || "";
+        let uca = params.get("uca") || "";
+        setConfig({
+            floors: {
+                model: flm,
+                action: fla
+            },
+            spaces: {
+                model: asm,
+                action: asa
+            },
+            setRegion: {
+                model: ucm,
+                action: uca
+            }
+        });
+    }, [window.location]);
+    React.useEffect(() => {
+        getFloors();
+    }, [config.floors]);
+    React.useEffect(() => {
+        if (floors.length > 0) {
+            setFloor(floors[0].id);
+        }
+    }, [floors]);
+    React.useEffect(() => {
+        getSpaces();
+    }, [config.spaces]);
+    React.useEffect(() => {
+        if (spaces.length > 0 && !!space)
+            setSpace(spaces[0]);
+    }, [spaces]);
+    React.useEffect(() => {
+        filterSpaces();
+    }, [spaces, query]);
+    React.useEffect(() => {
+        getDefaultCoords();
+    }, [space]);
+    function filterSpaces() {
+        var _a;
+        const filtered = (((_a = query === null || query === void 0 ? void 0 : query.trim()) === null || _a === void 0 ? void 0 : _a.length) > 0) ? [...spaces].filter(s => { var _a; return ((_a = s === null || s === void 0 ? void 0 : s.name) === null || _a === void 0 ? void 0 : _a.indexOf(query)) !== -1; }) : spaces;
+        setFilteredSpace(filtered);
+    }
+    function getDefaultCoords() {
+        if (space) {
+            let coords = space.coordinates || [];
+            if (coords.length == 0)
+                coords = [getCenterCoords()];
+            setRegion(coords);
+        }
+    }
+    function getCenterCoords() {
+        let floorData = floors.find(f => f.id == floor);
+        let lat = (floorData === null || floorData === void 0 ? void 0 : floorData.layout.width) * 0.5 || 0;
+        let lng = (floorData === null || floorData === void 0 ? void 0 : floorData.layout.height) * 0.5 || 0;
+        return { x: lng, y: lat };
+    }
+    function getFloors() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                setLoading(true);
+                let { model, action } = config.floors;
+                if (model.trim().length > 0 && action.trim().length > 0) {
+                    let res = yield props.uxpContext.executeAction(model, action, {}, { json: true });
+                    setFloors(res.floors || []);
+                }
+                setLoading(false);
+            }
+            catch (e) {
+                setFloors([]);
+                console.log("unable to get floors ", e);
+                setLoading(false);
+                // toast.error("Unable to get floors. Something went wrong")
+            }
+        });
+    }
+    function getSpaces() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                setLoading(true);
+                let { model, action } = config.spaces;
+                if (model.trim().length > 0 && action.trim().length > 0) {
+                    let res = yield props.uxpContext.executeAction(model, action, {}, { json: true });
+                    setSpaces(res.spaces || []);
+                    console.log("spaces ", res.spaces);
+                }
+                setLoading(false);
+            }
+            catch (e) {
+                setSpaces([]);
+                console.log("unable to get spaces ", e);
+                // toast.error("Unable to get spaces. Something went wrong")
+            }
+        });
+    }
+    function saveRegionChanges() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let { model, action } = config.setRegion;
+                if (model.trim().length > 0 && action.trim().length > 0 && space) {
+                    if (saving)
+                        return;
+                    setSaving(true);
+                    let params = {
+                        id: space.id,
+                        coordinates: JSON.stringify(region),
+                        floor: floor
+                    };
+                    let res = yield props.uxpContext.executeAction(model, action, params, { json: true });
+                    yield getSpaces();
+                    setEditRegion(false);
+                    setConfirming(false);
+                    setSaving(false);
+                }
+            }
+            catch (e) {
+                console.log("Unable to save ", e);
+                toast.error("Unable to save changes. Something went wrong");
+            }
+        });
+    }
+    let floorData = floors.find(f => f.id == floor);
+    let _center = {
+        position: {
+            latitude: (floorData === null || floorData === void 0 ? void 0 : floorData.layout.width) * 0.5,
+            longitude: (floorData === null || floorData === void 0 ? void 0 : floorData.layout.height) * 0.5
+        },
+        renderMarker: false
+    };
+    let markers = [];
+    if (floorData) {
+        for (let i = 0; i < region.length; i++) {
+            let pos = region[i];
+            let lat = (floorData.layout.height - pos.y);
+            let lng = pos.x;
+            let m = {
+                latitude: lat,
+                longitude: lng,
+                draggable: editRegion,
+                ondragstart: (e) => console.log("Drag start ", e),
+                ondragend: (e) => {
+                    let { lat, lng } = e.target._latlng;
+                    let _region = [...region];
+                    _region[i] = { x: Number(lng), y: Number(floorData.layout.height - lat) };
+                    setRegion(_region);
+                },
+                customHTMLIcon: {
+                    className: 'lmui-custom-marker',
+                    html: '<div></div>'
+                },
+                renderPopup: {
+                    content: () => React.createElement("div", null, editRegion ?
+                        React.createElement(React.Fragment, null,
+                            React.createElement(components_1.IconButton, { type: "copy", size: "small", onClick: () => {
+                                    // duplicate the marker 
+                                    let _region = [...region];
+                                    _region.splice(i, 0, { x: pos.x + 1, y: pos.y + 1 });
+                                    setRegion(_region);
+                                } }),
+                            React.createElement(components_1.IconButton, { type: "delete", size: "small", onClick: () => {
+                                    let _region = [...region];
+                                    _region.splice(i, 1);
+                                    setRegion(_region);
+                                } }))
+                        :
+                            React.createElement("div", null, " Click on \"Edit Coordinates\" to start editing "))
+                }
+            };
+            markers.push(m);
+        }
+    }
+    return (React.createElement("div", { className: "location-marker-ui-container" },
+        React.createElement("div", { className: "lmui-sidebar" },
+            React.createElement("div", { className: "title" }, " Spaces "),
+            React.createElement("div", { className: "content" },
+                React.createElement("div", { className: "search" },
+                    React.createElement(components_1.SearchBox, { value: query, onChange: setQuery })),
+                filteredSpace.map((s, i) => {
+                    return React.createElement("div", { className: `space ${(space === null || space === void 0 ? void 0 : space.id) == s.id && 'active'} `, key: i, onClick: () => setSpace(s) },
+                        " ",
+                        s.name,
+                        " ");
+                }))),
+        React.createElement("div", { className: "lmui-toolbar" },
+            React.createElement(components_1.FormField, { className: "floor-filter" },
+                React.createElement(components_1.Select, { selected: floor || "", onChange: setFloor, options: floors, labelField: "name", valueField: "id", placeholder: "Select a floor" })),
+            React.createElement(components_1.FilterPanel, null,
+                React.createElement(components_1.FormField, { className: "location-marker-config-row" },
+                    React.createElement(components_1.Label, null, "Get Floors "),
+                    React.createElement("div", { className: "row" },
+                        React.createElement(components_1.Input, { value: config.floors.model || "", onChange: s => { setConfig(prev => (Object.assign(Object.assign({}, prev), { floors: Object.assign(Object.assign({}, prev.floors), { model: s }) }))); }, placeholder: "Model name" }),
+                        React.createElement(components_1.Input, { value: config.floors.action || "", onChange: s => { setConfig(prev => (Object.assign(Object.assign({}, prev), { floors: Object.assign(Object.assign({}, prev.floors), { action: s }) }))); }, placeholder: "Action name" }))),
+                React.createElement(components_1.FormField, { className: "location-marker-config-row" },
+                    React.createElement(components_1.Label, null, "Get Spaces "),
+                    React.createElement("div", { className: "row" },
+                        React.createElement(components_1.Input, { value: config.spaces.model || "", onChange: s => { setConfig(prev => (Object.assign(Object.assign({}, prev), { spaces: Object.assign(Object.assign({}, prev.spaces), { model: s }) }))); }, placeholder: "Model name" }),
+                        React.createElement(components_1.Input, { value: config.spaces.action || "", onChange: s => { setConfig(prev => (Object.assign(Object.assign({}, prev), { spaces: Object.assign(Object.assign({}, prev.spaces), { action: s }) }))); }, placeholder: "Action name" }))),
+                React.createElement(components_1.FormField, { className: "location-marker-config-row" },
+                    React.createElement(components_1.Label, null, "Set Coordinates "),
+                    React.createElement("div", { className: "row" },
+                        React.createElement(components_1.Input, { value: config.setRegion.model || "", onChange: s => { setConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { model: s }) }))); }, placeholder: "Model name" }),
+                        React.createElement(components_1.Input, { value: config.setRegion.action || "", onChange: s => { setConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { action: s }) }))); }, placeholder: "Action name" }))))),
+        React.createElement("div", { className: "lmui-map-container" }, (floorData && floorData.layout.floorPlan) ?
+            React.createElement(React.Fragment, null,
+                React.createElement(components_1.MapComponent, { zoom: 1, minZoom: -20, center: _center, regions: [
+                        {
+                            type: 'polygon',
+                            color: '#DDBC52FF',
+                            fillColor: '#DDBC52FF',
+                            bounds: region.map((c) => [c.x, c.y]),
+                            imageCoordinates: true,
+                        }
+                    ], staticImage: {
+                        url: floorData.layout.floorPlan || "",
+                        width: floorData.layout.width,
+                        height: floorData.layout.height
+                    }, onRegionClick: (e, data) => {
+                    }, markers: markers, onMarkerClick: () => { }, mapUrl: '', onClick: e => {
+                        console.log("cliked", e);
+                        // const _reg = [...region]
+                        // _reg.push({x:e.latlng.lat, y:e.latlng.lng})
+                        // setRegion(_reg)
+                    } }),
+                space &&
+                    React.createElement("div", { className: "toolbar" }, editRegion ?
+                        React.createElement(React.Fragment, null,
+                            confirming ?
+                                React.createElement(components_1.AsyncButton, { title: "Confirm", loadingTitle: "Saving...", onClick: saveRegionChanges, className: "confirm-button" })
+                                :
+                                    React.createElement(components_1.Button, { title: "Save Changes", loadingTitle: "Saving Changes....", onClick: () => setConfirming(true), className: "confirm-button" }),
+                            !saving &&
+                                React.createElement(components_1.Button, { title: 'Cancel', onClick: () => {
+                                        setEditRegion(false);
+                                        getDefaultCoords();
+                                    } }))
+                        :
+                            React.createElement(components_1.Button, { title: "Edit Coordinates", onClick: () => setEditRegion(true) })))
+            : React.createElement("div", { className: 'no-map' }, "Select a floor to get started")),
+        loading && React.createElement("div", { className: "lmui-overlay" },
+            " ",
+            React.createElement(components_1.Loading, null),
+            " ")));
+};
+/**
+ * Register as a Widget
+ */
+uxp_1.registerUI({
+    id: "sensor-space-coordinate-editor",
+    component: SensorSpaceCoordinateEditor,
+    showDefaultHeader: false
+});
+/**
+ * Register as a Sidebar Link
+ */
+/*
+registerLink({
+    id: "LocationMarkerUI",
+    label: "LocationMarkerUI",
+    // click: () => alert("Hello"),
+    component: LocationMarkerUIWidget
+});
+*/
+/**
+ * Register as a UI
+ */
+/*
+registerUI({
+   id:"LocationMarkerUI",
+   component: LocationMarkerUIWidget
+});
+*/ 
+
+
+/***/ }),
+
+/***/ "./src/uxp.ts":
+/*!********************!*\
+  !*** ./src/uxp.ts ***!
+  \********************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.registerUI = exports.registerMenuItem = exports.registerLink = exports.registerWidget = void 0;
+const bundle_json_1 = __importDefault(__webpack_require__(/*! ../bundle.json */ "./bundle.json"));
+function registerWidget(_widget) {
+    var _a;
+    let id = (bundle_json_1.default.id + '/widget/' + _widget.id).toLowerCase();
+    if (!window.registerWidget) {
+        console.error('This code is not being run within the context of UXP');
+        return;
+    }
+    // get widget details from bundle.json 
+    // get widget
+    let _widgetDetails = (_a = bundle_json_1.default.widgets) === null || _a === void 0 ? void 0 : _a.find((w) => w.id == _widget.id);
+    if (!_widgetDetails) {
+        console.log("Please update the bundle.json");
+        throw "Error: The widget you are trying to register is not in the bundle.json. Please update the bundle.json before continue";
+    }
+    // merge them
+    let updatedWidget = Object.assign(Object.assign(Object.assign({}, _widget), _widgetDetails), { id });
+    window.registerWidget(updatedWidget);
+}
+exports.registerWidget = registerWidget;
+function registerLink(_link) {
+    var _a;
+    let id = (bundle_json_1.default.id + '/sidebarlink/' + _link.id).toLowerCase();
+    if (!window.registerLink) {
+        console.error('This is not is not being run within the UXP context');
+        return;
+    }
+    console.log('registering link....', id);
+    // get widget details from bundle.json 
+    // get widget
+    let _linkDetails = (_a = bundle_json_1.default.sidebarLinks) === null || _a === void 0 ? void 0 : _a.find((s) => s.id == _link.id);
+    if (!_linkDetails) {
+        console.log("Please update the bundle.json");
+        throw "Error: The sidebar link you are trying to register is not in the bundle.json. Please update the bundle.json before continue";
+    }
+    // merge them
+    let updatedLink = Object.assign(Object.assign(Object.assign({}, _link), _linkDetails), { id });
+    window.registerLink(updatedLink);
+}
+exports.registerLink = registerLink;
+function registerMenuItem(_menuItem) {
+    let id = (bundle_json_1.default.id + '/menuitem/' + _menuItem.id).toLowerCase();
+    if (!window.registerMenuItem) {
+        console.error('This is not is not being run within the UXP context');
+        return;
+    }
+    console.log('registering menu item....', id);
+    // get widget details from bundle.json 
+    // get widget
+    let _menuItemDetails = bundle_json_1.default.menuItems.find((s) => s.id == _menuItem.id);
+    if (!_menuItemDetails) {
+        console.log("Please update the bundle.json");
+        throw "Error: The menu item you are trying to register is not in the bundle.json. Please update the bundle.json before continue";
+    }
+    // merge them
+    let updatedMenuItem = Object.assign(Object.assign(Object.assign({}, _menuItem), _menuItemDetails), { id });
+    window.registerMenuItem(updatedMenuItem);
+}
+exports.registerMenuItem = registerMenuItem;
+function registerUI(_ui) {
+    let id = (bundle_json_1.default.id + '/ui/' + _ui.id).toLowerCase();
+    if (!window.registerUI) {
+        console.error('This is not is not being run within the UXP context');
+        return;
+    }
+    console.log('registering link....', id);
+    // get widget details from bundle.json 
+    // get widget
+    let _uiDetails = bundle_json_1.default.uis.find((s) => s.id == _ui.id);
+    if (!_uiDetails) {
+        console.log("Please update the bundle.json");
+        throw "Error: The ui you are trying to register is not in the bundle.json. Please update the bundle.json before continue";
+    }
+    // merge them
+    let updatedUI = Object.assign(Object.assign(Object.assign({}, _ui), _uiDetails), { id });
+    window.registerUI(updatedUI);
+}
+exports.registerUI = registerUI;
+
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = React;
+
+/***/ }),
+
+/***/ "uxp/components":
+/*!********************************!*\
+  !*** external "UXPComponents" ***!
+  \********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = UXPComponents;
+
+/***/ }),
+
+/***/ "./bundle.json":
+/*!*********************!*\
+  !*** ./bundle.json ***!
+  \*********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"id":"86b70895-f91a-419f-9eca-0425e5d8ca17","author":"dinesh","widgets":[],"sidebarLinks":[],"uis":[{"id":"sensor-space-coordinate-editor","label":"Sensor,space coordinate editor interface"}],"menuItems":[]}');
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			id: moduleId,
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.tsx");
+/******/ 	
+/******/ })()
+;
 //# sourceMappingURL=main.js.map

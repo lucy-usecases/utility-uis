@@ -1,6 +1,6 @@
 import * as React from "react";
 import { registerWidget, registerLink, registerUI, IContextProvider, } from './uxp';
-import { TitleBar, FilterPanel, WidgetWrapper, FormField, Select, Label, Input, MapComponent, IMarker, Popover, IconButton, Button, AsyncButton, ConfirmButton, Loading, useToast } from "uxp/components";
+import { TitleBar, FilterPanel, WidgetWrapper, FormField, Select, Label, Input, MapComponent, IMarker, Popover, IconButton, Button, AsyncButton, ConfirmButton, Loading, useToast, SearchBox } from "uxp/components";
 import './styles.scss';
 
 interface IWidgetProps {
@@ -40,7 +40,8 @@ interface IConfig {
 }
 const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (props) => {
 
-
+    const [filteredSpace, setFilteredSpace] = React.useState<ISpace[]>([])
+    const [query, setQuery] = React.useState('')
     let [spaces, setSpaces] = React.useState<ISpace[]>([])
     let [space, setSpace] = React.useState<ISpace>(null)
     let [floors, setFloors] = React.useState<IFloor[]>([])
@@ -102,12 +103,21 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
     }, [config.spaces])
 
     React.useEffect(() => {
-        if (spaces.length > 0) setSpace(spaces[0])
+        if (spaces.length > 0 && !!space) setSpace(spaces[0]);
     }, [spaces])
+
+    React.useEffect(() => {
+        filterSpaces()
+    }, [spaces, query])
 
     React.useEffect(() => {
         getDefaultCoords()
     }, [space])
+
+    function filterSpaces() {
+        const filtered = (query?.trim()?.length > 0) ? [...spaces].filter(s => s?.name?.indexOf(query) !== -1) : spaces
+        setFilteredSpace(filtered)
+    }
 
     function getDefaultCoords() {
         if (space) {
@@ -171,7 +181,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                 setSaving(true)
                 let params = {
                     id: space.id,
-                    coordinates: JSON.stringify(region)
+                    coordinates: JSON.stringify(region),
+                    floor: floor
                 }
 
                 let res = await props.uxpContext.executeAction(model, action, params, { json: true })
@@ -263,7 +274,12 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             <div className="title"> Spaces </div>
 
             <div className="content">
-                {spaces.map((s, i) => {
+
+                <div className="search">
+                    <SearchBox value={query} onChange={setQuery} />
+                </div>
+
+                {filteredSpace.map((s, i) => {
                     return <div className={`space ${space?.id == s.id && 'active'} `} key={i} onClick={() => setSpace(s)} > {s.name} </div>
                 })}
             </div>
@@ -341,8 +357,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                 (floorData && floorData.layout.floorPlan) ?
                     <>
                         <MapComponent
-                            zoom={3}
-                            minZoom={3}
+                            zoom={1}
+                            minZoom={-20}
                             center={_center}
                             regions={[
                                 {
@@ -364,7 +380,12 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                             markers={markers}
                             onMarkerClick={() => { }}
                             mapUrl={''}
-                            onClick={e => console.log("cliked", e)}
+                            onClick={e => {
+                                console.log("cliked", e)
+                                // const _reg = [...region]
+                                // _reg.push({x:e.latlng.lat, y:e.latlng.lng})
+                                // setRegion(_reg)
+                            }}
                         />
                         {space &&
                             <div className="toolbar">
@@ -420,7 +441,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
  */
 registerUI({
     id: "sensor-space-coordinate-editor",
-    component: SensorSpaceCoordinateEditor
+    component: SensorSpaceCoordinateEditor,
+    showDefaultHeader: false
 });
 
 /**

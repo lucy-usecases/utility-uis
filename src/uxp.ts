@@ -76,7 +76,8 @@ interface IMenuItem {
 interface IRenderUIItemProps {
     id: string,
     component: any,
-    uiProps?: any
+    uiProps?: any,
+    showDefaultHeader?:boolean
 }
 declare global {
     interface Window {
