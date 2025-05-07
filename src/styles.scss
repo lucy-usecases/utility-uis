@@ -4,7 +4,7 @@
     position: relative;
     padding: 80px 0 0 250px;
 
-    & > .lmui-sidebar {
+    &>.lmui-sidebar {
         position: absolute;
         top: 0;
         left: 0;
@@ -14,7 +14,7 @@
         border-right: 1px solid silver;
         padding-top: 80px;
 
-        & > .title {
+        &>.title {
             position: absolute;
             top: 0;
             left: 0;
@@ -28,29 +28,29 @@
             border-bottom: 1px solid silver;
         }
 
-        & > .content {
+        &>.content {
             width: 100%;
             height: 100%;
             overflow-y: auto;
             padding: 10px;
 
-            .search{
+            .search {
                 width: 100%;
                 height: auto;
                 padding: 20px 10px;
 
-                .uxp-search-box-container{
-                    .search-box-container{
-                        .uxp-input-container{
+                .uxp-search-box-container {
+                    .search-box-container {
+                        .uxp-input-container {
                             input {
-                                min-width: 165px!important;
+                                min-width: 165px !important;
                             }
                         }
                     }
                 }
             }
 
-            & > .space {
+            &>.space {
                 width: 100%;
                 height: auto;
                 padding: 10px;
@@ -69,7 +69,7 @@
         }
     }
 
-    & > .lmui-toolbar {
+    &>.lmui-toolbar {
         position: absolute;
         top: 0;
         left: 250px;
@@ -82,7 +82,7 @@
         justify-content: flex-end;
         border-bottom: 1px solid silver;
 
-        & > .floor-filter {
+        &>.floor-filter {
             width: auto;
 
             .uxp-form-select {
@@ -92,7 +92,7 @@
         }
     }
 
-    & > .lmui-map-container {
+    &>.lmui-map-container {
         width: 100%;
         height: 100%;
         display: flex;
@@ -100,37 +100,65 @@
         justify-content: center;
         position: relative;
 
-        & > .no-map {
+        &>.no-map {
             font-weight: 900;
             font-size: 20px;
             color: #868686;
         }
 
-        & > .toolbar {
+        &>.toolbar {
             position: absolute;
             top: 20px;
             right: 20px;
             background-color: rgba(0, 0, 0, 0.5);
             border: 2px solid black;
-            padding: 15px 20px;
+            padding: 12px 16px;
             border-radius: 10px;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
+            flex-direction: column;
             z-index: 999;
 
-            & > .uxp-button {
-                margin: 0 4px;
+            .uxp-button {
+                margin: 4px 0;
 
                 &.confirm-button {
                     background-color: #52c4c9;
                     color: white;
                 }
             }
+
+            .coordinates-list {
+                margin-top: 8px;
+                background: #fff;
+                padding: 8px;
+                border-radius: 6px;
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+
+                    td {
+                        padding: 2px 4px;
+                        font-size: 13px;
+                    }
+                }
+
+                .coordinate-actions {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 4px;
+                    margin-top: 6px;
+
+                    .uxp-button {
+                        margin: 0;
+                    }
+                }
+            }
         }
+
     }
 
-    & > .lmui-overlay {
+    &>.lmui-overlay {
         position: absolute;
         top: 0;
         left: 0;
@@ -145,12 +173,12 @@
 }
 
 .location-marker-config-row {
-    & > .row {
+    &>.row {
         display: flex;
         align-items: center;
         justify-content: space-between;
 
-        & > .uxp-input-container {
+        &>.uxp-input-container {
             margin: 4px;
         }
     }
@@ -159,7 +187,7 @@
 .lmui-custom-marker {
     background-color: transparent;
 
-    & > div {
+    &>div {
         width: 30px;
         height: 30px;
         border: 2px solid #52c4c9;

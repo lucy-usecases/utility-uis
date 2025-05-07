@@ -99,8 +99,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
     }, [floors])
 
     React.useEffect(() => {
-        getSpaces()
-    }, [config.spaces])
+        if (!!floor) getSpaces()
+    }, [config.spaces, floor])
 
     React.useEffect(() => {
         if (spaces.length > 0 && !!space) setSpace(spaces[0]);
@@ -159,7 +159,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             setLoading(true)
             let { model, action } = config.spaces
             if (model.trim().length > 0 && action.trim().length > 0) {
-                let res = await props.uxpContext.executeAction(model, action, {}, { json: true })
+                let res = await props.uxpContext.executeAction(model, action, { floorId: floor }, { json: true })
                 setSpaces(res.spaces || [])
                 console.log("spaces ", res.spaces)
             }
@@ -389,41 +389,88 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                         />
                         {space &&
                             <div className="toolbar">
-                                {editRegion ?
-                                    <>
-                                        {confirming ?
-                                            <AsyncButton
-                                                title="Confirm"
-                                                loadingTitle={"Saving..."}
-                                                onClick={saveRegionChanges}
-                                                className="confirm-button"
-                                            />
-                                            :
-                                            <Button
-                                                title="Save Changes"
-                                                loadingTitle="Saving Changes...."
-                                                onClick={() => setConfirming(true)}
-                                                className="confirm-button"
-
-                                            />
-                                        }
-                                        {!saving &&
-                                            <Button
-                                                title='Cancel'
-                                                onClick={() => {
-                                                    setEditRegion(false)
-                                                    getDefaultCoords()
-                                                }}
-                                            />
-                                        }
-                                    </>
-                                    :
+                                {!editRegion &&
                                     <Button
-                                        title="Edit Coordinates"
-                                        onClick={() => setEditRegion(true)}
+                                        title={editRegion ? "Close Coordinates" : "Edit Coordinates"}
+                                        onClick={() => setEditRegion(prev => !prev)}
                                     />
                                 }
+
+                                {editRegion && (
+                                    <div className="coordinates-list">
+                                        <table>
+                                            <tbody>
+                                                {region.map((c, i) => (
+                                                    <tr className="coordinate-container" key={i}>
+                                                        <td>{i + 1}</td>
+                                                        <td>x: {c.x}</td>
+                                                        <td>y: {c.y}</td>
+                                                        {region.length > 1 && (
+                                                            <td>
+                                                                <IconButton
+                                                                    type="delete"
+                                                                    size="small"
+                                                                    onClick={() => {
+                                                                        setRegion(prev => {
+                                                                            prev.splice(i, 1);
+                                                                            return [...prev];
+                                                                        });
+                                                                    }}
+                                                                />
+                                                            </td>
+                                                        )}
+                                                    </tr>
+                                                ))}
+
+                                                <tr>
+                                                    <td colSpan={4}>
+                                                        <Button
+                                                            title="Add Coordinate"
+                                                            onClick={() => {
+                                                                setRegion(prev => {
+                                                                    const last = prev[prev.length - 1];
+                                                                    prev.push({ x: last.x + 10, y: last.y + 10 });
+                                                                    return [...prev];
+                                                                });
+                                                            }}
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div className="coordinate-actions">
+
+                                            {confirming ? (
+                                                <AsyncButton
+                                                    title="Confirm"
+                                                    loadingTitle="Saving..."
+                                                    onClick={saveRegionChanges}
+                                                    className="confirm-button"
+                                                />
+                                            ) : (
+                                                <Button
+                                                    title="Save Changes"
+                                                    loadingTitle="Saving Changes..."
+                                                    onClick={() => setConfirming(true)}
+                                                    className="confirm-button"
+                                                />
+                                            )}
+
+                                            {!saving && (
+                                                <Button
+                                                    title="Cancel"
+                                                    onClick={() => {
+                                                        setEditRegion(false);
+                                                        getDefaultCoords();
+                                                    }}
+                                                />
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
+
                         }
                     </>
                     : <div className='no-map'>Select a floor to get started</div>

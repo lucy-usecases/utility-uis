@@ -11,7 +11,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, ".location-marker-ui-container {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  padding: 80px 0 0 250px;\n}\n.location-marker-ui-container > .lmui-sidebar {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  background-color: white;\n  border-right: 1px solid silver;\n  padding-top: 80px;\n}\n.location-marker-ui-container > .lmui-sidebar > .title {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 80px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-weight: 900;\n  text-transform: uppercase;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-sidebar > .content {\n  width: 100%;\n  height: 100%;\n  overflow-y: auto;\n  padding: 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search {\n  width: 100%;\n  height: auto;\n  padding: 20px 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search .uxp-search-box-container .search-box-container .uxp-input-container input {\n  min-width: 165px !important;\n}\n.location-marker-ui-container > .lmui-sidebar > .content > .space {\n  width: 100%;\n  height: auto;\n  padding: 10px;\n  font-size: 12px;\n  overflow: hidden;\n  cursor: pointer;\n  margin-bottom: 8px;\n  border-radius: 5px;\n  background-color: #d8d8d8;\n}\n.location-marker-ui-container > .lmui-sidebar > .content > .space.active {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-toolbar {\n  position: absolute;\n  top: 0;\n  left: 250px;\n  right: 0;\n  height: 80px;\n  padding: 20px;\n  background-color: white;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter {\n  width: auto;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter .uxp-form-select {\n  max-width: 250px;\n  margin: 0;\n}\n.location-marker-ui-container > .lmui-map-container {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n}\n.location-marker-ui-container > .lmui-map-container > .no-map {\n  font-weight: 900;\n  font-size: 20px;\n  color: #868686;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar {\n  position: absolute;\n  top: 20px;\n  right: 20px;\n  background-color: rgba(0, 0, 0, 0.5);\n  border: 2px solid black;\n  padding: 15px 20px;\n  border-radius: 10px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  z-index: 999;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar > .uxp-button {\n  margin: 0 4px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar > .uxp-button.confirm-button {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.12);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 100%;\n}\n\n.location-marker-config-row > .row {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.location-marker-config-row > .row > .uxp-input-container {\n  margin: 4px;\n}\n\n.lmui-custom-marker {\n  background-color: transparent;\n}\n.lmui-custom-marker > div {\n  width: 30px;\n  height: 30px;\n  border: 2px solid #52c4c9;\n  background-color: #51d2d757;\n  transform: translate(-9px, -9px);\n  border-radius: 50%;\n  position: relative;\n}\n.lmui-custom-marker > div::before {\n  content: \"\";\n  width: 5px;\n  height: 5px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  background-color: #52c4c9;\n}", ""]);
+exports.push([module.id, ".location-marker-ui-container {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  padding: 80px 0 0 250px;\n}\n.location-marker-ui-container > .lmui-sidebar {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  background-color: white;\n  border-right: 1px solid silver;\n  padding-top: 80px;\n}\n.location-marker-ui-container > .lmui-sidebar > .title {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 80px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-weight: 900;\n  text-transform: uppercase;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-sidebar > .content {\n  width: 100%;\n  height: 100%;\n  overflow-y: auto;\n  padding: 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search {\n  width: 100%;\n  height: auto;\n  padding: 20px 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search .uxp-search-box-container .search-box-container .uxp-input-container input {\n  min-width: 165px !important;\n}\n.location-marker-ui-container > .lmui-sidebar > .content > .space {\n  width: 100%;\n  height: auto;\n  padding: 10px;\n  font-size: 12px;\n  overflow: hidden;\n  cursor: pointer;\n  margin-bottom: 8px;\n  border-radius: 5px;\n  background-color: #d8d8d8;\n}\n.location-marker-ui-container > .lmui-sidebar > .content > .space.active {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-toolbar {\n  position: absolute;\n  top: 0;\n  left: 250px;\n  right: 0;\n  height: 80px;\n  padding: 20px;\n  background-color: white;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter {\n  width: auto;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter .uxp-form-select {\n  max-width: 250px;\n  margin: 0;\n}\n.location-marker-ui-container > .lmui-map-container {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n}\n.location-marker-ui-container > .lmui-map-container > .no-map {\n  font-weight: 900;\n  font-size: 20px;\n  color: #868686;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar {\n  position: absolute;\n  top: 20px;\n  right: 20px;\n  background-color: rgba(0, 0, 0, 0.5);\n  border: 2px solid black;\n  padding: 12px 16px;\n  border-radius: 10px;\n  display: flex;\n  flex-direction: column;\n  z-index: 999;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button {\n  margin: 4px 0;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button.confirm-button {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list {\n  margin-top: 8px;\n  background: #fff;\n  padding: 8px;\n  border-radius: 6px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list table td {\n  padding: 2px 4px;\n  font-size: 13px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinate-actions {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 4px;\n  margin-top: 6px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinate-actions .uxp-button {\n  margin: 0;\n}\n.location-marker-ui-container > .lmui-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.12);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 100%;\n}\n\n.location-marker-config-row > .row {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.location-marker-config-row > .row > .uxp-input-container {\n  margin: 4px;\n}\n\n.lmui-custom-marker {\n  background-color: transparent;\n}\n.lmui-custom-marker > div {\n  width: 30px;\n  height: 30px;\n  border: 2px solid #52c4c9;\n  background-color: #51d2d757;\n  transform: translate(-9px, -9px);\n  border-radius: 50%;\n  position: relative;\n}\n.lmui-custom-marker > div::before {\n  content: \"\";\n  width: 5px;\n  height: 5px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  background-color: #52c4c9;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -521,8 +521,9 @@ const SensorSpaceCoordinateEditor = (props) => {
         }
     }, [floors]);
     React.useEffect(() => {
-        getSpaces();
-    }, [config.spaces]);
+        if (!!floor)
+            getSpaces();
+    }, [config.spaces, floor]);
     React.useEffect(() => {
         if (spaces.length > 0 && !!space)
             setSpace(spaces[0]);
@@ -577,7 +578,7 @@ const SensorSpaceCoordinateEditor = (props) => {
                 setLoading(true);
                 let { model, action } = config.spaces;
                 if (model.trim().length > 0 && action.trim().length > 0) {
-                    let res = yield props.uxpContext.executeAction(model, action, {}, { json: true });
+                    let res = yield props.uxpContext.executeAction(model, action, { floorId: floor }, { json: true });
                     setSpaces(res.spaces || []);
                     console.log("spaces ", res.spaces);
                 }
@@ -719,19 +720,42 @@ const SensorSpaceCoordinateEditor = (props) => {
                         // setRegion(_reg)
                     } }),
                 space &&
-                    React.createElement("div", { className: "toolbar" }, editRegion ?
-                        React.createElement(React.Fragment, null,
-                            confirming ?
-                                React.createElement(components_1.AsyncButton, { title: "Confirm", loadingTitle: "Saving...", onClick: saveRegionChanges, className: "confirm-button" })
-                                :
-                                    React.createElement(components_1.Button, { title: "Save Changes", loadingTitle: "Saving Changes....", onClick: () => setConfirming(true), className: "confirm-button" }),
-                            !saving &&
-                                React.createElement(components_1.Button, { title: 'Cancel', onClick: () => {
+                    React.createElement("div", { className: "toolbar" },
+                        !editRegion &&
+                            React.createElement(components_1.Button, { title: editRegion ? "Close Coordinates" : "Edit Coordinates", onClick: () => setEditRegion(prev => !prev) }),
+                        editRegion && (React.createElement("div", { className: "coordinates-list" },
+                            React.createElement("table", null,
+                                React.createElement("tbody", null,
+                                    region.map((c, i) => (React.createElement("tr", { className: "coordinate-container", key: i },
+                                        React.createElement("td", null, i + 1),
+                                        React.createElement("td", null,
+                                            "x: ",
+                                            c.x),
+                                        React.createElement("td", null,
+                                            "y: ",
+                                            c.y),
+                                        region.length > 1 && (React.createElement("td", null,
+                                            React.createElement(components_1.IconButton, { type: "delete", size: "small", onClick: () => {
+                                                    setRegion(prev => {
+                                                        prev.splice(i, 1);
+                                                        return [...prev];
+                                                    });
+                                                } })))))),
+                                    React.createElement("tr", null,
+                                        React.createElement("td", { colSpan: 4 },
+                                            React.createElement(components_1.Button, { title: "Add Coordinate", onClick: () => {
+                                                    setRegion(prev => {
+                                                        const last = prev[prev.length - 1];
+                                                        prev.push({ x: last.x + 10, y: last.y + 10 });
+                                                        return [...prev];
+                                                    });
+                                                } }))))),
+                            React.createElement("div", { className: "coordinate-actions" },
+                                confirming ? (React.createElement(components_1.AsyncButton, { title: "Confirm", loadingTitle: "Saving...", onClick: saveRegionChanges, className: "confirm-button" })) : (React.createElement(components_1.Button, { title: "Save Changes", loadingTitle: "Saving Changes...", onClick: () => setConfirming(true), className: "confirm-button" })),
+                                !saving && (React.createElement(components_1.Button, { title: "Cancel", onClick: () => {
                                         setEditRegion(false);
                                         getDefaultCoords();
-                                    } }))
-                        :
-                            React.createElement(components_1.Button, { title: "Edit Coordinates", onClick: () => setEditRegion(true) })))
+                                    } })))))))
             : React.createElement("div", { className: 'no-map' }, "Select a floor to get started")),
         loading && React.createElement("div", { className: "lmui-overlay" },
             " ",
