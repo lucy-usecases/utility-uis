@@ -7,6 +7,11 @@ import {
 } from "uxp/components";
 import './styles.scss';
 
+export function trimSlash(s: string): string {
+    return s?.replace(/\/$/, "");
+}
+
+
 export function hasValue<T>(value: T | null | undefined, allowZero?: boolean, allowNegative?: boolean): value is NonNullable<T> {
 
     if (allowZero && typeof value == "number" && value == 0) return true
@@ -135,8 +140,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
     // Auto-select first floor
     React.useEffect(() => {
         if (floors.length > 0 && !selectedFloor) {
-            // setSelectedFloor(floors[0].id);
-            setSelectedFloor("AU-MEL-435B.L06");
+            setSelectedFloor(floors[0].id);
         }
     }, [floors, selectedFloor]);
 
@@ -240,7 +244,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         }
     }, [config.spaces, selectedFloor, props.uxpContext]);
 
-    const closeForm = ()=> {
+    const closeForm = () => {
         setAddSpace(false)
         setNewSpace(NewSpace)
     }
@@ -250,11 +254,11 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             const { model, action } = config.addSpace;
 
             // validate 
-            if(!hasValue(newSpace.id)) {
+            if (!hasValue(newSpace.id)) {
                 toast.error('Id is required')
                 return
             }
-             if(!hasValue(newSpace.name)) {
+            if (!hasValue(newSpace.name)) {
                 toast.error('Name is required')
                 return
             }
@@ -345,7 +349,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
     const getImageUrl = React.useCallback((imagePath: string): string => {
         if (!imagePath) return '';
         if (imagePath.startsWith('/')) {
-            const lucyUrl = props.uxpContext?.lucyUrl || '';
+            const lucyUrl = trimSlash(props.uxpContext?.lucyUrl || '/');
             return `${lucyUrl}${imagePath}`;
         }
         return imagePath;
