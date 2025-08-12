@@ -466,10 +466,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.hasValue = void 0;
 const React = __importStar(__webpack_require__(/*! react */ "react"));
 const uxp_1 = __webpack_require__(/*! ./uxp */ "./src/uxp.ts");
 const components_1 = __webpack_require__(/*! uxp/components */ "uxp/components");
 __webpack_require__(/*! ./styles.scss */ "./src/styles.scss");
+function hasValue(value, allowZero, allowNegative) {
+    if (allowZero && typeof value == "number" && value == 0)
+        return true;
+    if (allowNegative && typeof value == "number" && value < 0)
+        return true;
+    if (!value)
+        return false;
+    switch (typeof value) {
+        case 'string':
+            return (value === null || value === void 0 ? void 0 : value.trim().length) > 0;
+        case 'number':
+            return value > 0;
+        default:
+            return true;
+    }
+}
+exports.hasValue = hasValue;
 const NewSpace = {
     id: '',
     name: '',
@@ -627,14 +645,28 @@ const SensorSpaceCoordinateEditor = (props) => {
             setIsLoading(false);
         }
     }), [config.spaces, selectedFloor, props.uxpContext]);
+    const closeForm = () => {
+        setAddSpace(false);
+        setNewSpace(NewSpace);
+    };
     const saveSpace = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
         var _d;
         try {
             setIsSaving(true);
             const { model, action } = config.addSpace;
-            const res = yield ((_d = props.uxpContext) === null || _d === void 0 ? void 0 : _d.executeAction(model, action, newSpace, { json: true }));
+            // validate 
+            if (!hasValue(newSpace.id)) {
+                toast.error('Id is required');
+                return;
+            }
+            if (!hasValue(newSpace.name)) {
+                toast.error('Name is required');
+                return;
+            }
+            const res = yield ((_d = props.uxpContext) === null || _d === void 0 ? void 0 : _d.executeAction(model, action, { floorId: selectedFloor, space: newSpace }, { json: true }));
             loadSpaces();
             toast.success('Space added');
+            closeForm();
         }
         catch (error) {
             console.error("Unable to add space. something went wrong:", error);
@@ -644,7 +676,7 @@ const SensorSpaceCoordinateEditor = (props) => {
         finally {
             setIsSaving(false);
         }
-    }), [config.floors, props.uxpContext, newSpace]);
+    }), [config.addSpace, selectedFloor, props.uxpContext, newSpace]);
     const saveRegionChanges = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
         var _e;
         if (!selectedSpace || isSaving)
@@ -880,7 +912,7 @@ const SensorSpaceCoordinateEditor = (props) => {
                         !isSaving && (React.createElement(components_1.IconButton, { type: 'close', onClick: handleCancelEdit }))))))))) : (React.createElement("div", { className: "no-map" }, "Select a floor to get started"))),
         isLoading && (React.createElement("div", { className: "lmui-overlay" },
             React.createElement(components_1.Loading, null))),
-        React.createElement(components_1.Modal, { show: addSpace, onClose: () => { setAddSpace(false); setNewSpace(NewSpace); }, title: "Add New Space", className: "add-space-modal" },
+        React.createElement(components_1.Modal, { show: addSpace, onClose: closeForm, title: "Add New Space", className: "add-space-modal" },
             React.createElement(components_1.FormField, null,
                 React.createElement(components_1.Label, null, "Id"),
                 React.createElement(components_1.Input, { value: (newSpace === null || newSpace === void 0 ? void 0 : newSpace.id) || '', onChange: v => setNewSpace(prev => (Object.assign(Object.assign({}, prev), { id: v }))) })),
@@ -894,10 +926,7 @@ const SensorSpaceCoordinateEditor = (props) => {
                 React.createElement(components_1.Label, null, "Icon"),
                 React.createElement(components_1.Input, { value: (newSpace === null || newSpace === void 0 ? void 0 : newSpace.icon) || '', onChange: v => setNewSpace(prev => (Object.assign(Object.assign({}, prev), { color: v }))) })),
             React.createElement(components_1.FormField, { className: "button-row" },
-                React.createElement(components_1.Button, { title: "Canel", onClick: () => {
-                        setAddSpace(false);
-                        setNewSpace(NewSpace);
-                    } }),
+                React.createElement(components_1.Button, { title: "Canel", onClick: closeForm }),
                 React.createElement(components_1.AsyncButton, { title: "Submit", onClick: saveSpace, className: "save-button" })))));
 };
 uxp_1.registerUI({

@@ -7,6 +7,21 @@ import {
 } from "uxp/components";
 import './styles.scss';
 
+export function hasValue<T>(value: T | null | undefined, allowZero?: boolean, allowNegative?: boolean): value is NonNullable<T> {
+
+    if (allowZero && typeof value == "number" && value == 0) return true
+    if (allowNegative && typeof value == "number" && value < 0) return true
+    if (!value) return false
+    switch (typeof value) {
+        case 'string':
+            return value?.trim().length > 0
+        case 'number':
+            return value > 0
+        default:
+            return true
+    }
+}
+
 interface IWidgetProps {
     uxpContext?: IContextProvider;
     instanceId?: string;
@@ -225,13 +240,29 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         }
     }, [config.spaces, selectedFloor, props.uxpContext]);
 
+    const closeForm = ()=> {
+        setAddSpace(false)
+        setNewSpace(NewSpace)
+    }
     const saveSpace = React.useCallback(async () => {
         try {
             setIsSaving(true);
             const { model, action } = config.addSpace;
-            const res = await props.uxpContext?.executeAction(model, action, newSpace, { json: true });
+
+            // validate 
+            if(!hasValue(newSpace.id)) {
+                toast.error('Id is required')
+                return
+            }
+             if(!hasValue(newSpace.name)) {
+                toast.error('Name is required')
+                return
+            }
+
+            const res = await props.uxpContext?.executeAction(model, action, { floorId: selectedFloor, space: newSpace }, { json: true });
             loadSpaces()
             toast.success('Space added');
+            closeForm()
         } catch (error) {
             console.error("Unable to add space. something went wrong:", error);
             toast.error('Unable to add space. something went wrong')
@@ -239,7 +270,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         } finally {
             setIsSaving(false);
         }
-    }, [config.floors, props.uxpContext, newSpace]);
+    }, [config.addSpace, selectedFloor, props.uxpContext, newSpace]);
 
 
     const saveRegionChanges = React.useCallback(async () => {
@@ -384,7 +415,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         // Show space markers (only for non-editing spaces)
         const spaceMarkers: IMarker[] = allSpaceRegions
             .filter(item => (
-                item.type === 'marker' 
+                item.type === 'marker'
                 && (!selectedSpace || selectedSpace.id !== item.spaceId)
             ))
             .map(item => {
@@ -676,7 +707,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
 
             <Modal
                 show={addSpace}
-                onClose={() => { setAddSpace(false); setNewSpace(NewSpace) }}
+                onClose={closeForm}
                 title="Add New Space"
                 className="add-space-modal"
             >
@@ -717,10 +748,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                 >
                     <Button
                         title="Canel"
-                        onClick={() => {
-                            setAddSpace(false)
-                            setNewSpace(NewSpace)
-                        }}
+                        onClick={closeForm}
                     />
                     <AsyncButton
                         title="Submit"

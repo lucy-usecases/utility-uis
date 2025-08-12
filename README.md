@@ -31,6 +31,8 @@ A UI to visually configure and update space/sensor coordinates on a floor layout
    &asa=<action to get spaces>
    &ucm=<model to update coordinates>
    &uca=<action to update coordinates>
+   &ssm=<model to add space>
+   &ssa=<action to add space>
    ```
 ---
 
@@ -70,7 +72,9 @@ A UI to visually configure and update space/sensor coordinates on a floor layout
          "name": "Meeting Room",
          "coordinates": [
            { "x": 100, "y": 150 }
-         ]
+         ],
+         "color":"green",
+         "icon": ""
        }
      ]
    }
@@ -87,6 +91,20 @@ A UI to visually configure and update space/sensor coordinates on a floor layout
      {
        "id": "space-1",
        "coordinates": [{ "x": 100, "y": 150 }]
+     }
+     ```
+
+6. **Add New Spaces**  
+   - Users can add new spaces for the selected floor. Acion will receive this payload:
+     ```json
+     {
+       "floorId": "space-1",
+       "space": {
+        "id": "id",
+        "name":"",
+        "color":"",
+        "icon":""
+       }
      }
      ```
 
