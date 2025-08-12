@@ -11,7 +11,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, ".location-marker-ui-container {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  padding: 80px 0 0 250px;\n}\n.location-marker-ui-container > .lmui-sidebar {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  background-color: white;\n  border-right: 1px solid silver;\n  padding-top: 80px;\n}\n.location-marker-ui-container > .lmui-sidebar > .title {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 80px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-weight: 900;\n  text-transform: uppercase;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-sidebar > .content {\n  width: 100%;\n  height: 100%;\n  overflow-y: auto;\n  padding: 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search {\n  width: 100%;\n  height: auto;\n  padding: 20px 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search .uxp-search-box-container .search-box-container .uxp-input-container input {\n  min-width: 165px !important;\n}\n.location-marker-ui-container > .lmui-sidebar > .content > .space {\n  width: 100%;\n  height: auto;\n  padding: 10px;\n  font-size: 12px;\n  overflow: hidden;\n  cursor: pointer;\n  margin-bottom: 8px;\n  border-radius: 5px;\n  background-color: #d8d8d8;\n}\n.location-marker-ui-container > .lmui-sidebar > .content > .space.active {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-toolbar {\n  position: absolute;\n  top: 0;\n  left: 250px;\n  right: 0;\n  height: 80px;\n  padding: 20px;\n  background-color: white;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter {\n  width: auto;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter .uxp-form-select {\n  max-width: 250px;\n  margin: 0;\n}\n.location-marker-ui-container > .lmui-map-container {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n}\n.location-marker-ui-container > .lmui-map-container > .no-map {\n  font-weight: 900;\n  font-size: 20px;\n  color: #868686;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar {\n  position: absolute;\n  top: 20px;\n  right: 20px;\n  background-color: rgba(0, 0, 0, 0.5);\n  border: 2px solid black;\n  padding: 12px 16px;\n  border-radius: 10px;\n  display: flex;\n  flex-direction: column;\n  z-index: 999;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button {\n  margin: 4px 0;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button.confirm-button {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list {\n  margin-top: 8px;\n  background: #fff;\n  padding: 8px;\n  border-radius: 6px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list table td {\n  padding: 2px 4px;\n  font-size: 13px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinate-actions {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 4px;\n  margin-top: 6px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinate-actions .uxp-button {\n  margin: 0;\n}\n.location-marker-ui-container > .lmui-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.12);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 100%;\n}\n\n.location-marker-config-row > .row {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.location-marker-config-row > .row > .uxp-input-container {\n  margin: 4px;\n}\n\n.lmui-custom-marker {\n  background-color: transparent;\n}\n.lmui-custom-marker > div {\n  width: 30px;\n  height: 30px;\n  border: 2px solid #52c4c9;\n  background-color: #51d2d757;\n  transform: translate(-9px, -9px);\n  border-radius: 50%;\n  position: relative;\n}\n.lmui-custom-marker > div::before {\n  content: \"\";\n  width: 5px;\n  height: 5px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  background-color: #52c4c9;\n}", ""]);
+exports.push([module.id, ".location-marker-ui-container {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  padding: 80px 0 0 250px;\n}\n.location-marker-ui-container > .lmui-sidebar {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  background-color: white;\n  border-right: 1px solid silver;\n  padding-top: 80px;\n}\n.location-marker-ui-container > .lmui-sidebar > .title {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 80px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-weight: 900;\n  text-transform: uppercase;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-sidebar > .content {\n  width: 100%;\n  height: 100%;\n  overflow-y: auto;\n  padding: 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search {\n  width: 100%;\n  height: auto;\n  padding: 20px 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search .uxp-search-box-container .search-box-container .uxp-input-container input {\n  min-width: 165px !important;\n}\n.location-marker-ui-container > .lmui-sidebar > .content > .space {\n  width: 100%;\n  height: auto;\n  padding: 10px;\n  font-size: 12px;\n  overflow: hidden;\n  cursor: pointer;\n  margin-bottom: 8px;\n  border-radius: 5px;\n  background-color: #d8d8d8;\n}\n.location-marker-ui-container > .lmui-sidebar > .content > .space.active {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-toolbar {\n  position: absolute;\n  top: 0;\n  left: 250px;\n  right: 0;\n  height: 80px;\n  padding: 20px;\n  background-color: white;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter {\n  width: auto;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter .uxp-form-select {\n  max-width: 250px;\n  margin: 0;\n}\n.location-marker-ui-container > .lmui-map-container {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n}\n.location-marker-ui-container > .lmui-map-container > .no-map {\n  font-weight: 900;\n  font-size: 20px;\n  color: #868686;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar {\n  position: absolute;\n  top: 20px;\n  right: 20px;\n  border-radius: 10px;\n  display: flex;\n  flex-direction: column;\n  z-index: 999;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button {\n  margin: 4px 0;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button.confirm-button, .location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button.edit-coordinated-btn {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list {\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(20px);\n  padding: 8px;\n  border-radius: 6px;\n  min-width: 250px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinates-list-header {\n  padding: 8px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinates-list-body {\n  width: 100%;\n  max-height: 250px;\n  overflow-y: auto;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinates-list-body table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinates-list-body table td {\n  padding: 2px 4px;\n  font-size: 13px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinate-list-footer {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  flex-wrap: wrap;\n  gap: 4px;\n  margin-top: 6px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinate-list-footer .uxp-button {\n  margin: 0;\n}\n.location-marker-ui-container > .lmui-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.12);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 100%;\n}\n\n.location-marker-config-row > .row {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.location-marker-config-row > .row > .uxp-input-container {\n  margin: 4px;\n}\n\n.lmui-custom-marker {\n  background-color: transparent;\n}\n.lmui-custom-marker > div {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 30px;\n  height: 30px;\n  border: 2px solid #52c4c9;\n  background-color: #52c4c955;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.lmui-custom-marker > div::before {\n  content: \"\";\n  width: 5px;\n  height: 5px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  background-color: #52c4c9;\n  border-radius: 50%;\n}\n.lmui-custom-marker.edit-marker > div {\n  border: 2px solid #f09936;\n  background-color: #f099365c;\n}\n.lmui-custom-marker.edit-marker > div::before {\n  background-color: #f09936;\n  /* Match border color */\n}\n\n/* Icon markers */\n.icon-marker {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: white;\n  font-size: 12px;\n  font-weight: bold;\n  transform: translate(-15px, -15px);\n  border: 2px solid rgba(255, 255, 255, 0.8);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n}\n.icon-marker i {\n  font-size: 14px;\n}\n\n.default-marker {\n  /* Uses parent .lmui-custom-marker > div styles */\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -471,325 +471,372 @@ const uxp_1 = __webpack_require__(/*! ./uxp */ "./src/uxp.ts");
 const components_1 = __webpack_require__(/*! uxp/components */ "uxp/components");
 __webpack_require__(/*! ./styles.scss */ "./src/styles.scss");
 const SensorSpaceCoordinateEditor = (props) => {
-    const [filteredSpace, setFilteredSpace] = React.useState([]);
+    var _a;
+    // State management
+    const [filteredSpaces, setFilteredSpaces] = React.useState([]);
     const [query, setQuery] = React.useState('');
-    let [spaces, setSpaces] = React.useState([]);
-    let [space, setSpace] = React.useState(null);
-    let [floors, setFloors] = React.useState([]);
-    let [floor, setFloor] = React.useState(null);
-    let [config, setConfig] = React.useState({
+    const [spaces, setSpaces] = React.useState([]);
+    const [selectedSpace, setSelectedSpace] = React.useState(null);
+    const [floors, setFloors] = React.useState([]);
+    const [selectedFloor, setSelectedFloor] = React.useState('');
+    const [config, setConfig] = React.useState({
         floors: { model: "", action: "" },
         spaces: { model: "", action: "" },
         setRegion: { model: "", action: "" },
     });
-    let [region, setRegion] = React.useState([]);
-    let [editRegion, setEditRegion] = React.useState(false);
-    let [loading, setLoading] = React.useState(true);
-    let [saving, setSaving] = React.useState(false);
-    let [confirming, setConfirming] = React.useState(false);
-    let toast = components_1.useToast();
+    const [allSpaceRegions, setAllSpaceRegions] = React.useState([]);
+    const [isEditingRegion, setIsEditingRegion] = React.useState(false);
+    const [region, setRegion] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(true);
+    const [isSaving, setIsSaving] = React.useState(false);
+    const [isConfirming, setIsConfirming] = React.useState(false);
+    const toast = components_1.useToast();
+    // Initialize config from URL params
     React.useEffect(() => {
-        let params = new URLSearchParams(window.location.search);
-        console.log("params ", params);
-        let flm = params.get("flm") || "";
-        let fla = params.get("fla") || "";
-        let asm = params.get("asm") || "";
-        let asa = params.get("asa") || "";
-        let ucm = params.get("ucm") || "";
-        let uca = params.get("uca") || "";
+        const params = new URLSearchParams(window.location.search);
         setConfig({
             floors: {
-                model: flm,
-                action: fla
+                model: params.get("flm") || "",
+                action: params.get("fla") || ""
             },
             spaces: {
-                model: asm,
-                action: asa
+                model: params.get("asm") || "",
+                action: params.get("asa") || ""
             },
             setRegion: {
-                model: ucm,
-                action: uca
+                model: params.get("ucm") || "",
+                action: params.get("uca") || ""
             }
         });
-    }, [window.location]);
+    }, []);
+    // Load floors when config changes
     React.useEffect(() => {
-        getFloors();
+        if (config.floors.model && config.floors.action) {
+            loadFloors();
+        }
     }, [config.floors]);
+    // Auto-select first floor
     React.useEffect(() => {
-        if (floors.length > 0) {
-            setFloor(floors[0].id);
+        if (floors.length > 0 && !selectedFloor) {
+            // setSelectedFloor(floors[0].id);
+            setSelectedFloor("AU-MEL-435B.L06");
         }
-    }, [floors]);
+    }, [floors, selectedFloor]);
+    // Load spaces when floor or config changes
     React.useEffect(() => {
-        if (!!floor)
-            getSpaces();
-    }, [config.spaces, floor]);
+        if (selectedFloor && config.spaces.model && config.spaces.action) {
+            loadSpaces();
+        }
+    }, [config.spaces, selectedFloor]);
+    // Filter spaces based on search query
     React.useEffect(() => {
-        if (spaces.length > 0 && !!space)
-            setSpace(spaces[0]);
-    }, [spaces]);
-    React.useEffect(() => {
-        filterSpaces();
+        const filtered = query.trim()
+            ? spaces.filter(s => s.name.toLowerCase().includes(query.toLowerCase()))
+            : spaces;
+        setFilteredSpaces(filtered);
     }, [spaces, query]);
+    // Load coordinates when space changes
     React.useEffect(() => {
-        getDefaultCoords();
-    }, [space]);
-    function filterSpaces() {
-        var _a;
-        const filtered = (((_a = query === null || query === void 0 ? void 0 : query.trim()) === null || _a === void 0 ? void 0 : _a.length) > 0) ? [...spaces].filter(s => { var _a; return ((_a = s === null || s === void 0 ? void 0 : s.name) === null || _a === void 0 ? void 0 : _a.indexOf(query)) !== -1; }) : spaces;
-        setFilteredSpace(filtered);
-    }
-    function getDefaultCoords() {
-        if (space) {
-            let coords = space.coordinates || [];
-            if (coords.length == 0)
-                coords = [getCenterCoords()];
-            setRegion(coords);
+        if (selectedSpace) {
+            loadCoordinates();
         }
-    }
-    function getCenterCoords() {
-        let floorData = floors.find(f => f.id == floor);
-        let lat = (floorData === null || floorData === void 0 ? void 0 : floorData.layout.width) * 0.5 || 0;
-        let lng = (floorData === null || floorData === void 0 ? void 0 : floorData.layout.height) * 0.5 || 0;
-        return { x: lng, y: lat };
-    }
-    function getFloors() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                setLoading(true);
-                let { model, action } = config.floors;
-                if (model.trim().length > 0 && action.trim().length > 0) {
-                    let res = yield props.uxpContext.executeAction(model, action, {}, { json: true });
-                    setFloors(res.floors || []);
-                }
-                setLoading(false);
-            }
-            catch (e) {
-                setFloors([]);
-                console.log("unable to get floors ", e);
-                setLoading(false);
-                // toast.error("Unable to get floors. Something went wrong")
-            }
+    }, [selectedSpace]);
+    // Helper functions
+    const getCenterCoords = React.useCallback(() => {
+        const floorData = floors.find(f => f.id === selectedFloor);
+        if (!floorData)
+            return { x: 0, y: 0 };
+        return {
+            x: floorData.layout.width * 0.5,
+            y: floorData.layout.height * 0.5
+        };
+    }, [floors, selectedFloor]);
+    const loadCoordinates = React.useCallback(() => {
+        var _a;
+        if (!selectedSpace)
+            return;
+        const coords = ((_a = selectedSpace.coordinates) === null || _a === void 0 ? void 0 : _a.length) ? selectedSpace.coordinates
+            : [getCenterCoords()];
+        setRegion(coords);
+    }, [selectedSpace, getCenterCoords]);
+    // API calls
+    const loadFloors = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
+        var _b;
+        try {
+            setIsLoading(true);
+            const { model, action } = config.floors;
+            const res = yield ((_b = props.uxpContext) === null || _b === void 0 ? void 0 : _b.executeAction(model, action, {}, { json: true }));
+            setFloors((res === null || res === void 0 ? void 0 : res.floors) || []);
+        }
+        catch (error) {
+            console.error("Failed to load floors:", error);
+            setFloors([]);
+        }
+        finally {
+            setIsLoading(false);
+        }
+    }), [config.floors, props.uxpContext]);
+    const loadSpaces = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
+        var _c;
+        try {
+            setIsLoading(true);
+            const { model, action } = config.spaces;
+            const res = yield ((_c = props.uxpContext) === null || _c === void 0 ? void 0 : _c.executeAction(model, action, { floorId: selectedFloor }, { json: true }));
+            const spacesData = (res === null || res === void 0 ? void 0 : res.spaces) || [];
+            setSpaces(spacesData);
+            // Extract all space regions and markers for map display
+            const regions = spacesData
+                .filter(space => space.coordinates && space.coordinates.length > 1)
+                .map(space => ({
+                spaceId: space.id,
+                coordinates: space.coordinates,
+                color: (space === null || space === void 0 ? void 0 : space.color) || null,
+                type: 'region'
+            }));
+            const markers = spacesData
+                .filter(space => space.coordinates && space.coordinates.length === 1)
+                .map(space => ({
+                spaceId: space.id,
+                coordinates: space.coordinates,
+                color: (space === null || space === void 0 ? void 0 : space.color) || null,
+                icon: (space === null || space === void 0 ? void 0 : space.icon) || null,
+                type: 'marker'
+            }));
+            setAllSpaceRegions([...regions, ...markers]);
+        }
+        catch (error) {
+            console.error("Failed to load spaces:", error);
+            setSpaces([]);
+            setAllSpaceRegions([]);
+        }
+        finally {
+            setIsLoading(false);
+        }
+    }), [config.spaces, selectedFloor, props.uxpContext]);
+    const saveRegionChanges = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
+        var _d;
+        if (!selectedSpace || isSaving)
+            return;
+        try {
+            setIsSaving(true);
+            const { model, action } = config.setRegion;
+            const params = {
+                id: selectedSpace.id,
+                coordinates: JSON.stringify(region),
+                floor: selectedFloor
+            };
+            yield ((_d = props.uxpContext) === null || _d === void 0 ? void 0 : _d.executeAction(model, action, params, { json: true }));
+            yield loadSpaces();
+            setIsEditingRegion(false);
+            setIsConfirming(false);
+            toast.success("Coordinates saved successfully");
+        }
+        catch (error) {
+            console.error("Failed to save coordinates:", error);
+            toast.error("Unable to save changes. Something went wrong");
+        }
+        finally {
+            setIsSaving(false);
+        }
+    }), [selectedSpace, isSaving, config.setRegion, region, selectedFloor, props.uxpContext, loadSpaces, toast]);
+    // Event handlers
+    const handleSpaceSelect = React.useCallback((space) => {
+        setSelectedSpace(space);
+        setIsEditingRegion(false);
+        setIsConfirming(false);
+    }, []);
+    const handleFloorChange = React.useCallback((floorId) => {
+        setSelectedFloor(floorId);
+        setSelectedSpace(null);
+        setIsEditingRegion(false);
+        setIsConfirming(false);
+    }, []);
+    const handleRegionUpdate = React.useCallback((index, newPosition) => {
+        setRegion(prev => prev.map((pos, i) => i === index ? newPosition : pos));
+    }, []);
+    const handleMarkerDelete = React.useCallback((index) => {
+        setRegion(prev => prev.filter((_, i) => i !== index));
+    }, []);
+    const handleMarkerDuplicate = React.useCallback((index) => {
+        setRegion(prev => {
+            const newRegion = [...prev];
+            const pos = prev[index];
+            newRegion.splice(index + 1, 0, { x: pos.x + 1, y: pos.y + 1 });
+            return newRegion;
         });
-    }
-    function getSpaces() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                setLoading(true);
-                let { model, action } = config.spaces;
-                if (model.trim().length > 0 && action.trim().length > 0) {
-                    let res = yield props.uxpContext.executeAction(model, action, { floorId: floor }, { json: true });
-                    setSpaces(res.spaces || []);
-                    console.log("spaces ", res.spaces);
-                }
-                setLoading(false);
-            }
-            catch (e) {
-                setSpaces([]);
-                console.log("unable to get spaces ", e);
-                // toast.error("Unable to get spaces. Something went wrong")
-            }
+    }, []);
+    const handleAddCoordinate = React.useCallback(() => {
+        setRegion(prev => {
+            const last = prev[prev.length - 1] || getCenterCoords();
+            return [...prev, { x: last.x + 10, y: last.y + 10 }];
         });
-    }
-    function saveRegionChanges() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                let { model, action } = config.setRegion;
-                if (model.trim().length > 0 && action.trim().length > 0 && space) {
-                    if (saving)
-                        return;
-                    setSaving(true);
-                    let params = {
-                        id: space.id,
-                        coordinates: JSON.stringify(region),
-                        floor: floor
-                    };
-                    let res = yield props.uxpContext.executeAction(model, action, params, { json: true });
-                    yield getSpaces();
-                    setEditRegion(false);
-                    setConfirming(false);
-                    setSaving(false);
-                }
-            }
-            catch (e) {
-                console.log("Unable to save ", e);
-                toast.error("Unable to save changes. Something went wrong");
-            }
-        });
-    }
-    let floorData = floors.find(f => f.id == floor);
-    let _center = {
-        position: {
-            latitude: (floorData === null || floorData === void 0 ? void 0 : floorData.layout.width) * 0.5,
-            longitude: (floorData === null || floorData === void 0 ? void 0 : floorData.layout.height) * 0.5
-        },
-        renderMarker: false
-    };
-    let markers = [];
-    if (floorData) {
-        for (let i = 0; i < region.length; i++) {
-            let pos = region[i];
-            let lat = (floorData.layout.height - pos.y);
-            let lng = pos.x;
-            let m = {
-                latitude: lat,
-                longitude: lng,
-                draggable: editRegion,
-                ondragstart: (e) => console.log("Drag start ", e),
+    }, [getCenterCoords]);
+    const handleCancelEdit = React.useCallback(() => {
+        setIsEditingRegion(false);
+        setIsConfirming(false);
+        loadCoordinates();
+    }, [loadCoordinates]);
+    const getImageUrl = React.useCallback((imagePath) => {
+        var _a;
+        if (!imagePath)
+            return '';
+        if (imagePath.startsWith('/')) {
+            const lucyUrl = ((_a = props.uxpContext) === null || _a === void 0 ? void 0 : _a.lucyUrl) || '';
+            return `${lucyUrl}${imagePath}`;
+        }
+        return imagePath;
+    }, [(_a = props.uxpContext) === null || _a === void 0 ? void 0 : _a.lucyUrl]);
+    // Computed values
+    const selectedFloorData = React.useMemo(() => floors.find(f => f.id === selectedFloor), [floors, selectedFloor]);
+    const mapCenter = React.useMemo(() => {
+        if (!selectedFloorData)
+            return null;
+        return {
+            position: {
+                latitude: selectedFloorData.layout.width * 0.5,
+                longitude: selectedFloorData.layout.height * 0.5
+            },
+            renderMarker: false
+        };
+    }, [selectedFloorData]);
+    const markers = React.useMemo(() => {
+        if (!selectedFloorData)
+            return [];
+        const allMarkers = [];
+        // Show editing markers when in edit mode
+        if (selectedSpace && isEditingRegion) {
+            const editMarkers = region.map((pos, index) => ({
+                latitude: selectedFloorData.layout.height - pos.y,
+                longitude: pos.x,
+                draggable: true,
                 ondragend: (e) => {
-                    let { lat, lng } = e.target._latlng;
-                    let _region = [...region];
-                    _region[i] = { x: Number(lng), y: Number(floorData.layout.height - lat) };
-                    setRegion(_region);
+                    const { lat, lng } = e.target._latlng;
+                    handleRegionUpdate(index, {
+                        x: Number(lng),
+                        y: Number(selectedFloorData.layout.height - lat)
+                    });
                 },
                 customHTMLIcon: {
-                    className: 'lmui-custom-marker',
-                    html: '<div></div>'
+                    className: 'lmui-custom-marker edit-marker',
+                    html: '<div class="edit-marker"></div>',
+                    iconSize: [0, 0],
+                    iconAnchor: [0, 0]
                 },
                 renderPopup: {
-                    content: () => React.createElement("div", null, editRegion ?
-                        React.createElement(React.Fragment, null,
-                            React.createElement(components_1.IconButton, { type: "copy", size: "small", onClick: () => {
-                                    // duplicate the marker 
-                                    let _region = [...region];
-                                    _region.splice(i, 0, { x: pos.x + 1, y: pos.y + 1 });
-                                    setRegion(_region);
-                                } }),
-                            React.createElement(components_1.IconButton, { type: "delete", size: "small", onClick: () => {
-                                    let _region = [...region];
-                                    _region.splice(i, 1);
-                                    setRegion(_region);
-                                } }))
-                        :
-                            React.createElement("div", null, " Click on \"Edit Coordinates\" to start editing "))
+                    content: () => (React.createElement("div", null,
+                        React.createElement(components_1.IconButton, { type: "copy", size: "small", onClick: () => handleMarkerDuplicate(index) }),
+                        React.createElement(components_1.IconButton, { type: "delete", size: "small", onClick: () => handleMarkerDelete(index) })))
+                }
+            }));
+            allMarkers.push(...editMarkers);
+        }
+        // Show space markers (only for non-editing spaces)
+        const spaceMarkers = allSpaceRegions
+            .filter(item => item.type === 'marker' && (!selectedSpace || selectedSpace.id !== item.spaceId || !isEditingRegion))
+            .map(item => {
+            const pos = item.coordinates[0];
+            const isSelected = (selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) === item.spaceId;
+            return {
+                latitude: selectedFloorData.layout.height - pos.y,
+                longitude: pos.x,
+                draggable: false,
+                customHTMLIcon: {
+                    className: `lmui-custom-marker ${isSelected ? 'edit-marker' : ''}`,
+                    html: !!item.icon
+                        ? `<div class="icon-marker" style="background-color: ${item.color || '#52c4c9'}"><i class="${item.icon}"></i></div>`
+                        : `<div class='default-marker'></div>`,
                 }
             };
-            markers.push(m);
+        });
+        allMarkers.push(...spaceMarkers);
+        return allMarkers;
+    }, [selectedFloorData, region, isEditingRegion, allSpaceRegions, selectedSpace, handleRegionUpdate, handleMarkerDuplicate, handleMarkerDelete]);
+    const mapRegions = React.useMemo(() => {
+        const regions = [];
+        // Add all space regions (non-selected in default colors)
+        allSpaceRegions
+            .filter(item => item.type === 'region' && (selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) !== item.spaceId)
+            .forEach(spaceRegion => {
+            regions.push({
+                type: 'polygon',
+                color: (spaceRegion === null || spaceRegion === void 0 ? void 0 : spaceRegion.color) || '#52c4c9',
+                fillColor: ((spaceRegion === null || spaceRegion === void 0 ? void 0 : spaceRegion.color) || '#52c4c9') + '55',
+                bounds: spaceRegion.coordinates.map(c => [c.x, c.y]),
+                imageCoordinates: true,
+            });
+        });
+        // Add selected space region
+        if (selectedSpace && region.length > 0) {
+            regions.push({
+                type: 'polygon',
+                color: '#E74C3CFF',
+                fillColor: '#E74C3C55',
+                bounds: region.map(c => [c.x, c.y]),
+                imageCoordinates: true,
+            });
         }
-    }
+        return regions;
+    }, [allSpaceRegions, selectedSpace, region, isEditingRegion]);
     return (React.createElement("div", { className: "location-marker-ui-container" },
         React.createElement("div", { className: "lmui-sidebar" },
-            React.createElement("div", { className: "title" }, " Spaces "),
+            React.createElement("div", { className: "title" }, "Spaces"),
             React.createElement("div", { className: "content" },
                 React.createElement("div", { className: "search" },
                     React.createElement(components_1.SearchBox, { value: query, onChange: setQuery })),
-                filteredSpace.map((s, i) => {
-                    return React.createElement("div", { className: `space ${(space === null || space === void 0 ? void 0 : space.id) == s.id && 'active'} `, key: i, onClick: () => setSpace(s) },
-                        " ",
-                        s.name,
-                        " ");
-                }))),
+                filteredSpaces.map((space, index) => (React.createElement("div", { key: space.id, className: `space ${(selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) === space.id ? 'active' : ''}`, onClick: () => handleSpaceSelect(space) }, space.name))))),
         React.createElement("div", { className: "lmui-toolbar" },
             React.createElement(components_1.FormField, { className: "floor-filter" },
-                React.createElement(components_1.Select, { selected: floor || "", onChange: setFloor, options: floors, labelField: "name", valueField: "id", placeholder: "Select a floor" })),
+                React.createElement(components_1.Select, { selected: selectedFloor, onChange: handleFloorChange, options: floors, labelField: "name", valueField: "id", placeholder: "Select a floor" })),
             React.createElement(components_1.FilterPanel, null,
                 React.createElement(components_1.FormField, { className: "location-marker-config-row" },
-                    React.createElement(components_1.Label, null, "Get Floors "),
+                    React.createElement(components_1.Label, null, "Get Floors"),
                     React.createElement("div", { className: "row" },
-                        React.createElement(components_1.Input, { value: config.floors.model || "", onChange: s => { setConfig(prev => (Object.assign(Object.assign({}, prev), { floors: Object.assign(Object.assign({}, prev.floors), { model: s }) }))); }, placeholder: "Model name" }),
-                        React.createElement(components_1.Input, { value: config.floors.action || "", onChange: s => { setConfig(prev => (Object.assign(Object.assign({}, prev), { floors: Object.assign(Object.assign({}, prev.floors), { action: s }) }))); }, placeholder: "Action name" }))),
+                        React.createElement(components_1.Input, { value: config.floors.model, onChange: (model) => setConfig(prev => (Object.assign(Object.assign({}, prev), { floors: Object.assign(Object.assign({}, prev.floors), { model }) }))), placeholder: "Model name" }),
+                        React.createElement(components_1.Input, { value: config.floors.action, onChange: (action) => setConfig(prev => (Object.assign(Object.assign({}, prev), { floors: Object.assign(Object.assign({}, prev.floors), { action }) }))), placeholder: "Action name" }))),
                 React.createElement(components_1.FormField, { className: "location-marker-config-row" },
-                    React.createElement(components_1.Label, null, "Get Spaces "),
+                    React.createElement(components_1.Label, null, "Get Spaces"),
                     React.createElement("div", { className: "row" },
-                        React.createElement(components_1.Input, { value: config.spaces.model || "", onChange: s => { setConfig(prev => (Object.assign(Object.assign({}, prev), { spaces: Object.assign(Object.assign({}, prev.spaces), { model: s }) }))); }, placeholder: "Model name" }),
-                        React.createElement(components_1.Input, { value: config.spaces.action || "", onChange: s => { setConfig(prev => (Object.assign(Object.assign({}, prev), { spaces: Object.assign(Object.assign({}, prev.spaces), { action: s }) }))); }, placeholder: "Action name" }))),
+                        React.createElement(components_1.Input, { value: config.spaces.model, onChange: (model) => setConfig(prev => (Object.assign(Object.assign({}, prev), { spaces: Object.assign(Object.assign({}, prev.spaces), { model }) }))), placeholder: "Model name" }),
+                        React.createElement(components_1.Input, { value: config.spaces.action, onChange: (action) => setConfig(prev => (Object.assign(Object.assign({}, prev), { spaces: Object.assign(Object.assign({}, prev.spaces), { action }) }))), placeholder: "Action name" }))),
                 React.createElement(components_1.FormField, { className: "location-marker-config-row" },
-                    React.createElement(components_1.Label, null, "Set Coordinates "),
+                    React.createElement(components_1.Label, null, "Set Coordinates"),
                     React.createElement("div", { className: "row" },
-                        React.createElement(components_1.Input, { value: config.setRegion.model || "", onChange: s => { setConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { model: s }) }))); }, placeholder: "Model name" }),
-                        React.createElement(components_1.Input, { value: config.setRegion.action || "", onChange: s => { setConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { action: s }) }))); }, placeholder: "Action name" }))))),
-        React.createElement("div", { className: "lmui-map-container" }, (floorData && floorData.layout.floorPlan) ?
-            React.createElement(React.Fragment, null,
-                React.createElement(components_1.MapComponent, { zoom: 1, minZoom: -20, center: _center, regions: [
-                        {
-                            type: 'polygon',
-                            color: '#DDBC52FF',
-                            fillColor: '#DDBC52FF',
-                            bounds: region.map((c) => [c.x, c.y]),
-                            imageCoordinates: true,
-                        }
-                    ], staticImage: {
-                        url: floorData.layout.floorPlan || "",
-                        width: floorData.layout.width,
-                        height: floorData.layout.height
-                    }, onRegionClick: (e, data) => {
-                    }, markers: markers, onMarkerClick: () => { }, mapUrl: '', onClick: e => {
-                        console.log("cliked", e);
-                        // const _reg = [...region]
-                        // _reg.push({x:e.latlng.lat, y:e.latlng.lng})
-                        // setRegion(_reg)
-                    } }),
-                space &&
-                    React.createElement("div", { className: "toolbar" },
-                        !editRegion &&
-                            React.createElement(components_1.Button, { title: editRegion ? "Close Coordinates" : "Edit Coordinates", onClick: () => setEditRegion(prev => !prev) }),
-                        editRegion && (React.createElement("div", { className: "coordinates-list" },
-                            React.createElement("table", null,
-                                React.createElement("tbody", null,
-                                    region.map((c, i) => (React.createElement("tr", { className: "coordinate-container", key: i },
-                                        React.createElement("td", null, i + 1),
-                                        React.createElement("td", null,
-                                            "x: ",
-                                            c.x),
-                                        React.createElement("td", null,
-                                            "y: ",
-                                            c.y),
-                                        region.length > 1 && (React.createElement("td", null,
-                                            React.createElement(components_1.IconButton, { type: "delete", size: "small", onClick: () => {
-                                                    setRegion(prev => {
-                                                        prev.splice(i, 1);
-                                                        return [...prev];
-                                                    });
-                                                } })))))),
-                                    React.createElement("tr", null,
-                                        React.createElement("td", { colSpan: 4 },
-                                            React.createElement(components_1.Button, { title: "Add Coordinate", onClick: () => {
-                                                    setRegion(prev => {
-                                                        const last = prev[prev.length - 1];
-                                                        prev.push({ x: last.x + 10, y: last.y + 10 });
-                                                        return [...prev];
-                                                    });
-                                                } }))))),
-                            React.createElement("div", { className: "coordinate-actions" },
-                                confirming ? (React.createElement(components_1.AsyncButton, { title: "Confirm", loadingTitle: "Saving...", onClick: saveRegionChanges, className: "confirm-button" })) : (React.createElement(components_1.Button, { title: "Save Changes", loadingTitle: "Saving Changes...", onClick: () => setConfirming(true), className: "confirm-button" })),
-                                !saving && (React.createElement(components_1.Button, { title: "Cancel", onClick: () => {
-                                        setEditRegion(false);
-                                        getDefaultCoords();
-                                    } })))))))
-            : React.createElement("div", { className: 'no-map' }, "Select a floor to get started")),
-        loading && React.createElement("div", { className: "lmui-overlay" },
-            " ",
-            React.createElement(components_1.Loading, null),
-            " ")));
+                        React.createElement(components_1.Input, { value: config.setRegion.model, onChange: (model) => setConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { model }) }))), placeholder: "Model name" }),
+                        React.createElement(components_1.Input, { value: config.setRegion.action, onChange: (action) => setConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { action }) }))), placeholder: "Action name" }))))),
+        React.createElement("div", { className: "lmui-map-container" }, (selectedFloorData === null || selectedFloorData === void 0 ? void 0 : selectedFloorData.layout.floorPlan) ? (React.createElement(React.Fragment, null,
+            React.createElement(components_1.MapComponent, { zoom: -1, minZoom: -20, center: mapCenter, regions: mapRegions, staticImage: {
+                    url: getImageUrl(selectedFloorData.layout.floorPlan),
+                    width: selectedFloorData.layout.width,
+                    height: selectedFloorData.layout.height
+                }, markers: markers, onMarkerClick: () => { }, mapUrl: "", onClick: (e) => console.log("Map clicked", e) }),
+            selectedSpace && (React.createElement("div", { className: "toolbar" },
+                !isEditingRegion && (React.createElement(components_1.Button, { title: "Edit Coordinates", onClick: () => setIsEditingRegion(true), className: "edit-coordinated-btn" })),
+                isEditingRegion && (React.createElement("div", { className: "coordinates-list" },
+                    React.createElement("div", { className: "coordinates-list-header" }, "Corrdinates"),
+                    React.createElement("div", { className: "coordinates-list-body" },
+                        React.createElement("table", null,
+                            React.createElement("tbody", null, region.map((coord, index) => (React.createElement("tr", { key: index, className: "coordinate-container" },
+                                React.createElement("td", null, index + 1),
+                                React.createElement("td", null,
+                                    "x: ",
+                                    coord.x),
+                                React.createElement("td", null,
+                                    "y: ",
+                                    coord.y),
+                                region.length > 1 && (React.createElement("td", null,
+                                    React.createElement(components_1.IconButton, { type: "delete", size: "small", onClick: () => handleMarkerDelete(index) }))))))))),
+                    React.createElement("div", { className: "coordinate-list-footer" },
+                        (!isConfirming && !isSaving) && React.createElement(components_1.Button, { title: "Add", onClick: handleAddCoordinate }),
+                        isConfirming ? (React.createElement(components_1.AsyncButton, { title: "Confirm", loadingTitle: "Saving...", onClick: saveRegionChanges, className: "confirm-button" })) : (React.createElement(components_1.Button, { title: "Save", onClick: () => setIsConfirming(true), className: "confirm-button" })),
+                        !isSaving && (React.createElement(components_1.IconButton, { type: 'close', onClick: handleCancelEdit }))))))))) : (React.createElement("div", { className: "no-map" }, "Select a floor to get started"))),
+        isLoading && (React.createElement("div", { className: "lmui-overlay" },
+            React.createElement(components_1.Loading, null)))));
 };
-/**
- * Register as a Widget
- */
 uxp_1.registerUI({
     id: "sensor-space-coordinate-editor",
     component: SensorSpaceCoordinateEditor,
     showDefaultHeader: false
 });
-/**
- * Register as a Sidebar Link
- */
-/*
-registerLink({
-    id: "LocationMarkerUI",
-    label: "LocationMarkerUI",
-    // click: () => alert("Hello"),
-    component: LocationMarkerUIWidget
-});
-*/
-/**
- * Register as a UI
- */
-/*
-registerUI({
-   id:"LocationMarkerUI",
-   component: LocationMarkerUIWidget
-});
-*/ 
 
 
 /***/ }),

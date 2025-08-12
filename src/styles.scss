@@ -110,9 +110,6 @@
             position: absolute;
             top: 20px;
             right: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border: 2px solid black;
-            padding: 12px 16px;
             border-radius: 10px;
             display: flex;
             flex-direction: column;
@@ -121,30 +118,43 @@
             .uxp-button {
                 margin: 4px 0;
 
-                &.confirm-button {
+                &.confirm-button,
+                &.edit-coordinated-btn {
                     background-color: #52c4c9;
                     color: white;
                 }
             }
 
             .coordinates-list {
-                margin-top: 8px;
-                background: #fff;
+                background-color: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(20px);
                 padding: 8px;
                 border-radius: 6px;
+                min-width: 250px;
 
-                table {
+                .coordinates-list-header {
+                    padding: 8px;
+                }
+                .coordinates-list-body {
                     width: 100%;
-                    border-collapse: collapse;
+                    max-height: 250px;
+                    overflow-y: auto;
 
-                    td {
-                        padding: 2px 4px;
-                        font-size: 13px;
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+
+                        td {
+                            padding: 2px 4px;
+                            font-size: 13px;
+                        }
                     }
                 }
 
-                .coordinate-actions {
+                .coordinate-list-footer {
                     display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
                     flex-wrap: wrap;
                     gap: 4px;
                     margin-top: 6px;
@@ -188,13 +198,15 @@
     background-color: transparent;
 
     &>div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
         width: 30px;
         height: 30px;
         border: 2px solid #52c4c9;
-        background-color: #51d2d757;
-        transform: translate(-9px, -9px);
+        background-color: #52c4c955;
+        transform: translate(-50%, -50%);
         border-radius: 50%;
-        position: relative;
 
         &::before {
             content: "";
@@ -205,6 +217,43 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: #52c4c9;
+            border-radius: 50%;
         }
     }
+
+    &.edit-marker {
+        &>div {
+            border: 2px solid #f09936;
+            background-color: #f099365c;
+
+            &::before {
+                background-color: #f09936;
+                /* Match border color */
+            }
+        }
+    }
+}
+
+/* Icon markers */
+.icon-marker {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    transform: translate(-15px, -15px);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+    i {
+        font-size: 14px;
+    }
+}
+
+.default-marker {
+    /* Uses parent .lmui-custom-marker > div styles */
 }
