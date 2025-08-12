@@ -33,6 +33,9 @@
             height: 100%;
             overflow-y: auto;
             padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
 
             .search {
                 width: 100%;
@@ -50,21 +53,33 @@
                 }
             }
 
-            &>.space {
-                width: 100%;
-                height: auto;
-                padding: 10px;
-                font-size: 12px;
-                overflow: hidden;
-                cursor: pointer;
-                margin-bottom: 8px;
-                border-radius: 5px;
-                background-color: #d8d8d8;
+            .list {
+                min-height: 0;
+                flex-grow: 1;
 
-                &.active {
-                    background-color: #52c4c9;
-                    color: white;
+                &>.space {
+                    width: 100%;
+                    height: auto;
+                    padding: 10px;
+                    font-size: 12px;
+                    overflow: hidden;
+                    cursor: pointer;
+                    margin-bottom: 8px;
+                    border-radius: 5px;
+                    background-color: #d8d8d8;
+
+                    &.active {
+                        background-color: #52c4c9;
+                        color: white;
+                    }
                 }
+
+            }
+
+            .footer {
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
     }
@@ -135,6 +150,7 @@
                 .coordinates-list-header {
                     padding: 8px;
                 }
+
                 .coordinates-list-body {
                     width: 100%;
                     max-height: 250px;
@@ -223,6 +239,19 @@
 
     &.edit-marker {
         &>div {
+            border: 2px solid #E74C3CFF;
+            background-color: #E74C3C55;
+
+            &::before {
+                background-color: #E74C3CFF;
+                /* Match border color */
+            }
+        }
+       
+    }
+
+    &.selected-marker {
+         &>div {
             border: 2px solid #f09936;
             background-color: #f099365c;
 
@@ -256,4 +285,35 @@
 
 .default-marker {
     /* Uses parent .lmui-custom-marker > div styles */
+}
+
+
+.add-space-modal {
+    &.modal-container {
+        .modal-panel {
+            max-width: unset;
+            margin-right: unset;
+            min-width: unset;
+            width: 350px;
+            min-height: 400px;
+            margin: 0;
+        }
+
+        .modal-body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    }
+}
+
+.button-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .save-button {
+        background-color: #52c4c9;
+        color: #fff;
+    }
 }

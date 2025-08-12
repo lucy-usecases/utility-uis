@@ -11,7 +11,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, ".location-marker-ui-container {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  padding: 80px 0 0 250px;\n}\n.location-marker-ui-container > .lmui-sidebar {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  background-color: white;\n  border-right: 1px solid silver;\n  padding-top: 80px;\n}\n.location-marker-ui-container > .lmui-sidebar > .title {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 80px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-weight: 900;\n  text-transform: uppercase;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-sidebar > .content {\n  width: 100%;\n  height: 100%;\n  overflow-y: auto;\n  padding: 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search {\n  width: 100%;\n  height: auto;\n  padding: 20px 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search .uxp-search-box-container .search-box-container .uxp-input-container input {\n  min-width: 165px !important;\n}\n.location-marker-ui-container > .lmui-sidebar > .content > .space {\n  width: 100%;\n  height: auto;\n  padding: 10px;\n  font-size: 12px;\n  overflow: hidden;\n  cursor: pointer;\n  margin-bottom: 8px;\n  border-radius: 5px;\n  background-color: #d8d8d8;\n}\n.location-marker-ui-container > .lmui-sidebar > .content > .space.active {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-toolbar {\n  position: absolute;\n  top: 0;\n  left: 250px;\n  right: 0;\n  height: 80px;\n  padding: 20px;\n  background-color: white;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter {\n  width: auto;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter .uxp-form-select {\n  max-width: 250px;\n  margin: 0;\n}\n.location-marker-ui-container > .lmui-map-container {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n}\n.location-marker-ui-container > .lmui-map-container > .no-map {\n  font-weight: 900;\n  font-size: 20px;\n  color: #868686;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar {\n  position: absolute;\n  top: 20px;\n  right: 20px;\n  border-radius: 10px;\n  display: flex;\n  flex-direction: column;\n  z-index: 999;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button {\n  margin: 4px 0;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button.confirm-button, .location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button.edit-coordinated-btn {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list {\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(20px);\n  padding: 8px;\n  border-radius: 6px;\n  min-width: 250px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinates-list-header {\n  padding: 8px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinates-list-body {\n  width: 100%;\n  max-height: 250px;\n  overflow-y: auto;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinates-list-body table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinates-list-body table td {\n  padding: 2px 4px;\n  font-size: 13px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinate-list-footer {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  flex-wrap: wrap;\n  gap: 4px;\n  margin-top: 6px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinate-list-footer .uxp-button {\n  margin: 0;\n}\n.location-marker-ui-container > .lmui-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.12);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 100%;\n}\n\n.location-marker-config-row > .row {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.location-marker-config-row > .row > .uxp-input-container {\n  margin: 4px;\n}\n\n.lmui-custom-marker {\n  background-color: transparent;\n}\n.lmui-custom-marker > div {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 30px;\n  height: 30px;\n  border: 2px solid #52c4c9;\n  background-color: #52c4c955;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.lmui-custom-marker > div::before {\n  content: \"\";\n  width: 5px;\n  height: 5px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  background-color: #52c4c9;\n  border-radius: 50%;\n}\n.lmui-custom-marker.edit-marker > div {\n  border: 2px solid #f09936;\n  background-color: #f099365c;\n}\n.lmui-custom-marker.edit-marker > div::before {\n  background-color: #f09936;\n  /* Match border color */\n}\n\n/* Icon markers */\n.icon-marker {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: white;\n  font-size: 12px;\n  font-weight: bold;\n  transform: translate(-15px, -15px);\n  border: 2px solid rgba(255, 255, 255, 0.8);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n}\n.icon-marker i {\n  font-size: 14px;\n}\n\n.default-marker {\n  /* Uses parent .lmui-custom-marker > div styles */\n}", ""]);
+exports.push([module.id, ".location-marker-ui-container {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  padding: 80px 0 0 250px;\n}\n.location-marker-ui-container > .lmui-sidebar {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 100%;\n  background-color: white;\n  border-right: 1px solid silver;\n  padding-top: 80px;\n}\n.location-marker-ui-container > .lmui-sidebar > .title {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 250px;\n  height: 80px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-weight: 900;\n  text-transform: uppercase;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-sidebar > .content {\n  width: 100%;\n  height: 100%;\n  overflow-y: auto;\n  padding: 10px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search {\n  width: 100%;\n  height: auto;\n  padding: 20px 10px;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .search .uxp-search-box-container .search-box-container .uxp-input-container input {\n  min-width: 165px !important;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .list {\n  min-height: 0;\n  flex-grow: 1;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .list > .space {\n  width: 100%;\n  height: auto;\n  padding: 10px;\n  font-size: 12px;\n  overflow: hidden;\n  cursor: pointer;\n  margin-bottom: 8px;\n  border-radius: 5px;\n  background-color: #d8d8d8;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .list > .space.active {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-sidebar > .content .footer {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.location-marker-ui-container > .lmui-toolbar {\n  position: absolute;\n  top: 0;\n  left: 250px;\n  right: 0;\n  height: 80px;\n  padding: 20px;\n  background-color: white;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  border-bottom: 1px solid silver;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter {\n  width: auto;\n}\n.location-marker-ui-container > .lmui-toolbar > .floor-filter .uxp-form-select {\n  max-width: 250px;\n  margin: 0;\n}\n.location-marker-ui-container > .lmui-map-container {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n}\n.location-marker-ui-container > .lmui-map-container > .no-map {\n  font-weight: 900;\n  font-size: 20px;\n  color: #868686;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar {\n  position: absolute;\n  top: 20px;\n  right: 20px;\n  border-radius: 10px;\n  display: flex;\n  flex-direction: column;\n  z-index: 999;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button {\n  margin: 4px 0;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button.confirm-button, .location-marker-ui-container > .lmui-map-container > .toolbar .uxp-button.edit-coordinated-btn {\n  background-color: #52c4c9;\n  color: white;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list {\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(20px);\n  padding: 8px;\n  border-radius: 6px;\n  min-width: 250px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinates-list-header {\n  padding: 8px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinates-list-body {\n  width: 100%;\n  max-height: 250px;\n  overflow-y: auto;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinates-list-body table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinates-list-body table td {\n  padding: 2px 4px;\n  font-size: 13px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinate-list-footer {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  flex-wrap: wrap;\n  gap: 4px;\n  margin-top: 6px;\n}\n.location-marker-ui-container > .lmui-map-container > .toolbar .coordinates-list .coordinate-list-footer .uxp-button {\n  margin: 0;\n}\n.location-marker-ui-container > .lmui-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.12);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 100%;\n}\n\n.location-marker-config-row > .row {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.location-marker-config-row > .row > .uxp-input-container {\n  margin: 4px;\n}\n\n.lmui-custom-marker {\n  background-color: transparent;\n}\n.lmui-custom-marker > div {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 30px;\n  height: 30px;\n  border: 2px solid #52c4c9;\n  background-color: #52c4c955;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.lmui-custom-marker > div::before {\n  content: \"\";\n  width: 5px;\n  height: 5px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  background-color: #52c4c9;\n  border-radius: 50%;\n}\n.lmui-custom-marker.edit-marker > div {\n  border: 2px solid #E74C3CFF;\n  background-color: #E74C3C55;\n}\n.lmui-custom-marker.edit-marker > div::before {\n  background-color: #E74C3CFF;\n  /* Match border color */\n}\n.lmui-custom-marker.selected-marker > div {\n  border: 2px solid #f09936;\n  background-color: #f099365c;\n}\n.lmui-custom-marker.selected-marker > div::before {\n  background-color: #f09936;\n  /* Match border color */\n}\n\n/* Icon markers */\n.icon-marker {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: white;\n  font-size: 12px;\n  font-weight: bold;\n  transform: translate(-15px, -15px);\n  border: 2px solid rgba(255, 255, 255, 0.8);\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);\n}\n.icon-marker i {\n  font-size: 14px;\n}\n\n.default-marker {\n  /* Uses parent .lmui-custom-marker > div styles */\n}\n\n.add-space-modal.modal-container .modal-panel {\n  max-width: unset;\n  margin-right: unset;\n  min-width: unset;\n  width: 350px;\n  min-height: 400px;\n  margin: 0;\n}\n.add-space-modal.modal-container .modal-body {\n  height: 100%;\n  margin: 0;\n  padding: 0;\n}\n\n.button-row {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n}\n.button-row .save-button {\n  background-color: #52c4c9;\n  color: #fff;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -470,6 +470,13 @@ const React = __importStar(__webpack_require__(/*! react */ "react"));
 const uxp_1 = __webpack_require__(/*! ./uxp */ "./src/uxp.ts");
 const components_1 = __webpack_require__(/*! uxp/components */ "uxp/components");
 __webpack_require__(/*! ./styles.scss */ "./src/styles.scss");
+const NewSpace = {
+    id: '',
+    name: '',
+    coordinates: [],
+    color: '',
+    icon: ''
+};
 const SensorSpaceCoordinateEditor = (props) => {
     var _a;
     // State management
@@ -483,6 +490,7 @@ const SensorSpaceCoordinateEditor = (props) => {
         floors: { model: "", action: "" },
         spaces: { model: "", action: "" },
         setRegion: { model: "", action: "" },
+        addSpace: { model: "", action: "" },
     });
     const [allSpaceRegions, setAllSpaceRegions] = React.useState([]);
     const [isEditingRegion, setIsEditingRegion] = React.useState(false);
@@ -490,6 +498,8 @@ const SensorSpaceCoordinateEditor = (props) => {
     const [isLoading, setIsLoading] = React.useState(true);
     const [isSaving, setIsSaving] = React.useState(false);
     const [isConfirming, setIsConfirming] = React.useState(false);
+    const [addSpace, setAddSpace] = React.useState(false);
+    const [newSpace, setNewSpace] = React.useState(NewSpace);
     const toast = components_1.useToast();
     // Initialize config from URL params
     React.useEffect(() => {
@@ -506,7 +516,11 @@ const SensorSpaceCoordinateEditor = (props) => {
             setRegion: {
                 model: params.get("ucm") || "",
                 action: params.get("uca") || ""
-            }
+            },
+            addSpace: {
+                model: params.get("ssm") || "",
+                action: params.get("ssa") || ""
+            },
         });
     }, []);
     // Load floors when config changes
@@ -613,8 +627,26 @@ const SensorSpaceCoordinateEditor = (props) => {
             setIsLoading(false);
         }
     }), [config.spaces, selectedFloor, props.uxpContext]);
-    const saveRegionChanges = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
+    const saveSpace = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
         var _d;
+        try {
+            setIsSaving(true);
+            const { model, action } = config.addSpace;
+            const res = yield ((_d = props.uxpContext) === null || _d === void 0 ? void 0 : _d.executeAction(model, action, newSpace, { json: true }));
+            loadSpaces();
+            toast.success('Space added');
+        }
+        catch (error) {
+            console.error("Unable to add space. something went wrong:", error);
+            toast.error('Unable to add space. something went wrong');
+            loadSpaces();
+        }
+        finally {
+            setIsSaving(false);
+        }
+    }), [config.floors, props.uxpContext, newSpace]);
+    const saveRegionChanges = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
+        var _e;
         if (!selectedSpace || isSaving)
             return;
         try {
@@ -625,7 +657,7 @@ const SensorSpaceCoordinateEditor = (props) => {
                 coordinates: JSON.stringify(region),
                 floor: selectedFloor
             };
-            yield ((_d = props.uxpContext) === null || _d === void 0 ? void 0 : _d.executeAction(model, action, params, { json: true }));
+            yield ((_e = props.uxpContext) === null || _e === void 0 ? void 0 : _e.executeAction(model, action, params, { json: true }));
             yield loadSpaces();
             setIsEditingRegion(false);
             setIsConfirming(false);
@@ -700,12 +732,13 @@ const SensorSpaceCoordinateEditor = (props) => {
         };
     }, [selectedFloorData]);
     const markers = React.useMemo(() => {
+        var _a;
         if (!selectedFloorData)
             return [];
         const allMarkers = [];
-        // Show editing markers when in edit mode
-        if (selectedSpace && isEditingRegion) {
-            const editMarkers = region.map((pos, index) => ({
+        // Helper function to generate markers
+        const createMarkers = (markerType) => {
+            return region.map((pos, index) => ({
                 latitude: selectedFloorData.layout.height - pos.y,
                 longitude: pos.x,
                 draggable: true,
@@ -717,22 +750,31 @@ const SensorSpaceCoordinateEditor = (props) => {
                     });
                 },
                 customHTMLIcon: {
-                    className: 'lmui-custom-marker edit-marker',
-                    html: '<div class="edit-marker"></div>',
-                    iconSize: [0, 0],
-                    iconAnchor: [0, 0]
+                    className: `lmui-custom-marker ${markerType}`,
+                    html: '<div></div>'
                 },
                 renderPopup: {
-                    content: () => (React.createElement("div", null,
-                        React.createElement(components_1.IconButton, { type: "copy", size: "small", onClick: () => handleMarkerDuplicate(index) }),
-                        React.createElement(components_1.IconButton, { type: "delete", size: "small", onClick: () => handleMarkerDelete(index) })))
+                    content: () => (React.createElement(React.Fragment, null,
+                        React.createElement("button", { onClick: () => handleMarkerDuplicate(index) }, "Duplicate"),
+                        React.createElement("button", { onClick: () => handleMarkerDelete(index) }, "Delete")))
                 }
             }));
-            allMarkers.push(...editMarkers);
+        };
+        // Show editing markers when in edit mode
+        if (selectedSpace) {
+            const isMarker = ((_a = allSpaceRegions.find(s => s.spaceId === selectedSpace.id)) === null || _a === void 0 ? void 0 : _a.type) === 'marker';
+            console.log('is_marker', isMarker);
+            if (isMarker) {
+                allMarkers.push(...createMarkers(isEditingRegion ? 'edit-marker' : 'selected-marker'));
+            }
+            else if (isEditingRegion) {
+                allMarkers.push(...createMarkers('edit-marker'));
+            }
         }
         // Show space markers (only for non-editing spaces)
         const spaceMarkers = allSpaceRegions
-            .filter(item => item.type === 'marker' && (!selectedSpace || selectedSpace.id !== item.spaceId || !isEditingRegion))
+            .filter(item => (item.type === 'marker'
+            && (!selectedSpace || selectedSpace.id !== item.spaceId)))
             .map(item => {
             const pos = item.coordinates[0];
             const isSelected = (selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) === item.spaceId;
@@ -769,8 +811,8 @@ const SensorSpaceCoordinateEditor = (props) => {
         if (selectedSpace && region.length > 0) {
             regions.push({
                 type: 'polygon',
-                color: '#E74C3CFF',
-                fillColor: '#E74C3C55',
+                color: '#f09936',
+                fillColor: '#f099365c',
                 bounds: region.map(c => [c.x, c.y]),
                 imageCoordinates: true,
             });
@@ -783,7 +825,9 @@ const SensorSpaceCoordinateEditor = (props) => {
             React.createElement("div", { className: "content" },
                 React.createElement("div", { className: "search" },
                     React.createElement(components_1.SearchBox, { value: query, onChange: setQuery })),
-                filteredSpaces.map((space, index) => (React.createElement("div", { key: space.id, className: `space ${(selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) === space.id ? 'active' : ''}`, onClick: () => handleSpaceSelect(space) }, space.name))))),
+                React.createElement("div", { className: "list" }, filteredSpaces.map((space, index) => (React.createElement("div", { key: space.id, className: `space ${(selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) === space.id ? 'active' : ''}`, onClick: () => handleSpaceSelect(space) }, space.name)))),
+                React.createElement("div", { className: "footer" },
+                    React.createElement(components_1.Button, { title: "Add Space", onClick: () => setAddSpace(true) })))),
         React.createElement("div", { className: "lmui-toolbar" },
             React.createElement(components_1.FormField, { className: "floor-filter" },
                 React.createElement(components_1.Select, { selected: selectedFloor, onChange: handleFloorChange, options: floors, labelField: "name", valueField: "id", placeholder: "Select a floor" })),
@@ -802,7 +846,12 @@ const SensorSpaceCoordinateEditor = (props) => {
                     React.createElement(components_1.Label, null, "Set Coordinates"),
                     React.createElement("div", { className: "row" },
                         React.createElement(components_1.Input, { value: config.setRegion.model, onChange: (model) => setConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { model }) }))), placeholder: "Model name" }),
-                        React.createElement(components_1.Input, { value: config.setRegion.action, onChange: (action) => setConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { action }) }))), placeholder: "Action name" }))))),
+                        React.createElement(components_1.Input, { value: config.setRegion.action, onChange: (action) => setConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { action }) }))), placeholder: "Action name" }))),
+                React.createElement(components_1.FormField, { className: "location-marker-config-row" },
+                    React.createElement(components_1.Label, null, "Add Space"),
+                    React.createElement("div", { className: "row" },
+                        React.createElement(components_1.Input, { value: config.addSpace.model, onChange: (model) => setConfig(prev => (Object.assign(Object.assign({}, prev), { addSpace: Object.assign(Object.assign({}, prev.addSpace), { model }) }))), placeholder: "Model name" }),
+                        React.createElement(components_1.Input, { value: config.addSpace.action, onChange: (action) => setConfig(prev => (Object.assign(Object.assign({}, prev), { addSpace: Object.assign(Object.assign({}, prev.addSpace), { action }) }))), placeholder: "Action name" }))))),
         React.createElement("div", { className: "lmui-map-container" }, (selectedFloorData === null || selectedFloorData === void 0 ? void 0 : selectedFloorData.layout.floorPlan) ? (React.createElement(React.Fragment, null,
             React.createElement(components_1.MapComponent, { zoom: -1, minZoom: -20, center: mapCenter, regions: mapRegions, staticImage: {
                     url: getImageUrl(selectedFloorData.layout.floorPlan),
@@ -830,7 +879,26 @@ const SensorSpaceCoordinateEditor = (props) => {
                         isConfirming ? (React.createElement(components_1.AsyncButton, { title: "Confirm", loadingTitle: "Saving...", onClick: saveRegionChanges, className: "confirm-button" })) : (React.createElement(components_1.Button, { title: "Save", onClick: () => setIsConfirming(true), className: "confirm-button" })),
                         !isSaving && (React.createElement(components_1.IconButton, { type: 'close', onClick: handleCancelEdit }))))))))) : (React.createElement("div", { className: "no-map" }, "Select a floor to get started"))),
         isLoading && (React.createElement("div", { className: "lmui-overlay" },
-            React.createElement(components_1.Loading, null)))));
+            React.createElement(components_1.Loading, null))),
+        React.createElement(components_1.Modal, { show: addSpace, onClose: () => { setAddSpace(false); setNewSpace(NewSpace); }, title: "Add New Space", className: "add-space-modal" },
+            React.createElement(components_1.FormField, null,
+                React.createElement(components_1.Label, null, "Id"),
+                React.createElement(components_1.Input, { value: (newSpace === null || newSpace === void 0 ? void 0 : newSpace.id) || '', onChange: v => setNewSpace(prev => (Object.assign(Object.assign({}, prev), { id: v }))) })),
+            React.createElement(components_1.FormField, null,
+                React.createElement(components_1.Label, null, "Name"),
+                React.createElement(components_1.Input, { value: (newSpace === null || newSpace === void 0 ? void 0 : newSpace.name) || '', onChange: v => setNewSpace(prev => (Object.assign(Object.assign({}, prev), { name: v }))) })),
+            React.createElement(components_1.FormField, null,
+                React.createElement(components_1.Label, null, "Color"),
+                React.createElement(components_1.Input, { value: (newSpace === null || newSpace === void 0 ? void 0 : newSpace.color) || '', onChange: v => setNewSpace(prev => (Object.assign(Object.assign({}, prev), { color: v }))) })),
+            React.createElement(components_1.FormField, null,
+                React.createElement(components_1.Label, null, "Icon"),
+                React.createElement(components_1.Input, { value: (newSpace === null || newSpace === void 0 ? void 0 : newSpace.icon) || '', onChange: v => setNewSpace(prev => (Object.assign(Object.assign({}, prev), { color: v }))) })),
+            React.createElement(components_1.FormField, { className: "button-row" },
+                React.createElement(components_1.Button, { title: "Canel", onClick: () => {
+                        setAddSpace(false);
+                        setNewSpace(NewSpace);
+                    } }),
+                React.createElement(components_1.AsyncButton, { title: "Submit", onClick: saveSpace, className: "save-button" })))));
 };
 uxp_1.registerUI({
     id: "sensor-space-coordinate-editor",

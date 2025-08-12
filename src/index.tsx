@@ -2,7 +2,8 @@ import * as React from "react";
 import { registerUI, IContextProvider } from './uxp';
 import {
     FilterPanel, FormField, Select, Label, Input, MapComponent,
-    IMarker, IconButton, Button, AsyncButton, Loading, useToast, SearchBox
+    IMarker, IconButton, Button, AsyncButton, Loading, useToast, SearchBox,
+    Modal
 } from "uxp/components";
 import './styles.scss';
 
@@ -43,8 +44,16 @@ interface IConfig {
     floors: IModel;
     spaces: IModel;
     setRegion: IModel;
+    addSpace: IModel;
 }
 
+const NewSpace: ISpace = {
+    id: '',
+    name: '',
+    coordinates: [],
+    color: '',
+    icon: ''
+}
 const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (props) => {
     // State management
     const [filteredSpaces, setFilteredSpaces] = React.useState<ISpace[]>([]);
@@ -57,6 +66,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         floors: { model: "", action: "" },
         spaces: { model: "", action: "" },
         setRegion: { model: "", action: "" },
+        addSpace: { model: "", action: "" },
     });
     const [allSpaceRegions, setAllSpaceRegions] = React.useState<Array<{
         spaceId: string,
@@ -71,6 +81,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
     const [isLoading, setIsLoading] = React.useState(true);
     const [isSaving, setIsSaving] = React.useState(false);
     const [isConfirming, setIsConfirming] = React.useState(false);
+    const [addSpace, setAddSpace] = React.useState(false)
+    const [newSpace, setNewSpace] = React.useState<ISpace>(NewSpace)
 
     const toast = useToast();
 
@@ -90,7 +102,11 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             setRegion: {
                 model: params.get("ucm") || "",
                 action: params.get("uca") || ""
-            }
+            },
+            addSpace: {
+                model: params.get("ssm") || "",
+                action: params.get("ssa") || ""
+            },
         });
     }, []);
 
@@ -209,6 +225,23 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         }
     }, [config.spaces, selectedFloor, props.uxpContext]);
 
+    const saveSpace = React.useCallback(async () => {
+        try {
+            setIsSaving(true);
+            const { model, action } = config.addSpace;
+            const res = await props.uxpContext?.executeAction(model, action, newSpace, { json: true });
+            loadSpaces()
+            toast.success('Space added');
+        } catch (error) {
+            console.error("Unable to add space. something went wrong:", error);
+            toast.error('Unable to add space. something went wrong')
+            loadSpaces();
+        } finally {
+            setIsSaving(false);
+        }
+    }, [config.floors, props.uxpContext, newSpace]);
+
+
     const saveRegionChanges = React.useCallback(async () => {
         if (!selectedSpace || isSaving) return;
 
@@ -309,9 +342,9 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
 
         const allMarkers: IMarker[] = [];
 
-        // Show editing markers when in edit mode
-        if (selectedSpace && isEditingRegion) {
-            const editMarkers: IMarker[] = region.map((pos, index) => ({
+        // Helper function to generate markers
+        const createMarkers = (markerType: 'selected-marker' | 'edit-marker'): IMarker[] => {
+            return region.map((pos, index) => ({
                 latitude: selectedFloorData.layout.height - pos.y,
                 longitude: pos.x,
                 draggable: true,
@@ -323,26 +356,37 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     });
                 },
                 customHTMLIcon: {
-                    className: 'lmui-custom-marker edit-marker',
-                    html: '<div class="edit-marker"></div>',
-                    iconSize: [0, 0],
-                    iconAnchor: [0, 0]
+                    className: `lmui-custom-marker ${markerType}`,
+                    html: '<div></div>'
                 },
                 renderPopup: {
                     content: () => (
-                        <div>
-                            <IconButton type="copy" size="small" onClick={() => handleMarkerDuplicate(index)} />
-                            <IconButton type="delete" size="small" onClick={() => handleMarkerDelete(index)} />
-                        </div>
+                        <>
+                            <button onClick={() => handleMarkerDuplicate(index)}>Duplicate</button>
+                            <button onClick={() => handleMarkerDelete(index)}>Delete</button>
+                        </>
                     )
                 }
             }));
-            allMarkers.push(...editMarkers);
+        };
+
+        // Show editing markers when in edit mode
+        if (selectedSpace) {
+            const isMarker = allSpaceRegions.find(s => s.spaceId === selectedSpace.id)?.type === 'marker';
+            console.log('is_marker', isMarker)
+            if (isMarker) {
+                allMarkers.push(...createMarkers(isEditingRegion ? 'edit-marker' : 'selected-marker'));
+            } else if (isEditingRegion) {
+                allMarkers.push(...createMarkers('edit-marker'));
+            }
         }
 
         // Show space markers (only for non-editing spaces)
         const spaceMarkers: IMarker[] = allSpaceRegions
-            .filter(item => item.type === 'marker' && (!selectedSpace || selectedSpace.id !== item.spaceId || !isEditingRegion))
+            .filter(item => (
+                item.type === 'marker' 
+                && (!selectedSpace || selectedSpace.id !== item.spaceId)
+            ))
             .map(item => {
                 const pos = item.coordinates[0];
                 const isSelected = selectedSpace?.id === item.spaceId;
@@ -384,8 +428,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         if (selectedSpace && region.length > 0) {
             regions.push({
                 type: 'polygon' as const,
-                color: '#E74C3CFF',
-                fillColor: '#E74C3C55',
+                color: '#f09936',
+                fillColor: '#f099365c',
                 bounds: region.map(c => [c.x, c.y]),
                 imageCoordinates: true,
             });
@@ -402,15 +446,24 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     <div className="search">
                         <SearchBox value={query} onChange={setQuery} />
                     </div>
-                    {filteredSpaces.map((space, index) => (
-                        <div
-                            key={space.id}
-                            className={`space ${selectedSpace?.id === space.id ? 'active' : ''}`}
-                            onClick={() => handleSpaceSelect(space)}
-                        >
-                            {space.name}
-                        </div>
-                    ))}
+                    <div className="list">
+
+                        {filteredSpaces.map((space, index) => (
+                            <div
+                                key={space.id}
+                                className={`space ${selectedSpace?.id === space.id ? 'active' : ''}`}
+                                onClick={() => handleSpaceSelect(space)}
+                            >
+                                {space.name}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="footer">
+                        <Button
+                            title="Add Space"
+                            onClick={() => setAddSpace(true)}
+                        />
+                    </div>
                 </div>
             </div>
 
@@ -487,6 +540,28 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                                 onChange={(action) => setConfig(prev => ({
                                     ...prev,
                                     setRegion: { ...prev.setRegion, action }
+                                }))}
+                                placeholder="Action name"
+                            />
+                        </div>
+                    </FormField>
+
+                    <FormField className="location-marker-config-row">
+                        <Label>Add Space</Label>
+                        <div className="row">
+                            <Input
+                                value={config.addSpace.model}
+                                onChange={(model) => setConfig(prev => ({
+                                    ...prev,
+                                    addSpace: { ...prev.addSpace, model }
+                                }))}
+                                placeholder="Model name"
+                            />
+                            <Input
+                                value={config.addSpace.action}
+                                onChange={(action) => setConfig(prev => ({
+                                    ...prev,
+                                    addSpace: { ...prev.addSpace, action }
                                 }))}
                                 placeholder="Action name"
                             />
@@ -598,7 +673,63 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     <Loading />
                 </div>
             )}
-        </div>
+
+            <Modal
+                show={addSpace}
+                onClose={() => { setAddSpace(false); setNewSpace(NewSpace) }}
+                title="Add New Space"
+                className="add-space-modal"
+            >
+                <FormField>
+                    <Label>Id</Label>
+                    <Input
+                        value={newSpace?.id || ''}
+                        onChange={v => setNewSpace(prev => ({ ...prev, id: v }))}
+                    />
+                </FormField>
+
+                <FormField>
+                    <Label>Name</Label>
+                    <Input
+                        value={newSpace?.name || ''}
+                        onChange={v => setNewSpace(prev => ({ ...prev, name: v }))}
+                    />
+                </FormField>
+
+                <FormField>
+                    <Label>Color</Label>
+                    <Input
+                        value={newSpace?.color || ''}
+                        onChange={v => setNewSpace(prev => ({ ...prev, color: v }))}
+                    />
+                </FormField>
+
+                <FormField>
+                    <Label>Icon</Label>
+                    <Input
+                        value={newSpace?.icon || ''}
+                        onChange={v => setNewSpace(prev => ({ ...prev, color: v }))}
+                    />
+                </FormField>
+
+                <FormField
+                    className="button-row"
+                >
+                    <Button
+                        title="Canel"
+                        onClick={() => {
+                            setAddSpace(false)
+                            setNewSpace(NewSpace)
+                        }}
+                    />
+                    <AsyncButton
+                        title="Submit"
+                        onClick={saveSpace}
+                        className="save-button"
+                    />
+                </FormField>
+            </Modal>
+        </div >
     );
 };
 
