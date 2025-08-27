@@ -11,9 +11,7 @@ export function trimSlash(s: string): string {
     return s?.replace(/\/$/, "");
 }
 
-
 export function hasValue<T>(value: T | null | undefined, allowZero?: boolean, allowNegative?: boolean): value is NonNullable<T> {
-
     if (allowZero && typeof value == "number" && value == 0) return true
     if (allowNegative && typeof value == "number" && value < 0) return true
     if (!value) return false
@@ -74,6 +72,7 @@ const NewSpace: ISpace = {
     color: '',
     icon: ''
 }
+
 const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (props) => {
     // State management
     const [filteredSpaces, setFilteredSpaces] = React.useState<ISpace[]>([]);
@@ -95,7 +94,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         icon?: string,
         type: 'region' | 'marker'
     }>>([]);
-
     const [isEditingRegion, setIsEditingRegion] = React.useState(false);
     const [region, setRegion] = React.useState<IRegion[]>([]);
     const [isLoading, setIsLoading] = React.useState(true);
@@ -109,7 +107,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
     // Initialize config from URL params
     React.useEffect(() => {
         const params = new URLSearchParams(window.location.search);
-
         setConfig({
             floors: {
                 model: params.get("flm") || "",
@@ -170,7 +167,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
     const getCenterCoords = React.useCallback((): IRegion => {
         const floorData = floors.find(f => f.id === selectedFloor);
         if (!floorData) return { x: 0, y: 0 };
-
         return {
             x: floorData.layout.width * 0.5,
             y: floorData.layout.height * 0.5
@@ -179,7 +175,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
 
     const loadCoordinates = React.useCallback(() => {
         if (!selectedSpace) return;
-
         const coords = selectedSpace.coordinates?.length
             ? selectedSpace.coordinates
             : [getCenterCoords()];
@@ -248,6 +243,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         setAddSpace(false)
         setNewSpace(NewSpace)
     }
+
     const saveSpace = React.useCallback(async () => {
         try {
             setIsSaving(true);
@@ -276,10 +272,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         }
     }, [config.addSpace, selectedFloor, props.uxpContext, newSpace]);
 
-
     const saveRegionChanges = React.useCallback(async () => {
         if (!selectedSpace || isSaving) return;
-
         try {
             setIsSaving(true);
             const { model, action } = config.setRegion;
@@ -288,7 +282,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                 coordinates: JSON.stringify(region),
                 floor: selectedFloor
             };
-
             await props.uxpContext?.executeAction(model, action, params, { json: true });
             await loadSpaces();
             setIsEditingRegion(false);
@@ -346,6 +339,15 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         loadCoordinates();
     }, [loadCoordinates]);
 
+    const handleCoordinateChange = React.useCallback((index: number, field: 'x' | 'y', value: string) => {
+        const numValue = parseFloat(value);
+        if (!isNaN(numValue)) {
+            setRegion(prev => prev.map((pos, i) =>
+                i === index ? { ...pos, [field]: numValue } : pos
+            ));
+        }
+    }, []);
+
     const getImageUrl = React.useCallback((imagePath: string): string => {
         if (!imagePath) return '';
         if (imagePath.startsWith('/')) {
@@ -374,7 +376,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
 
     const markers = React.useMemo((): IMarker[] => {
         if (!selectedFloorData) return [];
-
         const allMarkers: IMarker[] = [];
 
         // Helper function to generate markers
@@ -408,7 +409,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         // Show editing markers when in edit mode
         if (selectedSpace) {
             const isMarker = allSpaceRegions.find(s => s.spaceId === selectedSpace.id)?.type === 'marker';
-            console.log('is_marker', isMarker)
             if (isMarker) {
                 allMarkers.push(...createMarkers(isEditingRegion ? 'edit-marker' : 'selected-marker'));
             } else if (isEditingRegion) {
@@ -425,7 +425,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             .map(item => {
                 const pos = item.coordinates[0];
                 const isSelected = selectedSpace?.id === item.spaceId;
-
                 return {
                     latitude: selectedFloorData.layout.height - pos.y,
                     longitude: pos.x,
@@ -445,7 +444,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
 
     const mapRegions = React.useMemo(() => {
         const regions: any[] = [];
-
         // Add all space regions (non-selected in default colors)
         allSpaceRegions
             .filter(item => item.type === 'region' && selectedSpace?.id !== item.spaceId)
@@ -469,7 +467,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                 imageCoordinates: true,
             });
         }
-
         return regions;
     }, [allSpaceRegions, selectedSpace, region, isEditingRegion]);
 
@@ -482,7 +479,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                         <SearchBox value={query} onChange={setQuery} />
                     </div>
                     <div className="list">
-
                         {filteredSpaces.map((space, index) => (
                             <div
                                 key={space.id}
@@ -494,10 +490,12 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                         ))}
                     </div>
                     <div className="footer">
-                        <Button
-                            title="Add Space"
-                            onClick={() => setAddSpace(true)}
-                        />
+                        {hasValue(config?.addSpace?.model) && hasValue(config?.addSpace?.action) &&
+                            <Button
+                                title="Add Space"
+                                onClick={() => setAddSpace(true)}
+                            />
+                        }
                     </div>
                 </div>
             </div>
@@ -637,17 +635,40 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                                 {isEditingRegion && (
                                     <div className="coordinates-list">
                                         <div className="coordinates-list-header">
-                                            Corrdinates
+                                            Coordinates
                                         </div>
                                         <div className="coordinates-list-body">
-
                                             <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>X</th>
+                                                        <th>Y</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
                                                 <tbody>
                                                     {region.map((coord, index) => (
                                                         <tr key={index} className="coordinate-container">
                                                             <td>{index + 1}</td>
-                                                            <td>x: {coord.x}</td>
-                                                            <td>y: {coord.y}</td>
+                                                            <td>
+                                                                <Input
+                                                                    type="number"
+                                                                    value={coord.x.toString()}
+                                                                    onChange={(value) => handleCoordinateChange(index, 'x', value)}
+                                                                    placeholder="X"
+                                                                    className="coordinate-input"
+                                                                />
+                                                            </td>
+                                                            <td>
+                                                                <Input
+                                                                    type="number"
+                                                                    value={coord.y.toString()}
+                                                                    onChange={(value) => handleCoordinateChange(index, 'y', value)}
+                                                                    placeholder="Y"
+                                                                    className="coordinate-input"
+                                                                />
+                                                            </td>
                                                             {region.length > 1 && (
                                                                 <td>
                                                                     <IconButton
@@ -662,15 +683,11 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                                                 </tbody>
                                             </table>
                                         </div>
-
-
                                         <div className="coordinate-list-footer">
-
                                             {(!isConfirming && !isSaving) && <Button
                                                 title="Add"
                                                 onClick={handleAddCoordinate}
                                             />}
-
                                             {isConfirming ? (
                                                 <AsyncButton
                                                     title="Confirm"
@@ -685,7 +702,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                                                     className="confirm-button"
                                                 />
                                             )}
-
                                             {!isSaving && (
                                                 <IconButton
                                                     type='close'
@@ -743,7 +759,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     <Label>Icon</Label>
                     <Input
                         value={newSpace?.icon || ''}
-                        onChange={v => setNewSpace(prev => ({ ...prev, color: v }))}
+                        onChange={v => setNewSpace(prev => ({ ...prev, icon: v }))}
                     />
                 </FormField>
 
@@ -751,7 +767,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     className="button-row"
                 >
                     <Button
-                        title="Canel"
+                        title="Cancel"
                         onClick={closeForm}
                     />
                     <AsyncButton
@@ -761,7 +777,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     />
                 </FormField>
             </Modal>
-        </div >
+        </div>
     );
 };
 
