@@ -747,7 +747,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     />
                 </FormField>
 
-                <FormField>
+                {/* <FormField>
                     <Label>Color</Label>
                     <Input
                         value={newSpace?.color || ''}
@@ -761,7 +761,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                         value={newSpace?.icon || ''}
                         onChange={v => setNewSpace(prev => ({ ...prev, icon: v }))}
                     />
-                </FormField>
+                </FormField> */}
 
                 <FormField
                     className="button-row"

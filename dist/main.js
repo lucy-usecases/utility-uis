@@ -931,12 +931,6 @@ const SensorSpaceCoordinateEditor = (props) => {
             React.createElement(components_1.FormField, null,
                 React.createElement(components_1.Label, null, "Name"),
                 React.createElement(components_1.Input, { value: (newSpace === null || newSpace === void 0 ? void 0 : newSpace.name) || '', onChange: v => setNewSpace(prev => (Object.assign(Object.assign({}, prev), { name: v }))) })),
-            React.createElement(components_1.FormField, null,
-                React.createElement(components_1.Label, null, "Color"),
-                React.createElement(components_1.Input, { value: (newSpace === null || newSpace === void 0 ? void 0 : newSpace.color) || '', onChange: v => setNewSpace(prev => (Object.assign(Object.assign({}, prev), { color: v }))) })),
-            React.createElement(components_1.FormField, null,
-                React.createElement(components_1.Label, null, "Icon"),
-                React.createElement(components_1.Input, { value: (newSpace === null || newSpace === void 0 ? void 0 : newSpace.icon) || '', onChange: v => setNewSpace(prev => (Object.assign(Object.assign({}, prev), { icon: v }))) })),
             React.createElement(components_1.FormField, { className: "button-row" },
                 React.createElement(components_1.Button, { title: "Cancel", onClick: closeForm }),
                 React.createElement(components_1.AsyncButton, { title: "Submit", onClick: saveSpace, className: "save-button" })))));
