@@ -1,18 +1,20 @@
 {
-    "id": "44bd0b59-ecaa-4fc7-c90e-9dcc56379933",
+    "id": "7ed7f6c8-0621-480b-d7e5-af01b849dc5d",
     "author": "",
     "widgets": [
         {
-            "id": "LocationMarkerUI",
-            "name": "LocationMarkerUI",
+            "id": "utility_uis",
+            "name": "utility_uis",
             "description": "A sample widget",
             "icon": "",
             "tags":[]
+            "category":"",
+            "isTemplate": true/false // this will mark the widget as a template 
         }
     ],
     "sidebarLinks": [
         {
-            "id": "LocationMarkerUILink",
+            "id": "utility_uisLink",
             "label": "",
             "description": "",
             "target": "",
@@ -22,7 +24,7 @@
     ],
     "uis": [
         {
-            "id": "LocationMarkerUILink",
+            "id": "utility_uisLink",
             "label":"",
             "description": "",
             "roles": []
@@ -30,8 +32,8 @@
     ],
     "menuItems": [
         {
-            "id": "LocationMarkerUILink",
-            "title": "LocationMarkerUI"
+            "id": "utility_uisLink",
+            "title": "utility_uis"
         }
     ]
 }

@@ -1,5 +1,9 @@
 
+import { IWidgetTemplate } from 'widget-designer/components';
 import BundleConfig from '../bundle.json';
+import LocalizationMessages from '../localization.json';
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+
 
 // window interface
 interface ILayout {
@@ -20,15 +24,38 @@ interface IContainer {
 
 interface IWidgetPropConfig {
     name: string,
-    type: string,
-    label: string
-    attr?: { [key: string]: any }
+    label: string,
+    type: 'text' | 'string' | 'password' | 'number' | 'email' | 'checkbox' | 'toggle' | 'select' | 'date' | 'time' | 'json',
+    value?: string | number | boolean,
+    placeholder?: string,
+    options?: Array<{ label: string, value: string }>,
+
+    validate?: {
+        required?: boolean // default is false 
+        allowEmptyString?: boolean // trim value. only for string values 
+        minLength?: number
+        maxLength?: number
+        regExp?: RegExp
+        allowZeros?: boolean // on;y applicable to numbers 
+        minVal?: number
+        maxVal?: number
+        customValidateFunction?: (value: any) => { valid: boolean, error?: string }// this is to give a custom validate function, which takes the value and return a boolean indicating value is valid or not
+    }
 }
+export interface IConfigPanelProps {
+    configs: any // configred props 
+    uxpContext: IContextProvider,
+    instanceId: string,
+    onSubmit: (data: { [key: string]: any }) => void
+    onCancel?: () => void
+}
+type IWidgetPreloader = 'default' | 'line-chart' | 'bar-chart' | 'donut-chart' | 'heatmap-chart' | 'gauge' | 'map'
 
 interface IWidgetConfig {
     layout?: ILayout
-    // container?: IContainer,
-    props?: IWidgetPropConfig[]
+    props?: IWidgetPropConfig[],
+    configPanel?: React.FunctionComponent<IConfigPanelProps>,
+    preLoader?: IWidgetPreloader
 }
 
 interface IWidgetObject {
@@ -37,19 +64,15 @@ interface IWidgetObject {
     configs?: IWidgetConfig
     defaultProps?: { [propName: string]: any }
     external?: {
-        styles?: {[key:string]:string}
-        scripts?: {[key:string]:string}
+        styles?: { [key: string]: string }
+        scripts?: { [key: string]: string }
     }
-    // name: string,
-    // isNew?: string,
-    // description?: string,
-    // icon?: string,
-    // vendor?: string,
-    // tags?: string[]
+    isTemplate?: boolean,
+    isDefaultTemplate?: boolean
 }
 type SidebarLinkClick = () => void;
 
-interface ISidebarLinkProps {
+export interface ISidebarLinkProps {
     onClose: () => void;
     uxpContext: IContextProvider
 }
@@ -73,11 +96,15 @@ interface IMenuItem {
     component?: React.FunctionComponent<ISidebarLinkProps> | React.Component<ISidebarLinkProps, {}>,
     menuPanel?: React.FunctionComponent<IMenuPanelProps> | React.Component<IMenuPanelProps, {}>
 }
+
+export interface ICustomUIProps {
+    uxpContext: IContextProvider
+}
 interface IRenderUIItemProps {
     id: string,
-    component: any,
+    component: React.FunctionComponent<ICustomUIProps> | React.Component<ICustomUIProps, {}>,
     uiProps?: any,
-    showDefaultHeader?:boolean
+    showDefaultHeader?: boolean
 }
 declare global {
     interface Window {
@@ -110,6 +137,18 @@ interface IPartialContextProvider {
 interface ILucyActionExecutionOptions {
     /** Set this to true to parse the data as JSON and return it */
     json?: boolean;
+    // unique key for the request 
+    // better to have a combination of instance id and some text  (<instanceId>-<some-text>) to keep the uniqueness 
+    // this key will be used when caching (coming soon :)) and cancelling previous requests 
+    key?: string
+
+    // cancel the previous request if a new request comes with the same key (above). 
+    // default is false
+    cancelPrevious?: boolean,
+
+    // to skip batching and execute separately, set to true. 
+    // default is false
+    executeImmidiately?: boolean
 }
 
 type IDataFunction = (max: number, lastPageToken: string, args?: any) => Promise<{ items: Array<any>, pageToken: string }>;
@@ -120,6 +159,8 @@ interface IShowUIOptions {
 }
 export interface IContextProvider extends IPartialContextProvider {
     executeAction: (model: string, action: string, parameters: any, options?: ILucyActionExecutionOptions) => Promise<any>;
+    executeService: (app: string, service: string, parameters: any, options?: ILucyActionExecutionOptions) => Promise<any>;
+    executeComponent(component: string, route: string, method: 'get' | 'post' | 'put' | 'patch' | 'delete', params: any, body?: any): Promise<any>;
     fireEvent: (eventID: string) => Promise<void>;
     hasAppRole: (roles: string | string[]) => Promise<boolean>;
     /**
@@ -141,8 +182,15 @@ export interface IContextProvider extends IPartialContextProvider {
      * this function will execute the render UI function & will render the given ui
      * 
      */
-    executeRenderUI: (uiId: string, bundleId?: string, author?: string, type?: IShowUITypes, options?: IShowUIOptions) => void
-
+    executeRenderUI: (uiId: string, bundleId?: string, author?: string, type?: IShowUITypes, options?: IShowUIOptions) => void,
+    /**
+     * this will be used handle localization messages
+     * @param code 
+     * @param params 
+     * @returns 
+     */
+    $L: (code: string, params?: any) => string
+    language?: string
 }
 export function registerWidget(_widget: IWidgetObject) {
     let id = (BundleConfig.id + '/widget/' + _widget.id).toLowerCase();
@@ -161,7 +209,7 @@ export function registerWidget(_widget: IWidgetObject) {
         throw "Error: The widget you are trying to register is not in the bundle.json. Please update the bundle.json before continue";
     }
     // merge them
-    let updatedWidget = {..._widget, ..._widgetDetails,...{id} };
+    let updatedWidget = { ..._widget, ..._widgetDetails, ...{ id } };
 
     window.registerWidget(updatedWidget);
 }
@@ -182,12 +230,12 @@ export function registerLink(_link: ISidebarLink) {
         throw "Error: The sidebar link you are trying to register is not in the bundle.json. Please update the bundle.json before continue";
     }
     // merge them
-    let updatedLink = { ..._link, ..._linkDetails,...{ id } }
+    let updatedLink = { ..._link, ..._linkDetails, ...{ id } }
 
     window.registerLink(updatedLink);
 }
 export function registerMenuItem(_menuItem: IMenuItem) {
-    let id =(BundleConfig.id + '/menuitem/' + _menuItem.id).toLowerCase();
+    let id = (BundleConfig.id + '/menuitem/' + _menuItem.id).toLowerCase();
     if (!window.registerMenuItem) {
         console.error('This is not is not being run within the UXP context');
         return;
@@ -201,7 +249,7 @@ export function registerMenuItem(_menuItem: IMenuItem) {
         throw "Error: The menu item you are trying to register is not in the bundle.json. Please update the bundle.json before continue";
     }
     // merge them
-    let updatedMenuItem = { ..._menuItem, ..._menuItemDetails,...{id} }
+    let updatedMenuItem = { ..._menuItem, ..._menuItemDetails, ...{ id } }
 
     window.registerMenuItem(updatedMenuItem);
 }
@@ -220,6 +268,55 @@ export function registerUI(_ui: IRenderUIItemProps) {
         throw "Error: The ui you are trying to register is not in the bundle.json. Please update the bundle.json before continue";
     }
     // merge them
-    let updatedUI = { ..._ui, ..._uiDetails,...{id} }
+    let updatedUI = { ..._ui, ..._uiDetails, ...{ id } }
     window.registerUI(updatedUI);
+}
+
+export function enableLocalization() {
+    (window as any).registerLocalization(LocalizationMessages)
+}
+
+export const getUrlFriendlyString = (string: string, removeSlashes?: boolean): string => {
+    const from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;"
+    const to = "aaaaaeeeeeiiiiooooouuuunc------"
+
+    const newText = string.split('').map(
+        (letter, i) => letter.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i)))
+
+    return newText
+        .toString()                     // Cast to string
+        .toLowerCase()                  // Convert the string to lowercase letters
+        .trim()                         // Remove whitespace from both sides of a string
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/'/g, '-e')           // Replace single quates with -
+        .replace(/&/g, '-and-')           // Replace & with 'and'
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-');        // Replace multiple - with single -
+}
+
+export function registerCustomWidgetTemplate(template: IWidgetTemplate) {
+    let id = getUrlFriendlyString(template.id)
+    if (!template.icon) template.icon = ['fad', 'align-justify'] as IconProp
+
+    (window as any).registerCustomWidgetTemplate(template)
+    registerWidget({
+        id: id,
+        widget: template.template,
+        isTemplate: true,
+        isDefaultTemplate: false, // mark this widget as a custom template
+        configs: {
+            layout: template.layout || { w: 10, h: 10 },
+            props: [
+                {
+                    name: "uiProps",
+                    label: "UI",
+                    type: "json"
+                }
+            ],
+            preLoader: template?.preLoader || 'default'
+        },
+        defaultProps: {
+            uiProps: {},
+        }
+    })
 }

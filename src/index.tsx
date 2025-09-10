@@ -384,7 +384,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                 latitude: selectedFloorData.layout.height - pos.y,
                 longitude: pos.x,
                 draggable: true,
-                ondragend: (e) => {
+                ondragend: (e:any) => {
                     const { lat, lng } = e.target._latlng;
                     handleRegionUpdate(index, {
                         x: Number(lng),

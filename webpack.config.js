@@ -1,3 +1,5 @@
+var path = require('path');
+
 module.exports = {
     mode: "development",
 
@@ -11,13 +13,18 @@ module.exports = {
     },
 
     entry: "./src/index.tsx",
+    output: {
+        path: path.join(__dirname, '/dist'),
+        publicPath: "/dist/",
+        filename: '[name].js'
+    },
 
     module: {
         rules: [
             {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"],
-                
+
             },
             {
                 test: /\.scss$/,
@@ -37,14 +44,14 @@ module.exports = {
             {
                 test: /\.svg$/,
                 use: [
-                  {
-                    loader: 'svg-url-loader',
-                    options: {
-                      limit: 10000,
+                    {
+                        loader: 'svg-url-loader',
+                        options: {
+                            limit: 10000,
+                        },
                     },
-                  },
                 ],
-              },
+            },
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             {
@@ -62,13 +69,18 @@ module.exports = {
     externals: {
         "react": "React",
         "react-dom": "ReactDOM",
-        "recharts":"Recharts",
-        "uxp/components":"UXPComponents",
+        "recharts": "Recharts",
+        "uxp/components": "UXPComponents",
+        "widget-designer/components": "WidgetDesignerComponents",
     },
 
-    
-    devServer:{
-        writeToDisk:true
+
+    devServer: {
+        static: {
+            directory: path.join(__dirname, '/'),
+        },
+        compress: true,
+        liveReload: true,
     }
 
 };
