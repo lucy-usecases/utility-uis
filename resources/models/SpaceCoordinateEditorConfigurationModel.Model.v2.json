@@ -1,0 +1,551 @@
+{
+  "models": [
+    {
+      "ApiRoutes": [],
+      "Definition": {
+        "actions": [
+          {
+            "canOverrideCredentials": false,
+            "capability": "",
+            "docs": "",
+            "initiate": false,
+            "name": "GetConfig",
+            "outputs": [
+              ""
+            ],
+            "parameters": [
+              "id"
+            ],
+            "parametersExtended": [
+              {
+                "dataType": "",
+                "docs": "",
+                "example": "",
+                "id": "id"
+              }
+            ],
+            "published": false,
+            "schema": "",
+            "schemaFrozen": false,
+            "static": true
+          },
+          {
+            "canOverrideCredentials": false,
+            "capability": "",
+            "docs": "",
+            "initiate": false,
+            "name": "SaveConfig",
+            "outputs": [
+              ""
+            ],
+            "parameters": [
+              "id",
+              "value"
+            ],
+            "parametersExtended": [
+              {
+                "dataType": "",
+                "docs": "",
+                "example": "",
+                "id": "id"
+              },
+              {
+                "dataType": "",
+                "docs": "",
+                "example": "",
+                "id": "value"
+              }
+            ],
+            "published": false,
+            "schema": "",
+            "schemaFrozen": false,
+            "static": true
+          }
+        ],
+        "attributes": [],
+        "flows": {
+          "blocks": [
+            {
+              "CollectionName": "525fd38f-b48c-4d6d-b205-f9fefc373758",
+              "configuration": "[{\"IsEither\":true,\"Conditions\":[{\"Attribute\":\"key\",\"Operator\":\"eq\",\"Value\":\"key\",\"IsPin\":true}],\"Groups\":[]}]",
+              "connections": {
+                "inputs": [
+                  {
+                    "source": "bb3c3b40-919c-49c6-e46e-a9eea935d4d3:output:id",
+                    "target": "318326e7-1c48-4564-f837-f40d0cb8ab74:input:key"
+                  },
+                  {
+                    "source": "bb3c3b40-919c-49c6-e46e-a9eea935d4d3:output:value",
+                    "target": "318326e7-1c48-4564-f837-f40d0cb8ab74:input:value"
+                  }
+                ],
+                "outputs": [
+                  {
+                    "source": "318326e7-1c48-4564-f837-f40d0cb8ab74:output:output",
+                    "target": "171108a2-847e-43a6-8558-605168dfd98c:input:input"
+                  }
+                ]
+              },
+              "id": "318326e7-1c48-4564-f837-f40d0cb8ab74",
+              "inputValues": [
+                {
+                  "description": "",
+                  "disablelog": "",
+                  "documentation": "",
+                  "id": "key",
+                  "label": "key",
+                  "transformation": "",
+                  "transformationOptions": "",
+                  "type": "",
+                  "value": ""
+                },
+                {
+                  "description": "",
+                  "disablelog": "",
+                  "documentation": "",
+                  "id": "trigger",
+                  "label": "Trigger",
+                  "transformation": "",
+                  "transformationOptions": "",
+                  "type": "",
+                  "value": ""
+                },
+                {
+                  "description": "",
+                  "disablelog": "",
+                  "documentation": "",
+                  "id": "value",
+                  "label": "value",
+                  "transformation": "",
+                  "transformationOptions": "",
+                  "type": "",
+                  "value": ""
+                },
+                {
+                  "description": "Data to be inserted",
+                  "disablelog": "",
+                  "documentation": "",
+                  "id": "__data__",
+                  "label": "Data",
+                  "transformation": "",
+                  "transformationOptions": "",
+                  "type": "text",
+                  "value": ""
+                }
+              ],
+              "outputValues": [
+                {
+                  "dataType": "",
+                  "description": "",
+                  "documentation": "",
+                  "example": "",
+                  "id": "__error__",
+                  "label": "Error",
+                  "type": "error"
+                },
+                {
+                  "dataType": "",
+                  "description": "",
+                  "documentation": "",
+                  "example": "",
+                  "id": "output",
+                  "label": "All Output",
+                  "type": ""
+                }
+              ],
+              "position": {
+                "left": 320,
+                "top": 100
+              },
+              "ReceiveIndividualFields": false,
+              "surface": "SaveConfig",
+              "TakeFilterFromPin": false,
+              "timeout": 5000,
+              "title": "Replace one document",
+              "type": "modelcollections:replaceone",
+              "UpdateAsAttributes": true
+            },
+            {
+              "CollectionName": "525fd38f-b48c-4d6d-b205-f9fefc373758",
+              "configuration": "[{\"IsEither\":true,\"Conditions\":[{\"Attribute\":\"key\",\"Operator\":\"eq\",\"Value\":\"key\",\"IsPin\":true}],\"Groups\":[]}]",
+              "connections": {
+                "inputs": [
+                  {
+                    "source": "dd6a2d24-8d1c-427a-99a4-ae8352322607:output:id",
+                    "target": "09574473-f26e-4f1f-a72f-869a6eb7ed14:input:key"
+                  }
+                ],
+                "outputs": [
+                  {
+                    "source": "09574473-f26e-4f1f-a72f-869a6eb7ed14:output:output",
+                    "target": "c98525fa-c94a-4e45-d6d3-c83880685922:input:input"
+                  }
+                ]
+              },
+              "id": "09574473-f26e-4f1f-a72f-869a6eb7ed14",
+              "inputValues": [
+                {
+                  "description": "",
+                  "disablelog": "",
+                  "documentation": "",
+                  "id": "key",
+                  "label": "key",
+                  "transformation": "",
+                  "transformationOptions": "",
+                  "type": "",
+                  "value": ""
+                },
+                {
+                  "description": "",
+                  "disablelog": "",
+                  "documentation": "",
+                  "id": "trigger",
+                  "label": "Trigger",
+                  "transformation": "",
+                  "transformationOptions": "",
+                  "type": "",
+                  "value": ""
+                }
+              ],
+              "outputValues": [
+                {
+                  "dataType": "",
+                  "description": "",
+                  "documentation": "",
+                  "example": "",
+                  "id": "__error__",
+                  "label": "Error",
+                  "type": "error"
+                },
+                {
+                  "dataType": "",
+                  "description": "",
+                  "documentation": "",
+                  "example": "",
+                  "id": "output",
+                  "label": "All Output",
+                  "type": ""
+                }
+              ],
+              "position": {
+                "left": 320,
+                "top": 100
+              },
+              "ReceiveIndividualFields": false,
+              "surface": "GetConfig",
+              "TakeFilterFromPin": false,
+              "timeout": 5000,
+              "title": "Find one document",
+              "type": "modelcollections:findone",
+              "UpdateAsAttributes": false
+            },
+            {
+              "actionName": "GetConfig",
+              "canOverrideCredentials": false,
+              "capability": "",
+              "connections": {
+                "inputs": [],
+                "outputs": [
+                  {
+                    "source": "dd6a2d24-8d1c-427a-99a4-ae8352322607:output:id",
+                    "target": "09574473-f26e-4f1f-a72f-869a6eb7ed14:input:key"
+                  }
+                ]
+              },
+              "debug": false,
+              "docs": "",
+              "id": "dd6a2d24-8d1c-427a-99a4-ae8352322607",
+              "initiate": false,
+              "inputValues": [],
+              "outputValues": [
+                {
+                  "dataType": "",
+                  "description": "",
+                  "documentation": "",
+                  "example": "",
+                  "id": "__error__",
+                  "label": "Error",
+                  "type": "error"
+                },
+                {
+                  "dataType": "",
+                  "description": "",
+                  "documentation": "",
+                  "example": "",
+                  "id": "id",
+                  "label": "id",
+                  "type": ""
+                },
+                {
+                  "dataType": "",
+                  "description": "",
+                  "documentation": "",
+                  "example": "",
+                  "id": "output",
+                  "label": "All Output",
+                  "type": ""
+                }
+              ],
+              "position": {
+                "left": 100,
+                "top": 100
+              },
+              "preProcessService": "",
+              "published": false,
+              "roles": [],
+              "schema": "",
+              "static": true,
+              "surface": "GetConfig",
+              "title": "Action",
+              "type": "actionstart"
+            },
+            {
+              "actionName": "SaveConfig",
+              "canOverrideCredentials": false,
+              "capability": "",
+              "connections": {
+                "inputs": [],
+                "outputs": [
+                  {
+                    "source": "bb3c3b40-919c-49c6-e46e-a9eea935d4d3:output:id",
+                    "target": "318326e7-1c48-4564-f837-f40d0cb8ab74:input:key"
+                  },
+                  {
+                    "source": "bb3c3b40-919c-49c6-e46e-a9eea935d4d3:output:value",
+                    "target": "318326e7-1c48-4564-f837-f40d0cb8ab74:input:value"
+                  }
+                ]
+              },
+              "debug": false,
+              "docs": "",
+              "id": "bb3c3b40-919c-49c6-e46e-a9eea935d4d3",
+              "initiate": false,
+              "inputValues": [],
+              "outputValues": [
+                {
+                  "dataType": "",
+                  "description": "",
+                  "documentation": "",
+                  "example": "",
+                  "id": "__error__",
+                  "label": "Error",
+                  "type": "error"
+                },
+                {
+                  "dataType": "",
+                  "description": "",
+                  "documentation": "",
+                  "example": "",
+                  "id": "id",
+                  "label": "id",
+                  "type": ""
+                },
+                {
+                  "dataType": "",
+                  "description": "",
+                  "documentation": "",
+                  "example": "",
+                  "id": "output",
+                  "label": "All Output",
+                  "type": ""
+                },
+                {
+                  "dataType": "",
+                  "description": "",
+                  "documentation": "",
+                  "example": "",
+                  "id": "value",
+                  "label": "value",
+                  "type": ""
+                }
+              ],
+              "position": {
+                "left": 100,
+                "top": 100
+              },
+              "preProcessService": "",
+              "published": false,
+              "roles": [],
+              "schema": "",
+              "static": true,
+              "surface": "SaveConfig",
+              "title": "Action",
+              "type": "actionstart"
+            },
+            {
+              "connections": {
+                "inputs": [
+                  {
+                    "source": "09574473-f26e-4f1f-a72f-869a6eb7ed14:output:output",
+                    "target": "c98525fa-c94a-4e45-d6d3-c83880685922:input:input"
+                  }
+                ],
+                "outputs": []
+              },
+              "fieldName": "",
+              "id": "c98525fa-c94a-4e45-d6d3-c83880685922",
+              "inputValues": [
+                {
+                  "description": "",
+                  "disablelog": "",
+                  "documentation": "",
+                  "id": "input",
+                  "label": "Value",
+                  "transformation": "",
+                  "transformationOptions": "",
+                  "type": "",
+                  "value": ""
+                },
+                {
+                  "description": "",
+                  "disablelog": "",
+                  "documentation": "",
+                  "id": "trigger",
+                  "label": "Trigger",
+                  "transformation": "",
+                  "transformationOptions": "",
+                  "type": "",
+                  "value": ""
+                }
+              ],
+              "outputValues": [],
+              "position": {
+                "left": 540,
+                "top": 100
+              },
+              "surface": "GetConfig",
+              "title": "Output",
+              "type": "actionoutput2"
+            },
+            {
+              "connections": {
+                "inputs": [
+                  {
+                    "source": "318326e7-1c48-4564-f837-f40d0cb8ab74:output:output",
+                    "target": "171108a2-847e-43a6-8558-605168dfd98c:input:input"
+                  }
+                ],
+                "outputs": []
+              },
+              "fieldName": "",
+              "id": "171108a2-847e-43a6-8558-605168dfd98c",
+              "inputValues": [
+                {
+                  "description": "",
+                  "disablelog": "",
+                  "documentation": "",
+                  "id": "input",
+                  "label": "Value",
+                  "transformation": "",
+                  "transformationOptions": "",
+                  "type": "",
+                  "value": ""
+                },
+                {
+                  "description": "",
+                  "disablelog": "",
+                  "documentation": "",
+                  "id": "trigger",
+                  "label": "Trigger",
+                  "transformation": "",
+                  "transformationOptions": "",
+                  "type": "",
+                  "value": ""
+                }
+              ],
+              "outputValues": [],
+              "position": {
+                "left": 540,
+                "top": 100
+              },
+              "surface": "SaveConfig",
+              "title": "Output",
+              "type": "actionoutput2"
+            }
+          ],
+          "position": {
+            "left": 0,
+            "top": 0
+          }
+        },
+        "sources": [
+          {
+            "canOverrideCredentials": false,
+            "capability": "",
+            "docs": "",
+            "initiate": false,
+            "name": "GetConfig",
+            "outputs": [
+              ""
+            ],
+            "parameters": [
+              "id"
+            ],
+            "parametersExtended": [
+              {
+                "dataType": "",
+                "docs": "",
+                "example": "",
+                "id": "id"
+              }
+            ],
+            "published": false,
+            "schema": "",
+            "schemaFrozen": false,
+            "static": true
+          },
+          {
+            "canOverrideCredentials": false,
+            "capability": "",
+            "docs": "",
+            "initiate": false,
+            "name": "SaveConfig",
+            "outputs": [
+              ""
+            ],
+            "parameters": [
+              "id",
+              "value"
+            ],
+            "parametersExtended": [
+              {
+                "dataType": "",
+                "docs": "",
+                "example": "",
+                "id": "id"
+              },
+              {
+                "dataType": "",
+                "docs": "",
+                "example": "",
+                "id": "value"
+              }
+            ],
+            "published": false,
+            "schema": "",
+            "schemaFrozen": false,
+            "static": true
+          }
+        ],
+        "uioptions": {},
+        "version": "v2"
+      },
+      "Icon": "",
+      "JSModules": [],
+      "Key": "20",
+      "MetadataDictionary": "null",
+      "ModelCollections": [
+        {
+          "Attributes": "[{\"name\":\"key\",\"dataType\":\"string\"},{\"name\":\"value\",\"dataType\":\"string\"}]",
+          "GUID": "525fd38f-b48c-4d6d-b205-f9fefc373758",
+          "MapKey": "20",
+          "Name": "config"
+        }
+      ],
+      "Name": "SpaceCoordinateEditorConfigurationModel",
+      "Roles": [],
+      "UIDefinition": null
+    }
+  ],
+  "version": "2.0"
+}
