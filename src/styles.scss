@@ -41,8 +41,12 @@ $textColor: #1e293b;
   }
 
   &__filters {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    
     .uxp-form-select {
-      min-width: 200px;
+      min-width: 180px;
 
       .uxp-select-container {
         .select-input {

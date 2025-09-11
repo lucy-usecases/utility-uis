@@ -1,6 +1,6 @@
 import * as React from "react";
 import { registerUI, IContextProvider } from './uxp';
-import { FormField, Select, Label, Input, MapComponent, IMarker, IconButton, Button, AsyncButton, Loading, useToast, SearchBox, Modal } from "uxp/components";
+import { FormField, Select, Label, Input, MapComponent, IMarker, IconButton, Button, AsyncButton, Loading, useToast, SearchBox, Modal, Checkbox } from "uxp/components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './styles.scss';
 
@@ -32,7 +32,8 @@ interface ISpace {
     name: string;
     coordinates?: IRegion[];
     color?: string,
-    icon?: string
+    icon?: string,
+    type?: string
 }
 
 interface IRegion {
@@ -59,43 +60,58 @@ interface IConfig {
     floors: IModel;
     spaces: IModel;
     setRegion: IModel;
+    enableFilterByType: boolean;
+    getTypes?: IModel;
 }
 
 // Backend Configuration Constants
 const CONFIG_MODEL = "SpaceCoordinateEditorConfigurationModel";
 const CONFIG_KEY = "space_coordinate_editor_config";
 
+interface ISpaceType {
+    id: string;
+    name: string;
+}
+
 interface IConfigurationState {
     isLoaded: boolean;
     hasValidConfig: boolean;
 }
 
+interface SpaceRegion {
+    spaceId: string,
+    coordinates: IRegion[],
+    color?: string,
+    icon?: string,
+    type: 'region' | 'marker',
+    space: ISpace
+}
+
 
 const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (props) => {
-    // State management
-    const [filteredSpaces, setFilteredSpaces] = React.useState<ISpace[]>([]);
-    const [query, setQuery] = React.useState('');
-    const [spaces, setSpaces] = React.useState<ISpace[]>([]);
-    const [selectedSpace, setSelectedSpace] = React.useState<ISpace | null>(null);
+
     const [floors, setFloors] = React.useState<IFloor[]>([]);
     const [selectedFloor, setSelectedFloor] = React.useState<string>('');
+    const [allSpaceRegions, setAllSpaceRegions] = React.useState<SpaceRegion[]>([]);
+    const [filteredSpaceRegions, setFilteredSpaceRegions] = React.useState<SpaceRegion[]>([]);
+    const [selectedSpace, setSelectedSpace] = React.useState<ISpace | null>(null);
+    const [spaceTypes, setSpaceTypes] = React.useState<ISpaceType[]>([]);
+    const [selectedType, setSelectedType] = React.useState<string>('');
+    const [query, setQuery] = React.useState('');
+
     const [config, setConfig] = React.useState<IConfig>({
         floors: { model: "", action: "" },
         spaces: { model: "", action: "" },
-        setRegion: { model: "", action: "" }
+        setRegion: { model: "", action: "" },
+        enableFilterByType: false,
+        getTypes: { model: "", action: "" }
     });
-    const [allSpaceRegions, setAllSpaceRegions] = React.useState<Array<{
-        spaceId: string,
-        coordinates: IRegion[],
-        color?: string,
-        icon?: string,
-        type: 'region' | 'marker',
-        space: ISpace
-    }>>([]);
-    const [isEditingRegion, setIsEditingRegion] = React.useState(false);
+
     const [region, setRegion] = React.useState<IRegion[]>([]);
     const [isLoading, setIsLoading] = React.useState(true);
+    const [isEditingRegion, setIsEditingRegion] = React.useState(false);
     const [isSaving, setIsSaving] = React.useState(false);
+
     const [isConfirming, setIsConfirming] = React.useState(false);
     const [showConfigModal, setShowConfigModal] = React.useState(false);
     const [configState, setConfigState] = React.useState<IConfigurationState>({
@@ -181,16 +197,43 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         const spaceAction = params.get("asa");
         const regionModel = params.get("ucm");
         const regionAction = params.get("uca");
+        const spaceTypeModel = params.get("stm");
+        const spaceTypeAction = params.get("sta");
+        const enableFilterByType = params.get("ebt") == '1';
 
         if (floorModel && floorAction && spaceModel && spaceAction && regionModel && regionAction) {
             return {
                 floors: { model: floorModel, action: floorAction },
                 spaces: { model: spaceModel, action: spaceAction },
-                setRegion: { model: regionModel, action: regionAction }
+                setRegion: { model: regionModel, action: regionAction },
+                getTypes: { model: spaceTypeModel, action: spaceTypeAction },
+                enableFilterByType: enableFilterByType || false
             };
         }
         return null;
     }, []);
+
+    const loadTypes = React.useCallback(async () => {
+        if (!config.enableFilterByType || !config.getTypes?.model || !config.getTypes?.action) {
+            setSpaceTypes([]);
+            return;
+        }
+
+        try {
+            const res = await props.uxpContext?.executeAction(
+                config.getTypes.model,
+                config.getTypes.action,
+                {},
+                { json: true }
+            );
+
+            const types = res?.types || [];
+            setSpaceTypes(types);
+        } catch (error) {
+            console.error("Failed to load space types:", error);
+            setSpaceTypes([]);
+        }
+    }, [config.enableFilterByType, config.getTypes, props.uxpContext]);
 
     // Initialize config from backend on component mount
     React.useEffect(() => {
@@ -218,13 +261,27 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         }
     }, [config.spaces, selectedFloor]);
 
-    // Filter spaces based on search query
+    // Load types when type filtering config changes
     React.useEffect(() => {
-        const filtered = query.trim()
-            ? spaces.filter(s => s.name.toLowerCase().includes(query.toLowerCase()))
-            : spaces;
-        setFilteredSpaces(filtered);
-    }, [spaces, query]);
+        loadTypes();
+    }, [loadTypes]);
+
+    // Filter spaces based on search query and type filter
+    React.useEffect(() => {
+        let filtered = allSpaceRegions || [];
+
+        // Filter by search query
+        if (query.trim()) {
+            filtered = filtered.filter(s => s.space.name.toLowerCase().includes(query.toLowerCase()));
+        }
+
+        // Filter by type if enabled and selected
+        if (config?.enableFilterByType && selectedType) {
+            filtered = filtered.filter(s => s.space.type === selectedType);
+        }
+
+        setFilteredSpaceRegions(filtered || []);
+    }, [allSpaceRegions, query, selectedType, config?.enableFilterByType]);
 
     // Load coordinates when space changes
     React.useEffect(() => {
@@ -232,6 +289,10 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             loadCoordinates();
         }
     }, [selectedSpace]);
+
+    React.useEffect(() => {
+        console.log('SPACES___', allSpaceRegions, filteredSpaceRegions, query, selectedType, config?.enableFilterByType,)
+    }, [allSpaceRegions, filteredSpaceRegions, query, selectedType, config?.enableFilterByType, ,])
 
     // Helper functions
     const getCenterCoords = React.useCallback((): IRegion => {
@@ -277,7 +338,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                 { json: true }
             );
             const spacesData: ISpace[] = res?.spaces || [];
-            setSpaces(spacesData);
 
             // Extract all space regions and markers for map display
             const regions = spacesData
@@ -304,7 +364,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             setAllSpaceRegions([...regions, ...markers]);
         } catch (error) {
             console.error("Failed to load spaces:", error);
-            setSpaces([]);
             setAllSpaceRegions([]);
         } finally {
             setIsLoading(false);
@@ -469,7 +528,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
 
         // Show editing markers when in edit mode
         if (selectedSpace) {
-            const isMarker = allSpaceRegions.find(s => s.spaceId === selectedSpace.id)?.type === 'marker';
+            const isMarker = filteredSpaceRegions.find(s => s.spaceId === selectedSpace.id)?.type === 'marker';
             if (isMarker) {
                 allMarkers.push(...createMarkers(isEditingRegion ? 'edit-marker' : 'selected-marker'));
             } else if (isEditingRegion) {
@@ -478,7 +537,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         }
 
         // Show space markers (only for non-editing spaces)
-        const spaceMarkers: IMarker[] = allSpaceRegions
+        const spaceMarkers: IMarker[] = filteredSpaceRegions
             .filter(item => (
                 item.type === 'marker'
                 && (!selectedSpace || selectedSpace.id !== item.spaceId)
@@ -505,12 +564,12 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
 
         allMarkers.push(...spaceMarkers);
         return allMarkers;
-    }, [selectedFloorData, region, isEditingRegion, allSpaceRegions, selectedSpace, handleRegionUpdate, handleMarkerDuplicate, handleMarkerDelete]);
+    }, [selectedFloorData, region, isEditingRegion, filteredSpaceRegions, selectedSpace, handleRegionUpdate, handleMarkerDuplicate, handleMarkerDelete]);
 
     const mapRegions = React.useMemo(() => {
         const regions: any[] = [];
         // Add all space regions (non-selected in default colors)
-        allSpaceRegions
+        filteredSpaceRegions
             .filter(item => item.type === 'region' && selectedSpace?.id !== item.spaceId)
             .forEach(spaceRegion => {
                 const color = spaceRegion?.color || '#3C82F6';
@@ -537,7 +596,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             });
         }
         return regions;
-    }, [allSpaceRegions, selectedSpace, region, isEditingRegion]);
+    }, [filteredSpaceRegions, selectedSpace, region, isEditingRegion]);
 
     const updateSelectedSpace = React.useCallback((space?: ISpace) => {
         if (!space) return
@@ -563,9 +622,18 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         };
 
         const validateConfig = () => {
-            return tempConfig.floors.model && tempConfig.floors.action &&
+            const basicValid = tempConfig.floors.model && tempConfig.floors.action &&
                 tempConfig.spaces.model && tempConfig.spaces.action &&
                 tempConfig.setRegion.model && tempConfig.setRegion.action;
+
+            if (!basicValid) return false;
+
+            // If type filtering is enabled, getTypes model and action must be provided
+            if (tempConfig.enableFilterByType) {
+                return tempConfig.getTypes?.model && tempConfig.getTypes?.action;
+            }
+
+            return true;
         };
 
         return (
@@ -636,6 +704,46 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                             />
                         </div>
                     </FormField>
+
+                    <FormField>
+                        <Label>
+                            <Checkbox
+                                checked={tempConfig.enableFilterByType}
+                                onChange={(v) => setTempConfig(prev => ({
+                                    ...prev,
+                                    enableFilterByType: v,
+                                    getTypes: prev.getTypes || { model: "", action: "" }
+                                }))}
+                                type='bordered'
+                                label="Enable Filter by Type"
+                            />
+
+                        </Label>
+                    </FormField>
+
+                    {tempConfig.enableFilterByType && (
+                        <FormField>
+                            <Label>Get Types</Label>
+                            <div className="space-editor__config-row">
+                                <Input
+                                    value={tempConfig.getTypes?.model || ''}
+                                    onChange={(model) => setTempConfig(prev => ({
+                                        ...prev,
+                                        getTypes: { ...prev.getTypes, model } as IModel
+                                    }))}
+                                    placeholder="Model name"
+                                />
+                                <Input
+                                    value={tempConfig.getTypes?.action || ''}
+                                    onChange={(action) => setTempConfig(prev => ({
+                                        ...prev,
+                                        getTypes: { ...prev.getTypes, action } as IModel
+                                    }))}
+                                    placeholder="Action name"
+                                />
+                            </div>
+                        </FormField>
+                    )}
                 </div>
 
                 <FormField className="space-editor__button-row">
@@ -729,6 +837,16 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                             valueField="id"
                             placeholder="Select a floor"
                         />
+                        {config.enableFilterByType && spaceTypes.length > 0 && (
+                            <Select
+                                selected={selectedType}
+                                onChange={setSelectedType}
+                                options={[{ id: '', name: 'All Types' }, ...spaceTypes]}
+                                labelField="name"
+                                valueField="id"
+                                placeholder="Filter by type"
+                            />
+                        )}
                     </div>
                     <div className="space-editor__settings">
                         <div className="space-editor__settings-button" onClick={() => setShowConfigModal(true)} >
@@ -747,13 +865,13 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     </div>
 
                     <div className="space-editor__list">
-                        {filteredSpaces.map((space, index) => (
+                        {filteredSpaceRegions.map((space, index) => (
                             <div
-                                key={space.id}
-                                className={`space-editor__space ${selectedSpace?.id === space.id ? 'space-editor__space--active' : ''}`}
-                                onClick={() => handleSpaceSelect(space)}
+                                key={space.space.id}
+                                className={`space-editor__space ${selectedSpace?.id === space.space.id ? 'space-editor__space--active' : ''}`}
+                                onClick={() => handleSpaceSelect(space.space)}
                             >
-                                {space.name}
+                                {space.space.name}
                             </div>
                         ))}
                     </div>

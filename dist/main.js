@@ -2945,7 +2945,7 @@ var convertCurry = convert.bind(null, (react__WEBPACK_IMPORTED_MODULE_2___defaul
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, ".space-editor {\n  width: 100%;\n  height: 100vh;\n  display: flex;\n  flex-direction: column;\n  background-color: #f8fafc;\n  color: #1e293b;\n}\n.space-editor__header {\n  background-color: #ffffff;\n  border-bottom: 1px solid #f0f2f5;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 15px 20px;\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);\n  z-index: 2;\n}\n.space-editor__title {\n  font-size: 20px;\n  font-weight: 600;\n  color: #1e293b;\n}\n.space-editor__actions {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n}\n.space-editor__filters .uxp-form-select {\n  min-width: 200px;\n}\n.space-editor__filters .uxp-form-select .uxp-select-container .select-input {\n  border: 1px solid #f0f2f5 !important;\n  border-radius: 8px !important;\n  padding: 8px 12px !important;\n  font-size: 14px !important;\n}\n.space-editor__filters .uxp-form-select .uxp-select-container .select-input:focus {\n  border-color: #3C82F6 !important;\n  box-shadow: 0 0 0 3px rgba(60, 130, 246, 0.1) !important;\n  outline: none !important;\n}\n.space-editor__settings {\n  display: flex;\n  align-items: center;\n}\n.space-editor__settings-button {\n  width: 35px;\n  height: 35px;\n  border-radius: 50%;\n  background-color: #E5E7EB;\n  color: #424242;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  transition: all 0.2s ease;\n}\n.space-editor__settings-button:hover {\n  background-color: rgb(200.1739130435, 204.3913043478, 212.8260869565);\n}\n.space-editor__settings-button svg {\n  width: 50% !important;\n  height: 50% !important;\n}\n.space-editor__body {\n  flex: 1;\n  display: grid;\n  grid-template-columns: 280px 1fr 0;\n  transition: grid-template-columns 0.3s ease;\n  overflow: hidden;\n}\n.space-editor__body--editing {\n  grid-template-columns: 280px 1fr 320px;\n}\n.space-editor__sidebar {\n  background-color: #ffffff;\n  border-right: 1px solid #f0f2f5;\n  display: flex;\n  flex-direction: column;\n  overflow: hidden;\n}\n.space-editor__search {\n  padding: 16px;\n}\n.space-editor__list {\n  flex: 1;\n  overflow-y: auto;\n  padding: 8px 0;\n  min-height: 0;\n}\n.space-editor__space {\n  padding: 10px;\n  margin-bottom: 4px;\n  border-radius: 0;\n  cursor: pointer;\n  transition: all 0.2s ease;\n  font-size: 14px;\n  font-weight: 500;\n  color: #424242;\n}\n.space-editor__space:hover {\n  background-color: rgba(60, 130, 246, 0.05);\n}\n.space-editor__space--active {\n  background-color: #3C82F6;\n  color: #FFF;\n}\n.space-editor__space--active:hover {\n  background-color: rgb(35.625, 114.375, 244.875);\n}\n.space-editor__map-container {\n  background-color: #f8fafc;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  overflow: hidden;\n}\n.space-editor__no-map {\n  color: #424242;\n  font-size: 16px;\n  font-weight: 500;\n}\n.space-editor__map-toolbar {\n  background-color: #ffffff;\n  border-left: 1px solid #f0f2f5;\n  display: flex;\n  flex-direction: column;\n  overflow: hidden;\n  transform: translateX(100%);\n  transition: transform 0.3s ease;\n}\n.space-editor__body--editing .space-editor__map-toolbar {\n  transform: translateX(0);\n}\n.space-editor__map-toolbar-header {\n  padding: 16px 20px;\n  border-bottom: 1px solid #f0f2f5;\n  background-color: #3C82F6;\n  color: #FFF;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.space-editor__map-toolbar-title {\n  font-size: 16px;\n  font-weight: 600;\n}\n.space-editor__map-toolbar-button {\n  width: 28px;\n  height: 28px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: #FFF;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  transition: all 0.2s ease;\n}\n.space-editor__map-toolbar-button:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n.space-editor__map-toolbar-button svg {\n  width: 50% !important;\n  height: 50% !important;\n}\n.space-editor__map-toolbar-body {\n  flex: 1;\n  overflow-y: auto;\n  padding: 16px;\n  min-height: 0;\n}\n.space-editor__map-toolbar-footer {\n  padding: 16px;\n  border-top: 1px solid #f0f2f5;\n  background-color: #ffffff;\n  display: flex;\n  justify-content: flex-end;\n  gap: 8px;\n  flex-wrap: wrap;\n}\n.space-editor__coordinates-table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.space-editor__coordinates-table th {\n  padding: 8px 4px;\n  font-size: 12px;\n  font-weight: 600;\n  color: #424242;\n  text-align: left;\n  border-bottom: 1px solid #f0f2f5;\n}\n.space-editor__coordinates-table td {\n  padding: 8px 4px;\n  font-size: 14px;\n  vertical-align: middle;\n}\n.space-editor__coordinate-row:hover {\n  background-color: rgba(60, 130, 246, 0.02);\n}\n.space-editor__coordinate-input input {\n  border: 1px solid #f0f2f5 !important;\n}\n.space-editor__coordinate-input input:focus {\n  border-color: #3C82F6 !important;\n  box-shadow: 0 0 0 2px rgba(60, 130, 246, 0.1) !important;\n  outline: none !important;\n}\n.space-editor__coordinate-input input:disabled {\n  background-color: #E5E7EB !important;\n  color: #424242 !important;\n  cursor: not-allowed !important;\n  opacity: 0.7 !important;\n}\n.space-editor__button--edit {\n  background-color: #3C82F6 !important;\n  color: #FFF !important;\n  border-color: #3C82F6 !important;\n}\n.space-editor__button--edit:hover {\n  background-color: rgb(35.625, 114.375, 244.875) !important;\n  border-color: rgb(35.625, 114.375, 244.875) !important;\n}\n.space-editor__button--confirm {\n  background-color: #059669 !important;\n  color: #ffffff !important;\n  border-color: #059669 !important;\n}\n.space-editor__button--confirm:hover {\n  background-color: rgb(4.1774193548, 125.3225806452, 87.7258064516) !important;\n  border-color: rgb(4.1774193548, 125.3225806452, 87.7258064516) !important;\n}\n.space-editor__overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(4px);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 1000;\n}\n.space-editor__marker {\n  background-color: transparent;\n}\n.space-editor__marker-actionbutton {\n  width: 25px;\n  height: 25px;\n  border: none;\n  outline: none;\n  border-radius: 50%;\n  cursor: pointer;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  overflow: hidden;\n  position: relative;\n  font-size: 14px;\n  margin: 5px;\n}\n.space-editor__marker-actionbutton-copy {\n  background-color: #3C82F6;\n  color: #FFF;\n}\n.space-editor__marker-actionbutton-delete {\n  background-color: #E5E7EB;\n  color: #424242;\n}\n.space-editor__marker > div {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 24px;\n  height: 24px;\n  border: 2px solid;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.space-editor__marker > div > div {\n  content: \"\";\n  width: 4px;\n  height: 4px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.space-editor__marker--edit-marker > div {\n  background-color: rgba(5, 150, 105, 0.2);\n  width: 28px;\n  height: 28px;\n}\n.space-editor__marker--edit-marker > div > div {\n  width: 6px;\n  height: 6px;\n}\n.space-editor__icon-marker {\n  width: 24px;\n  height: 24px;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #FFF;\n  font-size: 12px;\n  font-weight: 500;\n  transform: translate(-12px, -12px);\n  border: 2px solid #ffffff;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);\n}\n.space-editor__icon-marker i {\n  font-size: 12px;\n}\n.space-editor__modal.modal-container .modal-panel {\n  border-radius: 12px;\n  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);\n  border: none;\n  overflow: hidden;\n  margin: 0;\n  min-width: unset;\n  max-width: unset;\n  min-height: 60vh;\n  max-height: 90vh;\n  width: max(40%, 500px);\n  height: auto;\n}\n.space-editor__modal.modal-container .modal-header {\n  background-color: #3C82F6;\n  color: #FFF;\n  border-bottom: none;\n  padding: 20px 24px;\n}\n.space-editor__modal.modal-container .modal-header .modal-title {\n  font-size: 18px;\n  font-weight: 600;\n}\n.space-editor__modal.modal-container .modal-body {\n  margin: 0;\n  padding: 0;\n  height: 100%;\n  overflow-y: auto;\n  display: flex;\n  flex-direction: column;\n}\n.space-editor__config-section {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n  flex-grow: 1;\n  min-height: 0;\n  padding: 10px;\n}\n.space-editor__config-section .uxp-form-field .uxp-label {\n  font-size: 14px;\n  font-weight: 600;\n  color: #1e293b;\n  margin-bottom: 8px;\n}\n.space-editor__config-row {\n  display: flex;\n  gap: 12px;\n}\n.space-editor__config-row .uxp-input-container {\n  flex: 1;\n}\n.space-editor__config-row .uxp-input-container input {\n  width: 100% !important;\n}\n.space-editor__button-row {\n  height: 60px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  border-top: 1px solid #f0f2f5;\n}\n.space-editor__button-row .uxp-button {\n  margin: 0 10px;\n}\n.space-editor__configuration-needed {\n  width: 100%;\n  min-height: 0;\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 40px;\n  text-align: center;\n}\n.space-editor__configuration-needed-icon {\n  font-size: 50px;\n  color: #424242;\n  margin-bottom: 24px;\n  opacity: 0.7;\n}\n.space-editor__configuration-needed-title {\n  font-size: 20px;\n  font-weight: 600;\n  color: #1e293b;\n  margin-bottom: 12px;\n}\n.space-editor__configuration-needed-message {\n  font-size: 14px;\n  color: #424242;\n  margin-bottom: 32px;\n  max-width: 400px;\n  line-height: 1.5;\n}\n.space-editor__configuration-needed-button {\n  background-color: #3C82F6;\n  color: #FFF;\n  margin: 10px;\n}\n.space-editor__configuration-needed-button:hover {\n  background-color: rgb(35.625, 114.375, 244.875);\n  color: #FFF;\n}\n\n.uxp-form-field .uxp-label {\n  font-size: 14px;\n  font-weight: 500;\n  color: #1e293b;\n  margin-bottom: 8px;\n}\n.uxp-form-field .uxp-input-container input {\n  transition: all 0.2s ease;\n}\n\n.uxp-icon-button.uxp-icon-button--small {\n  width: 28px !important;\n  height: 28px !important;\n  border-radius: 6px !important;\n  background-color: transparent !important;\n  border: 1px solid #f0f2f5 !important;\n  color: #424242 !important;\n}\n.uxp-icon-button.uxp-icon-button--small:hover {\n  background-color: #E5E7EB !important;\n  border-color: #424242 !important;\n}\n\n.leaflet-popup-content {\n  margin: 6px 10px !important;\n}", ""]);
+exports.push([module.id, ".space-editor {\n  width: 100%;\n  height: 100vh;\n  display: flex;\n  flex-direction: column;\n  background-color: #f8fafc;\n  color: #1e293b;\n}\n.space-editor__header {\n  background-color: #ffffff;\n  border-bottom: 1px solid #f0f2f5;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 15px 20px;\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);\n  z-index: 2;\n}\n.space-editor__title {\n  font-size: 20px;\n  font-weight: 600;\n  color: #1e293b;\n}\n.space-editor__actions {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n}\n.space-editor__filters {\n  display: flex;\n  align-items: center;\n  gap: 16px;\n}\n.space-editor__filters .uxp-form-select {\n  min-width: 180px;\n}\n.space-editor__filters .uxp-form-select .uxp-select-container .select-input {\n  border: 1px solid #f0f2f5 !important;\n  border-radius: 8px !important;\n  padding: 8px 12px !important;\n  font-size: 14px !important;\n}\n.space-editor__filters .uxp-form-select .uxp-select-container .select-input:focus {\n  border-color: #3C82F6 !important;\n  box-shadow: 0 0 0 3px rgba(60, 130, 246, 0.1) !important;\n  outline: none !important;\n}\n.space-editor__settings {\n  display: flex;\n  align-items: center;\n}\n.space-editor__settings-button {\n  width: 35px;\n  height: 35px;\n  border-radius: 50%;\n  background-color: #E5E7EB;\n  color: #424242;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  transition: all 0.2s ease;\n}\n.space-editor__settings-button:hover {\n  background-color: rgb(200.1739130435, 204.3913043478, 212.8260869565);\n}\n.space-editor__settings-button svg {\n  width: 50% !important;\n  height: 50% !important;\n}\n.space-editor__body {\n  flex: 1;\n  display: grid;\n  grid-template-columns: 280px 1fr 0;\n  transition: grid-template-columns 0.3s ease;\n  overflow: hidden;\n}\n.space-editor__body--editing {\n  grid-template-columns: 280px 1fr 320px;\n}\n.space-editor__sidebar {\n  background-color: #ffffff;\n  border-right: 1px solid #f0f2f5;\n  display: flex;\n  flex-direction: column;\n  overflow: hidden;\n}\n.space-editor__search {\n  padding: 16px;\n}\n.space-editor__list {\n  flex: 1;\n  overflow-y: auto;\n  padding: 8px 0;\n  min-height: 0;\n}\n.space-editor__space {\n  padding: 10px;\n  margin-bottom: 4px;\n  border-radius: 0;\n  cursor: pointer;\n  transition: all 0.2s ease;\n  font-size: 14px;\n  font-weight: 500;\n  color: #424242;\n}\n.space-editor__space:hover {\n  background-color: rgba(60, 130, 246, 0.05);\n}\n.space-editor__space--active {\n  background-color: #3C82F6;\n  color: #FFF;\n}\n.space-editor__space--active:hover {\n  background-color: rgb(35.625, 114.375, 244.875);\n}\n.space-editor__map-container {\n  background-color: #f8fafc;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  position: relative;\n  overflow: hidden;\n}\n.space-editor__no-map {\n  color: #424242;\n  font-size: 16px;\n  font-weight: 500;\n}\n.space-editor__map-toolbar {\n  background-color: #ffffff;\n  border-left: 1px solid #f0f2f5;\n  display: flex;\n  flex-direction: column;\n  overflow: hidden;\n  transform: translateX(100%);\n  transition: transform 0.3s ease;\n}\n.space-editor__body--editing .space-editor__map-toolbar {\n  transform: translateX(0);\n}\n.space-editor__map-toolbar-header {\n  padding: 16px 20px;\n  border-bottom: 1px solid #f0f2f5;\n  background-color: #3C82F6;\n  color: #FFF;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n.space-editor__map-toolbar-title {\n  font-size: 16px;\n  font-weight: 600;\n}\n.space-editor__map-toolbar-button {\n  width: 28px;\n  height: 28px;\n  border-radius: 50%;\n  background-color: rgba(255, 255, 255, 0.2);\n  color: #FFF;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  cursor: pointer;\n  transition: all 0.2s ease;\n}\n.space-editor__map-toolbar-button:hover {\n  background-color: rgba(255, 255, 255, 0.3);\n}\n.space-editor__map-toolbar-button svg {\n  width: 50% !important;\n  height: 50% !important;\n}\n.space-editor__map-toolbar-body {\n  flex: 1;\n  overflow-y: auto;\n  padding: 16px;\n  min-height: 0;\n}\n.space-editor__map-toolbar-footer {\n  padding: 16px;\n  border-top: 1px solid #f0f2f5;\n  background-color: #ffffff;\n  display: flex;\n  justify-content: flex-end;\n  gap: 8px;\n  flex-wrap: wrap;\n}\n.space-editor__coordinates-table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.space-editor__coordinates-table th {\n  padding: 8px 4px;\n  font-size: 12px;\n  font-weight: 600;\n  color: #424242;\n  text-align: left;\n  border-bottom: 1px solid #f0f2f5;\n}\n.space-editor__coordinates-table td {\n  padding: 8px 4px;\n  font-size: 14px;\n  vertical-align: middle;\n}\n.space-editor__coordinate-row:hover {\n  background-color: rgba(60, 130, 246, 0.02);\n}\n.space-editor__coordinate-input input {\n  border: 1px solid #f0f2f5 !important;\n}\n.space-editor__coordinate-input input:focus {\n  border-color: #3C82F6 !important;\n  box-shadow: 0 0 0 2px rgba(60, 130, 246, 0.1) !important;\n  outline: none !important;\n}\n.space-editor__coordinate-input input:disabled {\n  background-color: #E5E7EB !important;\n  color: #424242 !important;\n  cursor: not-allowed !important;\n  opacity: 0.7 !important;\n}\n.space-editor__button--edit {\n  background-color: #3C82F6 !important;\n  color: #FFF !important;\n  border-color: #3C82F6 !important;\n}\n.space-editor__button--edit:hover {\n  background-color: rgb(35.625, 114.375, 244.875) !important;\n  border-color: rgb(35.625, 114.375, 244.875) !important;\n}\n.space-editor__button--confirm {\n  background-color: #059669 !important;\n  color: #ffffff !important;\n  border-color: #059669 !important;\n}\n.space-editor__button--confirm:hover {\n  background-color: rgb(4.1774193548, 125.3225806452, 87.7258064516) !important;\n  border-color: rgb(4.1774193548, 125.3225806452, 87.7258064516) !important;\n}\n.space-editor__overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(255, 255, 255, 0.8);\n  backdrop-filter: blur(4px);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  z-index: 1000;\n}\n.space-editor__marker {\n  background-color: transparent;\n}\n.space-editor__marker-actionbutton {\n  width: 25px;\n  height: 25px;\n  border: none;\n  outline: none;\n  border-radius: 50%;\n  cursor: pointer;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  overflow: hidden;\n  position: relative;\n  font-size: 14px;\n  margin: 5px;\n}\n.space-editor__marker-actionbutton-copy {\n  background-color: #3C82F6;\n  color: #FFF;\n}\n.space-editor__marker-actionbutton-delete {\n  background-color: #E5E7EB;\n  color: #424242;\n}\n.space-editor__marker > div {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 24px;\n  height: 24px;\n  border: 2px solid;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.space-editor__marker > div > div {\n  content: \"\";\n  width: 4px;\n  height: 4px;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  border-radius: 50%;\n}\n.space-editor__marker--edit-marker > div {\n  background-color: rgba(5, 150, 105, 0.2);\n  width: 28px;\n  height: 28px;\n}\n.space-editor__marker--edit-marker > div > div {\n  width: 6px;\n  height: 6px;\n}\n.space-editor__icon-marker {\n  width: 24px;\n  height: 24px;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #FFF;\n  font-size: 12px;\n  font-weight: 500;\n  transform: translate(-12px, -12px);\n  border: 2px solid #ffffff;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);\n}\n.space-editor__icon-marker i {\n  font-size: 12px;\n}\n.space-editor__modal.modal-container .modal-panel {\n  border-radius: 12px;\n  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);\n  border: none;\n  overflow: hidden;\n  margin: 0;\n  min-width: unset;\n  max-width: unset;\n  min-height: 60vh;\n  max-height: 90vh;\n  width: max(40%, 500px);\n  height: auto;\n}\n.space-editor__modal.modal-container .modal-header {\n  background-color: #3C82F6;\n  color: #FFF;\n  border-bottom: none;\n  padding: 20px 24px;\n}\n.space-editor__modal.modal-container .modal-header .modal-title {\n  font-size: 18px;\n  font-weight: 600;\n}\n.space-editor__modal.modal-container .modal-body {\n  margin: 0;\n  padding: 0;\n  height: 100%;\n  overflow-y: auto;\n  display: flex;\n  flex-direction: column;\n}\n.space-editor__config-section {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n  flex-grow: 1;\n  min-height: 0;\n  padding: 10px;\n}\n.space-editor__config-section .uxp-form-field .uxp-label {\n  font-size: 14px;\n  font-weight: 600;\n  color: #1e293b;\n  margin-bottom: 8px;\n}\n.space-editor__config-row {\n  display: flex;\n  gap: 12px;\n}\n.space-editor__config-row .uxp-input-container {\n  flex: 1;\n}\n.space-editor__config-row .uxp-input-container input {\n  width: 100% !important;\n}\n.space-editor__button-row {\n  height: 60px;\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  border-top: 1px solid #f0f2f5;\n}\n.space-editor__button-row .uxp-button {\n  margin: 0 10px;\n}\n.space-editor__configuration-needed {\n  width: 100%;\n  min-height: 0;\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  padding: 40px;\n  text-align: center;\n}\n.space-editor__configuration-needed-icon {\n  font-size: 50px;\n  color: #424242;\n  margin-bottom: 24px;\n  opacity: 0.7;\n}\n.space-editor__configuration-needed-title {\n  font-size: 20px;\n  font-weight: 600;\n  color: #1e293b;\n  margin-bottom: 12px;\n}\n.space-editor__configuration-needed-message {\n  font-size: 14px;\n  color: #424242;\n  margin-bottom: 32px;\n  max-width: 400px;\n  line-height: 1.5;\n}\n.space-editor__configuration-needed-button {\n  background-color: #3C82F6;\n  color: #FFF;\n  margin: 10px;\n}\n.space-editor__configuration-needed-button:hover {\n  background-color: rgb(35.625, 114.375, 244.875);\n  color: #FFF;\n}\n\n.uxp-form-field .uxp-label {\n  font-size: 14px;\n  font-weight: 500;\n  color: #1e293b;\n  margin-bottom: 8px;\n}\n.uxp-form-field .uxp-input-container input {\n  transition: all 0.2s ease;\n}\n\n.uxp-icon-button.uxp-icon-button--small {\n  width: 28px !important;\n  height: 28px !important;\n  border-radius: 6px !important;\n  background-color: transparent !important;\n  border: 1px solid #f0f2f5 !important;\n  color: #424242 !important;\n}\n.uxp-icon-button.uxp-icon-button--small:hover {\n  background-color: #E5E7EB !important;\n  border-color: #424242 !important;\n}\n\n.leaflet-popup-content {\n  margin: 6px 10px !important;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -4513,22 +4513,24 @@ const CONFIG_MODEL = "SpaceCoordinateEditorConfigurationModel";
 const CONFIG_KEY = "space_coordinate_editor_config";
 const SensorSpaceCoordinateEditor = (props) => {
     var _a, _b, _c;
-    // State management
-    const [filteredSpaces, setFilteredSpaces] = React.useState([]);
-    const [query, setQuery] = React.useState('');
-    const [spaces, setSpaces] = React.useState([]);
-    const [selectedSpace, setSelectedSpace] = React.useState(null);
     const [floors, setFloors] = React.useState([]);
     const [selectedFloor, setSelectedFloor] = React.useState('');
+    const [allSpaceRegions, setAllSpaceRegions] = React.useState([]);
+    const [filteredSpaceRegions, setFilteredSpaceRegions] = React.useState([]);
+    const [selectedSpace, setSelectedSpace] = React.useState(null);
+    const [spaceTypes, setSpaceTypes] = React.useState([]);
+    const [selectedType, setSelectedType] = React.useState('');
+    const [query, setQuery] = React.useState('');
     const [config, setConfig] = React.useState({
         floors: { model: "", action: "" },
         spaces: { model: "", action: "" },
-        setRegion: { model: "", action: "" }
+        setRegion: { model: "", action: "" },
+        enableFilterByType: false,
+        getTypes: { model: "", action: "" }
     });
-    const [allSpaceRegions, setAllSpaceRegions] = React.useState([]);
-    const [isEditingRegion, setIsEditingRegion] = React.useState(false);
     const [region, setRegion] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
+    const [isEditingRegion, setIsEditingRegion] = React.useState(false);
     const [isSaving, setIsSaving] = React.useState(false);
     const [isConfirming, setIsConfirming] = React.useState(false);
     const [showConfigModal, setShowConfigModal] = React.useState(false);
@@ -4607,15 +4609,36 @@ const SensorSpaceCoordinateEditor = (props) => {
         const spaceAction = params.get("asa");
         const regionModel = params.get("ucm");
         const regionAction = params.get("uca");
+        const spaceTypeModel = params.get("stm");
+        const spaceTypeAction = params.get("sta");
+        const enableFilterByType = params.get("ebt") == '1';
         if (floorModel && floorAction && spaceModel && spaceAction && regionModel && regionAction) {
             return {
                 floors: { model: floorModel, action: floorAction },
                 spaces: { model: spaceModel, action: spaceAction },
-                setRegion: { model: regionModel, action: regionAction }
+                setRegion: { model: regionModel, action: regionAction },
+                getTypes: { model: spaceTypeModel, action: spaceTypeAction },
+                enableFilterByType: enableFilterByType || false
             };
         }
         return null;
     }, []);
+    const loadTypes = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
+        var _f, _g, _h;
+        if (!config.enableFilterByType || !((_f = config.getTypes) === null || _f === void 0 ? void 0 : _f.model) || !((_g = config.getTypes) === null || _g === void 0 ? void 0 : _g.action)) {
+            setSpaceTypes([]);
+            return;
+        }
+        try {
+            const res = yield ((_h = props.uxpContext) === null || _h === void 0 ? void 0 : _h.executeAction(config.getTypes.model, config.getTypes.action, {}, { json: true }));
+            const types = (res === null || res === void 0 ? void 0 : res.types) || [];
+            setSpaceTypes(types);
+        }
+        catch (error) {
+            console.error("Failed to load space types:", error);
+            setSpaceTypes([]);
+        }
+    }), [config.enableFilterByType, config.getTypes, props.uxpContext]);
     // Initialize config from backend on component mount
     React.useEffect(() => {
         loadConfigFromBackend();
@@ -4638,19 +4661,32 @@ const SensorSpaceCoordinateEditor = (props) => {
             loadSpaces();
         }
     }, [config.spaces, selectedFloor]);
-    // Filter spaces based on search query
+    // Load types when type filtering config changes
     React.useEffect(() => {
-        const filtered = query.trim()
-            ? spaces.filter(s => s.name.toLowerCase().includes(query.toLowerCase()))
-            : spaces;
-        setFilteredSpaces(filtered);
-    }, [spaces, query]);
+        loadTypes();
+    }, [loadTypes]);
+    // Filter spaces based on search query and type filter
+    React.useEffect(() => {
+        let filtered = allSpaceRegions || [];
+        // Filter by search query
+        if (query.trim()) {
+            filtered = filtered.filter(s => s.space.name.toLowerCase().includes(query.toLowerCase()));
+        }
+        // Filter by type if enabled and selected
+        if ((config === null || config === void 0 ? void 0 : config.enableFilterByType) && selectedType) {
+            filtered = filtered.filter(s => s.space.type === selectedType);
+        }
+        setFilteredSpaceRegions(filtered || []);
+    }, [allSpaceRegions, query, selectedType, config === null || config === void 0 ? void 0 : config.enableFilterByType]);
     // Load coordinates when space changes
     React.useEffect(() => {
         if (selectedSpace) {
             loadCoordinates();
         }
     }, [selectedSpace]);
+    React.useEffect(() => {
+        console.log('SPACES___', allSpaceRegions, filteredSpaceRegions, query, selectedType, config === null || config === void 0 ? void 0 : config.enableFilterByType);
+    }, [allSpaceRegions, filteredSpaceRegions, query, selectedType, config === null || config === void 0 ? void 0 : config.enableFilterByType, ,]);
     // Helper functions
     const getCenterCoords = React.useCallback(() => {
         const floorData = floors.find(f => f.id === selectedFloor);
@@ -4672,11 +4708,11 @@ const SensorSpaceCoordinateEditor = (props) => {
     }, [selectedSpace, getCenterCoords]);
     // API calls
     const loadFloors = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
-        var _f;
+        var _j;
         try {
             setIsLoading(true);
             const { model, action } = config.floors;
-            const res = yield ((_f = props.uxpContext) === null || _f === void 0 ? void 0 : _f.executeAction(model, action, {}, { json: true }));
+            const res = yield ((_j = props.uxpContext) === null || _j === void 0 ? void 0 : _j.executeAction(model, action, {}, { json: true }));
             setFloors((res === null || res === void 0 ? void 0 : res.floors) || []);
         }
         catch (error) {
@@ -4688,13 +4724,12 @@ const SensorSpaceCoordinateEditor = (props) => {
         }
     }), [config.floors, props.uxpContext]);
     const loadSpaces = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
-        var _g;
+        var _k;
         try {
             setIsLoading(true);
             const { model, action } = config.spaces;
-            const res = yield ((_g = props.uxpContext) === null || _g === void 0 ? void 0 : _g.executeAction(model, action, { floorId: selectedFloor }, { json: true }));
+            const res = yield ((_k = props.uxpContext) === null || _k === void 0 ? void 0 : _k.executeAction(model, action, { floorId: selectedFloor }, { json: true }));
             const spacesData = (res === null || res === void 0 ? void 0 : res.spaces) || [];
-            setSpaces(spacesData);
             // Extract all space regions and markers for map display
             const regions = spacesData
                 .filter(space => space.coordinates && space.coordinates.length > 1)
@@ -4719,7 +4754,6 @@ const SensorSpaceCoordinateEditor = (props) => {
         }
         catch (error) {
             console.error("Failed to load spaces:", error);
-            setSpaces([]);
             setAllSpaceRegions([]);
         }
         finally {
@@ -4727,7 +4761,7 @@ const SensorSpaceCoordinateEditor = (props) => {
         }
     }), [config.spaces, selectedFloor, props.uxpContext]);
     const saveRegionChanges = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
-        var _h;
+        var _l;
         if (!selectedSpace || isSaving)
             return;
         try {
@@ -4738,7 +4772,7 @@ const SensorSpaceCoordinateEditor = (props) => {
                 coordinates: JSON.stringify(region),
                 floor: selectedFloor
             };
-            yield ((_h = props.uxpContext) === null || _h === void 0 ? void 0 : _h.executeAction(model, action, params, { json: true }));
+            yield ((_l = props.uxpContext) === null || _l === void 0 ? void 0 : _l.executeAction(model, action, params, { json: true }));
             yield loadSpaces();
             setIsEditingRegion(false);
             setIsConfirming(false);
@@ -4859,7 +4893,7 @@ const SensorSpaceCoordinateEditor = (props) => {
         };
         // Show editing markers when in edit mode
         if (selectedSpace) {
-            const isMarker = ((_a = allSpaceRegions.find(s => s.spaceId === selectedSpace.id)) === null || _a === void 0 ? void 0 : _a.type) === 'marker';
+            const isMarker = ((_a = filteredSpaceRegions.find(s => s.spaceId === selectedSpace.id)) === null || _a === void 0 ? void 0 : _a.type) === 'marker';
             if (isMarker) {
                 allMarkers.push(...createMarkers(isEditingRegion ? 'edit-marker' : 'selected-marker'));
             }
@@ -4868,7 +4902,7 @@ const SensorSpaceCoordinateEditor = (props) => {
             }
         }
         // Show space markers (only for non-editing spaces)
-        const spaceMarkers = allSpaceRegions
+        const spaceMarkers = filteredSpaceRegions
             .filter(item => (item.type === 'marker'
             && (!selectedSpace || selectedSpace.id !== item.spaceId)))
             .map(item => {
@@ -4890,11 +4924,11 @@ const SensorSpaceCoordinateEditor = (props) => {
         });
         allMarkers.push(...spaceMarkers);
         return allMarkers;
-    }, [selectedFloorData, region, isEditingRegion, allSpaceRegions, selectedSpace, handleRegionUpdate, handleMarkerDuplicate, handleMarkerDelete]);
+    }, [selectedFloorData, region, isEditingRegion, filteredSpaceRegions, selectedSpace, handleRegionUpdate, handleMarkerDuplicate, handleMarkerDelete]);
     const mapRegions = React.useMemo(() => {
         const regions = [];
         // Add all space regions (non-selected in default colors)
-        allSpaceRegions
+        filteredSpaceRegions
             .filter(item => item.type === 'region' && (selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) !== item.spaceId)
             .forEach(spaceRegion => {
             const color = (spaceRegion === null || spaceRegion === void 0 ? void 0 : spaceRegion.color) || '#3C82F6';
@@ -4920,7 +4954,7 @@ const SensorSpaceCoordinateEditor = (props) => {
             });
         }
         return regions;
-    }, [allSpaceRegions, selectedSpace, region, isEditingRegion]);
+    }, [filteredSpaceRegions, selectedSpace, region, isEditingRegion]);
     const updateSelectedSpace = React.useCallback((space) => {
         if (!space)
             return;
@@ -4934,6 +4968,7 @@ const SensorSpaceCoordinateEditor = (props) => {
     }, [selectedSpace, isEditingRegion]);
     // Configuration Form Component
     const ConfigurationForm = React.useCallback(() => {
+        var _a, _b;
         const [tempConfig, setTempConfig] = React.useState(config);
         const handleSaveConfig = () => __awaiter(void 0, void 0, void 0, function* () {
             try {
@@ -4945,9 +4980,17 @@ const SensorSpaceCoordinateEditor = (props) => {
             }
         });
         const validateConfig = () => {
-            return tempConfig.floors.model && tempConfig.floors.action &&
+            var _a, _b;
+            const basicValid = tempConfig.floors.model && tempConfig.floors.action &&
                 tempConfig.spaces.model && tempConfig.spaces.action &&
                 tempConfig.setRegion.model && tempConfig.setRegion.action;
+            if (!basicValid)
+                return false;
+            // If type filtering is enabled, getTypes model and action must be provided
+            if (tempConfig.enableFilterByType) {
+                return ((_a = tempConfig.getTypes) === null || _a === void 0 ? void 0 : _a.model) && ((_b = tempConfig.getTypes) === null || _b === void 0 ? void 0 : _b.action);
+            }
+            return true;
         };
         return (React.createElement(React.Fragment, null,
             React.createElement("div", { className: "space-editor__config-section" },
@@ -4965,7 +5008,15 @@ const SensorSpaceCoordinateEditor = (props) => {
                     React.createElement(components_1.Label, null, "Set Coordinates"),
                     React.createElement("div", { className: "space-editor__config-row" },
                         React.createElement(components_1.Input, { value: tempConfig.setRegion.model, onChange: (model) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { model }) }))), placeholder: "Model name" }),
-                        React.createElement(components_1.Input, { value: tempConfig.setRegion.action, onChange: (action) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { action }) }))), placeholder: "Action name" })))),
+                        React.createElement(components_1.Input, { value: tempConfig.setRegion.action, onChange: (action) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { action }) }))), placeholder: "Action name" }))),
+                React.createElement(components_1.FormField, null,
+                    React.createElement(components_1.Label, null,
+                        React.createElement(components_1.Checkbox, { checked: tempConfig.enableFilterByType, onChange: (v) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { enableFilterByType: v, getTypes: prev.getTypes || { model: "", action: "" } }))), type: 'bordered', label: "Enable Filter by Type" }))),
+                tempConfig.enableFilterByType && (React.createElement(components_1.FormField, null,
+                    React.createElement(components_1.Label, null, "Get Types"),
+                    React.createElement("div", { className: "space-editor__config-row" },
+                        React.createElement(components_1.Input, { value: ((_a = tempConfig.getTypes) === null || _a === void 0 ? void 0 : _a.model) || '', onChange: (model) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { getTypes: Object.assign(Object.assign({}, prev.getTypes), { model }) }))), placeholder: "Model name" }),
+                        React.createElement(components_1.Input, { value: ((_b = tempConfig.getTypes) === null || _b === void 0 ? void 0 : _b.action) || '', onChange: (action) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { getTypes: Object.assign(Object.assign({}, prev.getTypes), { action }) }))), placeholder: "Action name" }))))),
             React.createElement(components_1.FormField, { className: "space-editor__button-row" },
                 React.createElement(components_1.Button, { icon: "fas times", title: "Cancel", onClick: () => setShowConfigModal(false) }),
                 React.createElement(components_1.AsyncButton, { icon: "fas save", title: "Save Configuration", loadingTitle: "Saving...", onClick: handleSaveConfig, className: "space-editor__button space-editor__button--edit", 
@@ -5001,7 +5052,8 @@ const SensorSpaceCoordinateEditor = (props) => {
             React.createElement("div", { className: "space-editor__title" }, "Coordinate Editor"),
             React.createElement("div", { className: "space-editor__actions" },
                 React.createElement("div", { className: "space-editor__filters" },
-                    React.createElement(components_1.Select, { selected: selectedFloor, onChange: handleFloorChange, options: floors, labelField: "name", valueField: "id", placeholder: "Select a floor" })),
+                    React.createElement(components_1.Select, { selected: selectedFloor, onChange: handleFloorChange, options: floors, labelField: "name", valueField: "id", placeholder: "Select a floor" }),
+                    config.enableFilterByType && spaceTypes.length > 0 && (React.createElement(components_1.Select, { selected: selectedType, onChange: setSelectedType, options: [{ id: '', name: 'All Types' }, ...spaceTypes], labelField: "name", valueField: "id", placeholder: "Filter by type" }))),
                 React.createElement("div", { className: "space-editor__settings" },
                     React.createElement("div", { className: "space-editor__settings-button", onClick: () => setShowConfigModal(true) },
                         React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: ['fas', 'cog'] }))))),
@@ -5009,7 +5061,7 @@ const SensorSpaceCoordinateEditor = (props) => {
             React.createElement("div", { className: "space-editor__sidebar" },
                 React.createElement("div", { className: "space-editor__search" },
                     React.createElement(components_1.SearchBox, { value: query, onChange: setQuery })),
-                React.createElement("div", { className: "space-editor__list" }, filteredSpaces.map((space, index) => (React.createElement("div", { key: space.id, className: `space-editor__space ${(selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) === space.id ? 'space-editor__space--active' : ''}`, onClick: () => handleSpaceSelect(space) }, space.name))))),
+                React.createElement("div", { className: "space-editor__list" }, filteredSpaceRegions.map((space, index) => (React.createElement("div", { key: space.space.id, className: `space-editor__space ${(selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) === space.space.id ? 'space-editor__space--active' : ''}`, onClick: () => handleSpaceSelect(space.space) }, space.space.name))))),
             React.createElement("div", { className: "space-editor__map-container" }, ((_b = selectedFloorData === null || selectedFloorData === void 0 ? void 0 : selectedFloorData.layout) === null || _b === void 0 ? void 0 : _b.floorPlan)
                 ? React.createElement(components_1.MapComponent, { zoom: -1, minZoom: -20, center: mapCenter, regions: mapRegions, staticImage: {
                         url: getImageUrl(selectedFloorData.layout.floorPlan),
