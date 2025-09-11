@@ -420,40 +420,51 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
 
         // Helper function to generate markers
         const createMarkers = (markerType: 'selected-marker' | 'edit-marker'): IMarker[] => {
-            return region.map((pos, index) => ({
-                latitude: selectedFloorData.layout.height - pos.y,
-                longitude: pos.x,
-                draggable: true,
-                ondragend: (e: any) => {
-                    const { lat, lng } = e.target._latlng;
-                    handleRegionUpdate(index, {
-                        x: Number(lng),
-                        y: Number(selectedFloorData.layout.height - lat)
-                    });
-                },
-                customHTMLIcon: {
-                    className: `space-editor__marker space-editor__marker--${markerType.replace('-', '-')}`,
-                    html: '<div></div>'
-                },
-                renderPopup: {
-                    content: () => (
-                        <>
-                            <button
-                                className="space-editor__marker-actionbutton space-editor__marker-actionbutton-copy"
-                                onClick={() => handleMarkerDuplicate(index)}
-                            >
-                                <i className="fas fa-copy"></i>
-                            </button>
-                            <button
-                                className="space-editor__marker-actionbutton space-editor__marker-actionbutton-delete"
-                                onClick={() => handleMarkerDelete(index)}
-                            >
-                                <i className="fas fa-trash"></i>
-                            </button>
-                        </>
-                    )
+            const color = '#f09936';
+
+            return region.map((pos, index) => {
+
+                const popup = isEditingRegion
+                    ? {
+                        content: () => (
+                            <>
+                                <button
+                                    className="space-editor__marker-actionbutton space-editor__marker-actionbutton-copy"
+                                    onClick={() => handleMarkerDuplicate(index)}
+                                >
+                                    <i className="fas fa-copy"></i>
+                                </button>
+                                <button
+                                    className="space-editor__marker-actionbutton space-editor__marker-actionbutton-delete"
+                                    onClick={() => handleMarkerDelete(index)}
+                                >
+                                    <i className="fas fa-trash"></i>
+                                </button>
+                            </>
+                        )
+                    }
+                    : null
+
+                const m: any = {
+                    latitude: selectedFloorData.layout.height - pos.y,
+                    longitude: pos.x,
+                    draggable: isEditingRegion,
+                    ondragend: (e: any) => {
+                        const { lat, lng } = e.target._latlng;
+                        handleRegionUpdate(index, {
+                            x: Number(lng),
+                            y: Number(selectedFloorData.layout.height - lat)
+                        });
+                    },
+                    customHTMLIcon: {
+                        className: `space-editor__marker space-editor__marker--${markerType.replace('-', '-')}`,
+                        html: `<div style="border-color: ${color}; background-color: ${color}33;"><div style="background-color: ${color};"></div></div>`
+                    }
                 }
-            }));
+                if (popup) m.renderPopup = popup
+
+                return m
+            });
         };
 
         // Show editing markers when in edit mode
@@ -475,6 +486,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             .map(item => {
                 const pos = item.coordinates[0];
                 const isSelected = selectedSpace?.id === item.spaceId;
+
+                const color = item.color || '#3C82F6'
                 return {
                     latitude: selectedFloorData.layout.height - pos.y,
                     longitude: pos.x,
@@ -482,10 +495,11 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     customHTMLIcon: {
                         className: `space-editor__marker ${isSelected ? 'space-editor__marker--edit' : ''}`,
                         html: !!item.icon
-                            ? `<div class="space-editor__icon-marker" style="background-color: ${item.color || '#52c4c9'}"><i class="${item.icon}"></i></div>`
-                            : `<div class='space-editor__default-marker'></div>`,
+                            ? `<div class="space-editor__icon-marker" style="background-color: ${color}"><i class="${item.icon}"></i></div>`
+                            : `<div class='space-editor__default-marker' style="border-color: ${color}; background-color: ${color}33;"><div style="background-color: ${color};"></div></div>`,
                     },
-                    data: item.space
+                    data: item.space,
+
                 };
             });
 
@@ -499,10 +513,11 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         allSpaceRegions
             .filter(item => item.type === 'region' && selectedSpace?.id !== item.spaceId)
             .forEach(spaceRegion => {
+                const color = spaceRegion?.color || '#3C82F6';
                 regions.push({
                     type: 'polygon' as const,
-                    color: spaceRegion?.color || '#52c4c9',
-                    fillColor: (spaceRegion?.color || '#52c4c9') + '55',
+                    color: color,
+                    fillColor: color,
                     bounds: spaceRegion.coordinates.map(c => [c.x, c.y]),
                     imageCoordinates: true,
                     data: spaceRegion.space
@@ -511,10 +526,12 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
 
         // Add selected space region
         if (selectedSpace && region.length > 0) {
+            const color = '#f09936';
+            console.log('selected_region_color', color)
             regions.push({
                 type: 'polygon' as const,
-                color: '#f09936',
-                fillColor: '#f099365c',
+                color: color,
+                fillColor: color,
                 bounds: region.map(c => [c.x, c.y]),
                 imageCoordinates: true,
             });

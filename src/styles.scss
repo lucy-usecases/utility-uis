@@ -262,14 +262,14 @@ $textColor: #1e293b;
   }
 
   &__coordinate-input {
-    width: 70px !important;
+    // width: 70px !important;
 
     input {
       border: 1px solid $borderColor !important;
-      border-radius: 6px !important;
-      padding: 6px 8px !important;
-      font-size: 13px !important;
-      text-align: center !important;
+      // border-radius: 6px !important;
+      // padding: 6px 8px !important;
+      // font-size: 13px !important;
+      // text-align: center !important;
 
       &:focus {
         border-color: $primaryBGColor !important;
@@ -378,12 +378,11 @@ $textColor: #1e293b;
       left: 50%;
       width: 24px;
       height: 24px;
-      border: 2px solid $primaryBGColor;
-      background-color: rgba(60, 130, 246, 0.2);
+      border: 2px solid;
       transform: translate(-50%, -50%);
       border-radius: 50%;
 
-      &::before {
+      >div {
         content: "";
         width: 4px;
         height: 4px;
@@ -391,32 +390,22 @@ $textColor: #1e293b;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: $primaryBGColor;
         border-radius: 50%;
       }
     }
 
     &--edit-marker>div {
-      border-color: #059669;
       background-color: rgba(5, 150, 105, 0.2);
-
-      &::before {
-        background-color: #059669;
-      }
-    }
-
-    &--selected-marker>div {
-      border-color: $primaryBGColor;
-      background-color: rgba(60, 130, 246, 0.3);
       width: 28px;
       height: 28px;
 
-      &::before {
-        background-color: $primaryBGColor;
+      >div {
         width: 6px;
         height: 6px;
       }
     }
+
+    &--selected-marker>div {}
   }
 
   &__icon-marker {
