@@ -61,6 +61,15 @@ interface IConfig {
     setRegion: IModel;
 }
 
+// Backend Configuration Constants
+const CONFIG_MODEL = "SpaceCoordinateEditorConfigurationModel";
+const CONFIG_KEY = "space_coordinate_editor_config";
+
+interface IConfigurationState {
+    isLoaded: boolean;
+    hasValidConfig: boolean;
+}
+
 
 const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (props) => {
     // State management
@@ -88,28 +97,105 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
     const [isLoading, setIsLoading] = React.useState(true);
     const [isSaving, setIsSaving] = React.useState(false);
     const [isConfirming, setIsConfirming] = React.useState(false);
-    const [showConfigModal, setShowConfigModal] = React.useState(false)
+    const [showConfigModal, setShowConfigModal] = React.useState(false);
+    const [configState, setConfigState] = React.useState<IConfigurationState>({
+        isLoaded: false,
+        hasValidConfig: false
+    });
+    const [isConfigSaving, setIsConfigSaving] = React.useState(false);
 
     const toast = useToast();
 
-    // Initialize config from URL params
-    React.useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        setConfig({
-            floors: {
-                model: params.get("flm") || "",
-                action: params.get("fla") || ""
-            },
-            spaces: {
-                model: params.get("asm") || "",
-                action: params.get("asa") || ""
-            },
-            setRegion: {
-                model: params.get("ucm") || "",
-                action: params.get("uca") || ""
+    // Backend Configuration Functions
+    const loadConfigFromBackend = React.useCallback(async () => {
+        try {
+            const res = await props.uxpContext?.executeAction(
+                CONFIG_MODEL,
+                "GetConfig",
+                { id: CONFIG_KEY },
+                { json: true }
+            );
+
+            if (res && res.value) {
+                const savedConfig = JSON.parse(res.value) as IConfig;
+                setConfig(savedConfig);
+                setConfigState({ isLoaded: true, hasValidConfig: true });
+                return savedConfig;
+            } else {
+                // No saved config found, check URL params as fallback
+                const urlConfig = loadConfigFromURL();
+                if (urlConfig) {
+                    setConfig(urlConfig);
+                    setConfigState({ isLoaded: true, hasValidConfig: true });
+                    return urlConfig;
+                } else {
+                    setConfigState({ isLoaded: true, hasValidConfig: false });
+                    return null;
+                }
             }
-        });
+        } catch (error) {
+            console.error("Failed to load config from backend:", error);
+            // Fallback to URL params
+            const urlConfig = loadConfigFromURL();
+            if (urlConfig) {
+                setConfig(urlConfig);
+                setConfigState({ isLoaded: true, hasValidConfig: true });
+                return urlConfig;
+            } else {
+                setConfigState({ isLoaded: true, hasValidConfig: false });
+                return null;
+            }
+        }
+    }, [props.uxpContext]);
+
+    const saveConfigToBackend = React.useCallback(async (configToSave: IConfig) => {
+        try {
+            setIsConfigSaving(true);
+            await props.uxpContext?.executeAction(
+                CONFIG_MODEL,
+                "SaveConfig",
+                {
+                    id: CONFIG_KEY,
+                    value: JSON.stringify(configToSave)
+                },
+                { json: true }
+            );
+
+            setConfig(configToSave);
+            setConfigState({ isLoaded: true, hasValidConfig: true });
+            toast.success("Configuration saved successfully");
+        } catch (error) {
+            console.error("Failed to save config:", error);
+            toast.error("Failed to save configuration");
+            throw error;
+        } finally {
+            setIsConfigSaving(false);
+        }
+    }, [props.uxpContext, toast]);
+
+    const loadConfigFromURL = React.useCallback(() => {
+        const params = new URLSearchParams(window.location.search);
+        const floorModel = params.get("flm");
+        const floorAction = params.get("fla");
+        const spaceModel = params.get("asm");
+        const spaceAction = params.get("asa");
+        const regionModel = params.get("ucm");
+        const regionAction = params.get("uca");
+
+        if (floorModel && floorAction && spaceModel && spaceAction && regionModel && regionAction) {
+            return {
+                floors: { model: floorModel, action: floorAction },
+                spaces: { model: spaceModel, action: spaceAction },
+                setRegion: { model: regionModel, action: regionAction }
+            };
+        }
+        return null;
     }, []);
+
+    // Initialize config from backend on component mount
+    React.useEffect(() => {
+        loadConfigFromBackend();
+    }, [loadConfigFromBackend]);
 
     // Load floors when config changes
     React.useEffect(() => {
@@ -446,6 +532,171 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
 
     }, [selectedSpace, isEditingRegion])
 
+    // Configuration Form Component
+    const ConfigurationForm = React.useCallback(() => {
+        const [tempConfig, setTempConfig] = React.useState<IConfig>(config);
+
+        const handleSaveConfig = async () => {
+            try {
+                await saveConfigToBackend(tempConfig);
+                setShowConfigModal(false);
+            } catch (error) {
+                // Error is already handled in saveConfigToBackend
+            }
+        };
+
+        const validateConfig = () => {
+            return tempConfig.floors.model && tempConfig.floors.action &&
+                tempConfig.spaces.model && tempConfig.spaces.action &&
+                tempConfig.setRegion.model && tempConfig.setRegion.action;
+        };
+
+        return (
+            <>
+                <div className="space-editor__config-section">
+                    <FormField>
+                        <Label>Get Floors</Label>
+                        <div className="space-editor__config-row">
+                            <Input
+                                value={tempConfig.floors.model}
+                                onChange={(model) => setTempConfig(prev => ({
+                                    ...prev,
+                                    floors: { ...prev.floors, model }
+                                }))}
+                                placeholder="Model name"
+                            />
+                            <Input
+                                value={tempConfig.floors.action}
+                                onChange={(action) => setTempConfig(prev => ({
+                                    ...prev,
+                                    floors: { ...prev.floors, action }
+                                }))}
+                                placeholder="Action name"
+                            />
+                        </div>
+                    </FormField>
+
+                    <FormField>
+                        <Label>Get Spaces</Label>
+                        <div className="space-editor__config-row">
+                            <Input
+                                value={tempConfig.spaces.model}
+                                onChange={(model) => setTempConfig(prev => ({
+                                    ...prev,
+                                    spaces: { ...prev.spaces, model }
+                                }))}
+                                placeholder="Model name"
+                            />
+                            <Input
+                                value={tempConfig.spaces.action}
+                                onChange={(action) => setTempConfig(prev => ({
+                                    ...prev,
+                                    spaces: { ...prev.spaces, action }
+                                }))}
+                                placeholder="Action name"
+                            />
+                        </div>
+                    </FormField>
+
+                    <FormField>
+                        <Label>Set Coordinates</Label>
+                        <div className="space-editor__config-row">
+                            <Input
+                                value={tempConfig.setRegion.model}
+                                onChange={(model) => setTempConfig(prev => ({
+                                    ...prev,
+                                    setRegion: { ...prev.setRegion, model }
+                                }))}
+                                placeholder="Model name"
+                            />
+                            <Input
+                                value={tempConfig.setRegion.action}
+                                onChange={(action) => setTempConfig(prev => ({
+                                    ...prev,
+                                    setRegion: { ...prev.setRegion, action }
+                                }))}
+                                placeholder="Action name"
+                            />
+                        </div>
+                    </FormField>
+                </div>
+
+                <FormField className="space-editor__button-row">
+                    <Button
+                        icon="fas times"
+                        title="Cancel"
+                        onClick={() => setShowConfigModal(false)}
+                    />
+                    <AsyncButton
+                        icon="fas save"
+                        title="Save Configuration"
+                        loadingTitle="Saving..."
+                        onClick={handleSaveConfig}
+                        className="space-editor__button space-editor__button--edit"
+                        // loading={isConfigSaving}
+                        disabled={!validateConfig()}
+                    />
+                </FormField>
+            </>
+        );
+    }, [config, saveConfigToBackend, isConfigSaving]);
+
+    // Show configuration needed message if config is not valid
+    if (configState.isLoaded && !configState.hasValidConfig) {
+        return (
+            <div className="space-editor">
+                <div className="space-editor__header">
+                    <div className="space-editor__title">Coordinate Editor</div>
+                    <div className="space-editor__actions">
+                        <div className="space-editor__settings">
+                            <div className="space-editor__settings-button" onClick={() => setShowConfigModal(true)}>
+                                <FontAwesomeIcon icon={['fas', 'cog']} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="space-editor__configuration-needed">
+                    <div className="space-editor__configuration-needed-icon">
+                        <FontAwesomeIcon icon={['fas', 'cogs']} />
+                    </div>
+                    <div className="space-editor__configuration-needed-title">
+                        Configuration Required
+                    </div>
+                    <div className="space-editor__configuration-needed-message">
+                        Please configure the data models and actions to get started with the coordinate editor.
+                    </div>
+                    <Button
+                        title="Open Configuration"
+                        className="space-editor__configuration-needed-button"
+                        onClick={() => setShowConfigModal(true)}
+                    />
+
+                </div>
+
+                <Modal
+                    show={showConfigModal}
+                    onClose={() => setShowConfigModal(false)}
+                    title="Configuration Settings"
+                    className="space-editor__modal space-editor__modal--config"
+                >
+                    <ConfigurationForm />
+                </Modal>
+            </div>
+        );
+    }
+
+    // Show loading state while config is being loaded
+    if (!configState.isLoaded) {
+        return (
+            <div className="space-editor">
+                <div className="space-editor__overlay">
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="space-editor">
 
@@ -646,82 +897,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                 title="Configuration Settings"
                 className="space-editor__modal space-editor__modal--config"
             >
-                <div className="space-editor__config-section">
-                    <FormField>
-                        <Label>Get Floors</Label>
-                        <div className="space-editor__config-row">
-                            <Input
-                                value={config.floors.model}
-                                onChange={(model) => setConfig(prev => ({
-                                    ...prev,
-                                    floors: { ...prev.floors, model }
-                                }))}
-                                placeholder="Model name"
-                            />
-                            <Input
-                                value={config.floors.action}
-                                onChange={(action) => setConfig(prev => ({
-                                    ...prev,
-                                    floors: { ...prev.floors, action }
-                                }))}
-                                placeholder="Action name"
-                            />
-                        </div>
-                    </FormField>
-
-                    <FormField>
-                        <Label>Get Spaces</Label>
-                        <div className="space-editor__config-row">
-                            <Input
-                                value={config.spaces.model}
-                                onChange={(model) => setConfig(prev => ({
-                                    ...prev,
-                                    spaces: { ...prev.spaces, model }
-                                }))}
-                                placeholder="Model name"
-                            />
-                            <Input
-                                value={config.spaces.action}
-                                onChange={(action) => setConfig(prev => ({
-                                    ...prev,
-                                    spaces: { ...prev.spaces, action }
-                                }))}
-                                placeholder="Action name"
-                            />
-                        </div>
-                    </FormField>
-
-                    <FormField>
-                        <Label>Set Coordinates</Label>
-                        <div className="space-editor__config-row">
-                            <Input
-                                value={config.setRegion.model}
-                                onChange={(model) => setConfig(prev => ({
-                                    ...prev,
-                                    setRegion: { ...prev.setRegion, model }
-                                }))}
-                                placeholder="Model name"
-                            />
-                            <Input
-                                value={config.setRegion.action}
-                                onChange={(action) => setConfig(prev => ({
-                                    ...prev,
-                                    setRegion: { ...prev.setRegion, action }
-                                }))}
-                                placeholder="Action name"
-                            />
-                        </div>
-                    </FormField>
-
-                </div>
-
-                <FormField className="space-editor__button-row">
-                    <Button
-                        title="Close"
-                        onClick={() => setShowConfigModal(false)}
-                        className="space-editor__button space-editor__button--primary"
-                    />
-                </FormField>
+                <ConfigurationForm />
             </Modal>
         </div >
     );

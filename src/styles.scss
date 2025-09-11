@@ -446,9 +446,13 @@ $textColor: #1e293b;
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         border: none;
         overflow: hidden;
-        max-width: 600px;
-        width: 90vw;
         margin: 0;
+        min-width: unset;
+        max-width: unset;
+        min-height: 60vh;
+        max-height: 90vh;
+        width: max(40%, 500px);
+        height: auto;
       }
 
       .modal-header {
@@ -464,8 +468,12 @@ $textColor: #1e293b;
       }
 
       .modal-body {
-        padding: 24px;
-        background-color: $white;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
       }
     }
   }
@@ -473,7 +481,10 @@ $textColor: #1e293b;
   &__config-section {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+    flex-grow: 1;
+    min-height: 0;
+    padding: 10px;
 
     .uxp-form-field {
       .uxp-label {
@@ -493,16 +504,16 @@ $textColor: #1e293b;
       flex: 1;
 
       input {
-        border: 1px solid $borderColor !important;
-        border-radius: 8px !important;
-        padding: 10px 12px !important;
-        font-size: 14px !important;
+        // border: 1px solid $borderColor !important;
+        // border-radius: 8px !important;
+        // padding: 10px 12px !important;
+        // font-size: 14px !important;
         width: 100% !important;
 
         &:focus {
-          border-color: $primaryBGColor !important;
-          box-shadow: 0 0 0 3px rgba(60, 130, 246, 0.1) !important;
-          outline: none !important;
+          // border-color: $primaryBGColor !important;
+          // box-shadow: 0 0 0 3px rgba(60, 130, 246, 0.1) !important;
+          // outline: none !important;
         }
       }
     }
@@ -510,12 +521,61 @@ $textColor: #1e293b;
 
   // Button Row
   &__button-row {
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 12px;
-    padding-top: 16px;
     border-top: 1px solid $borderColor;
+
+    .uxp-button {
+      margin: 0 10px;
+    }
+  }
+
+  // Configuration needed screen
+  &__configuration-needed {
+    width: 100%;
+    min-height: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+
+    &-icon {
+      font-size: 50px;
+      color: $secondaryTextColor;
+      margin-bottom: 24px;
+      opacity: 0.7;
+    }
+
+    &-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: $textColor;
+      margin-bottom: 12px;
+    }
+
+    &-message {
+      font-size: 14px;
+      color: $secondaryTextColor;
+      margin-bottom: 32px;
+      max-width: 400px;
+      line-height: 1.5;
+    }
+
+    &-button {
+      background-color: $primaryBGColor;
+      color: $primaryTextColor;
+      margin: 10px;
+
+      &:hover {
+        background-color: darken($primaryBGColor, 5%);
+        color: $primaryTextColor;
+      }
+    }
   }
 }
 
@@ -550,6 +610,6 @@ $textColor: #1e293b;
   }
 }
 
-.leaflet-popup-content{
-  margin: 6px 10px!important;
+.leaflet-popup-content {
+  margin: 6px 10px !important;
 }
