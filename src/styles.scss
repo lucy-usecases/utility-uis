@@ -44,7 +44,7 @@ $textColor: #1e293b;
     display: flex;
     align-items: center;
     gap: 16px;
-    
+
     .uxp-form-select {
       min-width: 180px;
 
@@ -126,6 +126,14 @@ $textColor: #1e293b;
     overflow-y: auto;
     padding: 8px 0;
     min-height: 0;
+
+    &--empty {
+      color: $secondaryTextColor;
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+      padding: 10px 0;
+    }
   }
 
   &__space {
@@ -293,20 +301,6 @@ $textColor: #1e293b;
 
   // Buttons
   &__button {
-    // padding: 8px 16px !important;
-    // border-radius: 8px !important;
-    // font-size: 14px !important;
-    // font-weight: 500 !important;
-    // border: 1px solid $borderColor !important;
-    // background-color: $white !important;
-    // color: $secondaryTextColor !important;
-    // cursor: pointer !important;
-    // transition: all 0.2s ease !important;
-
-    // &:hover {
-    //   background-color: $secondaryBGColor !important;
-    //   border-color: $secondaryTextColor !important;
-    // }
 
     &--edit {
       background-color: $primaryBGColor !important;
@@ -376,58 +370,57 @@ $textColor: #1e293b;
       }
     }
 
-    >div {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 24px;
-      height: 24px;
-      border: 2px solid;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-
-      >div {
-        content: "";
-        width: 4px;
-        height: 4px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-      }
-    }
-
-    &--edit-marker>div {
-      background-color: rgba(5, 150, 105, 0.2);
-      width: 28px;
-      height: 28px;
-
-      >div {
-        width: 6px;
-        height: 6px;
-      }
-    }
-
-    &--selected-marker>div {}
   }
 
   &__icon-marker {
-    width: 24px;
-    height: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    border: 2px solid;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    transition: all 200ms ease-in-out;
+
+    &-icon {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    &--selected {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  &__default-marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    border: 2px solid;
+    transform: translate(-50%, -50%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $primaryTextColor;
-    font-size: 12px;
-    font-weight: 500;
-    transform: translate(-12px, -12px);
-    border: 2px solid $white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    transition: all 200ms ease-in-out;
 
-    i {
-      font-size: 12px;
+    &-icon {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    &--selected {
+      width: 30px;
+      height: 30px;
     }
   }
 
@@ -497,17 +490,7 @@ $textColor: #1e293b;
       flex: 1;
 
       input {
-        // border: 1px solid $borderColor !important;
-        // border-radius: 8px !important;
-        // padding: 10px 12px !important;
-        // font-size: 14px !important;
         width: 100% !important;
-
-        &:focus {
-          // border-color: $primaryBGColor !important;
-          // box-shadow: 0 0 0 3px rgba(60, 130, 246, 0.1) !important;
-          // outline: none !important;
-        }
       }
     }
   }

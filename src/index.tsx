@@ -62,6 +62,7 @@ interface IConfig {
     setRegion: IModel;
     enableFilterByType: boolean;
     getTypes?: IModel;
+    showIdInsteadOfName?: boolean
 }
 
 // Backend Configuration Constants
@@ -104,7 +105,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         spaces: { model: "", action: "" },
         setRegion: { model: "", action: "" },
         enableFilterByType: false,
-        getTypes: { model: "", action: "" }
+        getTypes: { model: "", action: "" },
+        showIdInsteadOfName: false
     });
 
     const [region, setRegion] = React.useState<IRegion[]>([]);
@@ -200,6 +202,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         const spaceTypeModel = params.get("stm");
         const spaceTypeAction = params.get("sta");
         const enableFilterByType = params.get("ebt") == '1';
+        const showId = params.get("showId") == '1';
 
         if (floorModel && floorAction && spaceModel && spaceAction && regionModel && regionAction) {
             return {
@@ -207,7 +210,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                 spaces: { model: spaceModel, action: spaceAction },
                 setRegion: { model: regionModel, action: regionAction },
                 getTypes: { model: spaceTypeModel, action: spaceTypeAction },
-                enableFilterByType: enableFilterByType || false
+                enableFilterByType: enableFilterByType || false,
+                showIdInsteadOfName: showId || false
             };
         }
         return null;
@@ -477,8 +481,25 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         if (!selectedFloorData) return [];
         const allMarkers: IMarker[] = [];
 
+        const createCustomHTMLMarker = (isSelected: boolean, isEditing?: boolean, color?: string, icon?: string) => {
+
+            const defaultMarker = `<div class='space-editor__default-marker ${isSelected ? 'space-editor__default-marker--selected' : ''}' style="border-color: ${color}; background-color: ${color}33;">
+                                <div div class="space-editor__default-marker-icon" style="background-color: ${color};"></div>
+                            </div>`;
+            const customMarker = `<div class="space-editor__icon-marker ${isSelected ? 'space-editor__icon-marker--selected' : ''}" style="background-color: ${color}; border-color: ${color}">
+                                <div class="space-editor__icon-marker-icon" style="background-image: url('${icon}')"></div>
+                            </div>`;
+
+            return {
+                className: `space-editor__marker`,
+                html: (!!icon && !isEditing)
+                    ? customMarker
+                    : defaultMarker
+            }
+        }
+
         // Helper function to generate markers
-        const createMarkers = (markerType: 'selected-marker' | 'edit-marker'): IMarker[] => {
+        const createMarkers = (type?: 'region' | 'marker', icon?: string, isEditing?: boolean): IMarker[] => {
             const color = '#f09936';
 
             return region.map((pos, index) => {
@@ -515,10 +536,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                             y: Number(selectedFloorData.layout.height - lat)
                         });
                     },
-                    customHTMLIcon: {
-                        className: `space-editor__marker space-editor__marker--${markerType.replace('-', '-')}`,
-                        html: `<div style="border-color: ${color}; background-color: ${color}33;"><div style="background-color: ${color};"></div></div>`
-                    }
+                    customHTMLIcon: createCustomHTMLMarker(true, isEditing || false, color, type == 'marker' ? icon : null)
                 }
                 if (popup) m.renderPopup = popup
 
@@ -530,9 +548,9 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         if (selectedSpace) {
             const isMarker = filteredSpaceRegions.find(s => s.spaceId === selectedSpace.id)?.type === 'marker';
             if (isMarker) {
-                allMarkers.push(...createMarkers(isEditingRegion ? 'edit-marker' : 'selected-marker'));
+                allMarkers.push(...createMarkers('marker', selectedSpace?.icon, isEditingRegion));
             } else if (isEditingRegion) {
-                allMarkers.push(...createMarkers('edit-marker'));
+                allMarkers.push(...createMarkers('region', null, isEditingRegion));
             }
         }
 
@@ -544,21 +562,13 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             ))
             .map(item => {
                 const pos = item.coordinates[0];
-                const isSelected = selectedSpace?.id === item.spaceId;
-
-                const color = item.color || '#3C82F6'
+                const color = item.color || '#3C82F6';
                 return {
                     latitude: selectedFloorData.layout.height - pos.y,
                     longitude: pos.x,
                     draggable: false,
-                    customHTMLIcon: {
-                        className: `space-editor__marker ${isSelected ? 'space-editor__marker--edit' : ''}`,
-                        html: !!item.icon
-                            ? `<div class="space-editor__icon-marker" style="background-color: ${color}"><i class="${item.icon}"></i></div>`
-                            : `<div class='space-editor__default-marker' style="border-color: ${color}; background-color: ${color}33;"><div style="background-color: ${color};"></div></div>`,
-                    },
+                    customHTMLIcon: createCustomHTMLMarker(false, false, color, item.icon),
                     data: item.space,
-
                 };
             });
 
@@ -744,6 +754,21 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                             </div>
                         </FormField>
                     )}
+
+                    <FormField>
+                        <Label>
+                            <Checkbox
+                                checked={tempConfig?.showIdInsteadOfName}
+                                onChange={(v) => setTempConfig(prev => ({
+                                    ...prev,
+                                    showIdInsteadOfName: v,
+                                }))}
+                                type='bordered'
+                                label="Show Id instead of of name for Floors, Types and Spaces"
+                            />
+
+                        </Label>
+                    </FormField>
                 </div>
 
                 <FormField className="space-editor__button-row">
@@ -775,7 +800,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     <div className="space-editor__actions">
                         <div className="space-editor__settings">
                             <div className="space-editor__settings-button" onClick={() => setShowConfigModal(true)}>
-                                <FontAwesomeIcon icon={['fas', 'cog']} />
+                                <FontAwesomeIcon icon={['fas', 'tools']} />
                             </div>
                         </div>
                     </div>
@@ -792,6 +817,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                         Please configure the data models and actions to get started with the coordinate editor.
                     </div>
                     <Button
+                        icon="fas tools"
                         title="Open Configuration"
                         className="space-editor__configuration-needed-button"
                         onClick={() => setShowConfigModal(true)}
@@ -833,7 +859,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                             selected={selectedFloor}
                             onChange={handleFloorChange}
                             options={floors}
-                            labelField="name"
+                            labelField={config?.showIdInsteadOfName ? "id" : "name"}
                             valueField="id"
                             placeholder="Select a floor"
                         />
@@ -842,7 +868,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                                 selected={selectedType}
                                 onChange={setSelectedType}
                                 options={[{ id: '', name: 'All Types' }, ...spaceTypes]}
-                                labelField="name"
+                                labelField={config?.showIdInsteadOfName ? "id" : "name"}
                                 valueField="id"
                                 placeholder="Filter by type"
                             />
@@ -850,7 +876,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     </div>
                     <div className="space-editor__settings">
                         <div className="space-editor__settings-button" onClick={() => setShowConfigModal(true)} >
-                            <FontAwesomeIcon icon={['fas', 'cog']} />
+                            <FontAwesomeIcon icon={['fas', 'tools']} />
                         </div>
                     </div>
                 </div>
@@ -871,9 +897,14 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                                 className={`space-editor__space ${selectedSpace?.id === space.space.id ? 'space-editor__space--active' : ''}`}
                                 onClick={() => handleSpaceSelect(space.space)}
                             >
-                                {space.space.name}
+                                {config?.showIdInsteadOfName ? space.space.id : space.space.name}
                             </div>
                         ))}
+                        {filteredSpaceRegions?.length == 0 &&
+                            <div className="space-editor__list--empty">
+                                No spaces found
+                            </div>
+                        }
                     </div>
                 </div>
 
