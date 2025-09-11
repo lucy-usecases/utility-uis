@@ -1,10 +1,7 @@
 import * as React from "react";
 import { registerUI, IContextProvider } from './uxp';
-import {
-    FilterPanel, FormField, Select, Label, Input, MapComponent,
-    IMarker, IconButton, Button, AsyncButton, Loading, useToast, SearchBox,
-    Modal
-} from "uxp/components";
+import { FormField, Select, Label, Input, MapComponent, IMarker, IconButton, Button, AsyncButton, Loading, useToast, SearchBox, Modal } from "uxp/components";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './styles.scss';
 
 export function trimSlash(s: string): string {
@@ -62,16 +59,8 @@ interface IConfig {
     floors: IModel;
     spaces: IModel;
     setRegion: IModel;
-    addSpace: IModel;
 }
 
-const NewSpace: ISpace = {
-    id: '',
-    name: '',
-    coordinates: [],
-    color: '',
-    icon: ''
-}
 
 const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (props) => {
     // State management
@@ -84,23 +73,22 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
     const [config, setConfig] = React.useState<IConfig>({
         floors: { model: "", action: "" },
         spaces: { model: "", action: "" },
-        setRegion: { model: "", action: "" },
-        addSpace: { model: "", action: "" },
+        setRegion: { model: "", action: "" }
     });
     const [allSpaceRegions, setAllSpaceRegions] = React.useState<Array<{
         spaceId: string,
         coordinates: IRegion[],
         color?: string,
         icon?: string,
-        type: 'region' | 'marker'
+        type: 'region' | 'marker',
+        space: ISpace
     }>>([]);
     const [isEditingRegion, setIsEditingRegion] = React.useState(false);
     const [region, setRegion] = React.useState<IRegion[]>([]);
     const [isLoading, setIsLoading] = React.useState(true);
     const [isSaving, setIsSaving] = React.useState(false);
     const [isConfirming, setIsConfirming] = React.useState(false);
-    const [addSpace, setAddSpace] = React.useState(false)
-    const [newSpace, setNewSpace] = React.useState<ISpace>(NewSpace)
+    const [showConfigModal, setShowConfigModal] = React.useState(false)
 
     const toast = useToast();
 
@@ -119,11 +107,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             setRegion: {
                 model: params.get("ucm") || "",
                 action: params.get("uca") || ""
-            },
-            addSpace: {
-                model: params.get("ssm") || "",
-                action: params.get("ssa") || ""
-            },
+            }
         });
     }, []);
 
@@ -216,7 +200,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     spaceId: space.id,
                     coordinates: space.coordinates,
                     color: space?.color || null,
-                    type: 'region' as const
+                    type: 'region' as const,
+                    space: space,
                 }));
 
             const markers = spacesData
@@ -226,7 +211,8 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     coordinates: space.coordinates,
                     color: space?.color || null,
                     icon: space?.icon || null,
-                    type: 'marker' as const
+                    type: 'marker' as const,
+                    space: space,
                 }));
 
             setAllSpaceRegions([...regions, ...markers]);
@@ -238,39 +224,6 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
             setIsLoading(false);
         }
     }, [config.spaces, selectedFloor, props.uxpContext]);
-
-    const closeForm = () => {
-        setAddSpace(false)
-        setNewSpace(NewSpace)
-    }
-
-    const saveSpace = React.useCallback(async () => {
-        try {
-            setIsSaving(true);
-            const { model, action } = config.addSpace;
-
-            // validate 
-            if (!hasValue(newSpace.id)) {
-                toast.error('Id is required')
-                return
-            }
-            if (!hasValue(newSpace.name)) {
-                toast.error('Name is required')
-                return
-            }
-
-            const res = await props.uxpContext?.executeAction(model, action, { floorId: selectedFloor, space: newSpace }, { json: true });
-            loadSpaces()
-            toast.success('Space added');
-            closeForm()
-        } catch (error) {
-            console.error("Unable to add space. something went wrong:", error);
-            toast.error('Unable to add space. something went wrong')
-            loadSpaces();
-        } finally {
-            setIsSaving(false);
-        }
-    }, [config.addSpace, selectedFloor, props.uxpContext, newSpace]);
 
     const saveRegionChanges = React.useCallback(async () => {
         if (!selectedSpace || isSaving) return;
@@ -321,7 +274,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         setRegion(prev => {
             const newRegion = [...prev];
             const pos = prev[index];
-            newRegion.splice(index + 1, 0, { x: pos.x + 1, y: pos.y + 1 });
+            newRegion.splice(index + 1, 0, { x: pos.x + 10, y: pos.y + 10 });
             return newRegion;
         });
     }, []);
@@ -357,6 +310,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         return imagePath;
     }, [props.uxpContext?.lucyUrl]);
 
+
     // Computed values
     const selectedFloorData = React.useMemo(() =>
         floors.find(f => f.id === selectedFloor),
@@ -384,7 +338,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                 latitude: selectedFloorData.layout.height - pos.y,
                 longitude: pos.x,
                 draggable: true,
-                ondragend: (e:any) => {
+                ondragend: (e: any) => {
                     const { lat, lng } = e.target._latlng;
                     handleRegionUpdate(index, {
                         x: Number(lng),
@@ -392,14 +346,24 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     });
                 },
                 customHTMLIcon: {
-                    className: `lmui-custom-marker ${markerType}`,
+                    className: `space-editor__marker space-editor__marker--${markerType.replace('-', '-')}`,
                     html: '<div></div>'
                 },
                 renderPopup: {
                     content: () => (
                         <>
-                            <button onClick={() => handleMarkerDuplicate(index)}>Duplicate</button>
-                            <button onClick={() => handleMarkerDelete(index)}>Delete</button>
+                            <button
+                                className="space-editor__marker-actionbutton space-editor__marker-actionbutton-copy"
+                                onClick={() => handleMarkerDuplicate(index)}
+                            >
+                                <i className="fas fa-copy"></i>
+                            </button>
+                            <button
+                                className="space-editor__marker-actionbutton space-editor__marker-actionbutton-delete"
+                                onClick={() => handleMarkerDelete(index)}
+                            >
+                                <i className="fas fa-trash"></i>
+                            </button>
                         </>
                     )
                 }
@@ -430,11 +394,12 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     longitude: pos.x,
                     draggable: false,
                     customHTMLIcon: {
-                        className: `lmui-custom-marker ${isSelected ? 'edit-marker' : ''}`,
+                        className: `space-editor__marker ${isSelected ? 'space-editor__marker--edit' : ''}`,
                         html: !!item.icon
-                            ? `<div class="icon-marker" style="background-color: ${item.color || '#52c4c9'}"><i class="${item.icon}"></i></div>`
-                            : `<div class='default-marker'></div>`,
-                    }
+                            ? `<div class="space-editor__icon-marker" style="background-color: ${item.color || '#52c4c9'}"><i class="${item.icon}"></i></div>`
+                            : `<div class='space-editor__default-marker'></div>`,
+                    },
+                    data: item.space
                 };
             });
 
@@ -454,6 +419,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                     fillColor: (spaceRegion?.color || '#52c4c9') + '55',
                     bounds: spaceRegion.coordinates.map(c => [c.x, c.y]),
                     imageCoordinates: true,
+                    data: spaceRegion.space
                 });
             });
 
@@ -470,52 +436,220 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         return regions;
     }, [allSpaceRegions, selectedSpace, region, isEditingRegion]);
 
+    const updateSelectedSpace = React.useCallback((space?: ISpace) => {
+        if (!space) return
+        // Don't allow selection changes during edit mode
+        if (isEditingRegion) return;
+        // Don't toggle if already selected
+        if (space?.id === selectedSpace?.id) return;
+        setSelectedSpace(space as ISpace);
+
+    }, [selectedSpace, isEditingRegion])
+
     return (
-        <div className="location-marker-ui-container">
-            <div className="lmui-sidebar">
-                <div className="title">Spaces</div>
-                <div className="content">
-                    <div className="search">
+        <div className="space-editor">
+
+            <div className="space-editor__header">
+                <div className="space-editor__title">Coordinate Editor</div>
+                <div className="space-editor__actions">
+                    <div className="space-editor__filters">
+                        <Select
+                            selected={selectedFloor}
+                            onChange={handleFloorChange}
+                            options={floors}
+                            labelField="name"
+                            valueField="id"
+                            placeholder="Select a floor"
+                        />
+                    </div>
+                    <div className="space-editor__settings">
+                        <div className="space-editor__settings-button" onClick={() => setShowConfigModal(true)} >
+                            <FontAwesomeIcon icon={['fas', 'cog']} />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div className={`space-editor__body ${selectedSpace ? 'space-editor__body--editing' : ''}`}>
+
+                <div className="space-editor__sidebar">
+                    <div className="space-editor__search">
                         <SearchBox value={query} onChange={setQuery} />
                     </div>
-                    <div className="list">
+
+                    <div className="space-editor__list">
                         {filteredSpaces.map((space, index) => (
                             <div
                                 key={space.id}
-                                className={`space ${selectedSpace?.id === space.id ? 'active' : ''}`}
+                                className={`space-editor__space ${selectedSpace?.id === space.id ? 'space-editor__space--active' : ''}`}
                                 onClick={() => handleSpaceSelect(space)}
                             >
                                 {space.name}
                             </div>
                         ))}
                     </div>
-                    <div className="footer">
-                        {hasValue(config?.addSpace?.model) && hasValue(config?.addSpace?.action) &&
-                            <Button
-                                title="Add Space"
-                                onClick={() => setAddSpace(true)}
-                            />
-                        }
-                    </div>
                 </div>
+
+                <div className="space-editor__map-container">
+                    {
+                        selectedFloorData?.layout?.floorPlan
+                            ? <MapComponent
+                                zoom={-1}
+                                minZoom={-20}
+                                center={mapCenter}
+                                regions={mapRegions}
+                                staticImage={{
+                                    url: getImageUrl(selectedFloorData.layout.floorPlan),
+                                    width: selectedFloorData.layout.width,
+                                    height: selectedFloorData.layout.height
+                                }}
+                                markers={markers}
+                                onMarkerClick={(el, data) => {
+                                    updateSelectedSpace(data)
+                                }}
+                                onRegionClick={(el, data) => {
+                                    updateSelectedSpace(data)
+                                }}
+                                mapUrl=""
+                                onClick={(e) => console.log("Map clicked", e)}
+                            />
+                            : <div className="space-editor__no-map">Select a floor to get started</div>
+                    }
+                </div>
+
+                {
+                    selectedFloorData?.layout?.floorPlan && selectedSpace && <div className="space-editor__map-toolbar">
+                        <div className="space-editor__map-toolbar-header">
+                            <div className="space-editor__map-toolbar-title">Coordinates</div>
+                            <div className="space-editor__map-toolbar-button" onClick={() => {
+                                setIsConfirming(false)
+                                setIsSaving(false)
+                                setIsEditingRegion(false)
+                                setSelectedSpace(null)
+                            }}>
+                                <FontAwesomeIcon icon={['fas', 'times']} />
+                            </div>
+                        </div>
+
+                        <div className="space-editor__map-toolbar-body">
+                            <table className="space-editor__coordinates-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>X</th>
+                                        <th>Y</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {region.map((coord, index) => (
+                                        <tr key={index} className="space-editor__coordinate-row">
+                                            <td>{index + 1}</td>
+                                            <td>
+                                                <Input
+                                                    type="number"
+                                                    value={coord.x.toString()}
+                                                    onChange={(value) => handleCoordinateChange(index, 'x', value)}
+                                                    placeholder="X"
+                                                    className="space-editor__coordinate-input"
+                                                    inputAttr={{
+                                                        disabled: !isEditingRegion
+                                                    }}
+                                                />
+                                            </td>
+                                            <td>
+                                                <Input
+                                                    type="number"
+                                                    value={coord.y.toString()}
+                                                    onChange={(value) => handleCoordinateChange(index, 'y', value)}
+                                                    placeholder="Y"
+                                                    className="space-editor__coordinate-input"
+                                                    inputAttr={{
+                                                        disabled: !isEditingRegion
+                                                    }}
+                                                />
+                                            </td>
+                                            {region.length > 1 && (
+                                                <td>
+                                                    <IconButton
+                                                        type="delete"
+                                                        size="small"
+                                                        onClick={() => handleMarkerDelete(index)}
+                                                    />
+                                                </td>
+                                            )}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div className="space-editor__map-toolbar-footer">
+                            {
+                                isEditingRegion
+                                    ? <>
+                                        {(!isConfirming && !isSaving) && <Button
+                                            icon="fas plus"
+                                            title="Add"
+                                            onClick={handleAddCoordinate}
+                                            className="space-editor__button"
+                                        />}
+                                        {isConfirming ? (
+                                            <AsyncButton
+                                                icon="fas check"
+                                                title="Confirm"
+                                                loadingTitle="Saving..."
+                                                onClick={saveRegionChanges}
+                                                className="space-editor__button space-editor__button--confirm"
+                                            />
+                                        ) : (
+                                            <Button
+                                                icon="fas save"
+                                                title="Save"
+                                                onClick={() => setIsConfirming(true)}
+                                                className="space-editor__button space-editor__button--confirm"
+                                            />
+                                        )}
+                                        {!isSaving && (
+                                            <Button
+                                                icon="fas times"
+                                                title='Cancel'
+                                                onClick={handleCancelEdit}
+                                            />
+                                        )}
+                                    </>
+                                    : <Button
+                                        icon="fas pencil"
+                                        title="Edit Coordinates"
+                                        onClick={() => setIsEditingRegion(true)}
+                                        className="space-editor__button space-editor__button--edit"
+                                    />
+                            }
+                        </div>
+                    </div>
+                }
+
             </div>
 
-            <div className="lmui-toolbar">
-                <FormField className="floor-filter">
-                    <Select
-                        selected={selectedFloor}
-                        onChange={handleFloorChange}
-                        options={floors}
-                        labelField="name"
-                        valueField="id"
-                        placeholder="Select a floor"
-                    />
-                </FormField>
+            {
+                isLoading && (
+                    <div className="space-editor__overlay">
+                        <Loading />
+                    </div>
+                )
+            }
 
-                <FilterPanel>
-                    <FormField className="location-marker-config-row">
+            <Modal
+                show={showConfigModal}
+                onClose={() => setShowConfigModal(false)}
+                title="Configuration Settings"
+                className="space-editor__modal space-editor__modal--config"
+            >
+                <div className="space-editor__config-section">
+                    <FormField>
                         <Label>Get Floors</Label>
-                        <div className="row">
+                        <div className="space-editor__config-row">
                             <Input
                                 value={config.floors.model}
                                 onChange={(model) => setConfig(prev => ({
@@ -535,9 +669,9 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                         </div>
                     </FormField>
 
-                    <FormField className="location-marker-config-row">
+                    <FormField>
                         <Label>Get Spaces</Label>
-                        <div className="row">
+                        <div className="space-editor__config-row">
                             <Input
                                 value={config.spaces.model}
                                 onChange={(model) => setConfig(prev => ({
@@ -557,9 +691,9 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                         </div>
                     </FormField>
 
-                    <FormField className="location-marker-config-row">
+                    <FormField>
                         <Label>Set Coordinates</Label>
-                        <div className="row">
+                        <div className="space-editor__config-row">
                             <Input
                                 value={config.setRegion.model}
                                 onChange={(model) => setConfig(prev => ({
@@ -579,205 +713,17 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                         </div>
                     </FormField>
 
-                    <FormField className="location-marker-config-row">
-                        <Label>Add Space</Label>
-                        <div className="row">
-                            <Input
-                                value={config.addSpace.model}
-                                onChange={(model) => setConfig(prev => ({
-                                    ...prev,
-                                    addSpace: { ...prev.addSpace, model }
-                                }))}
-                                placeholder="Model name"
-                            />
-                            <Input
-                                value={config.addSpace.action}
-                                onChange={(action) => setConfig(prev => ({
-                                    ...prev,
-                                    addSpace: { ...prev.addSpace, action }
-                                }))}
-                                placeholder="Action name"
-                            />
-                        </div>
-                    </FormField>
-                </FilterPanel>
-            </div>
-
-            <div className="lmui-map-container">
-                {selectedFloorData?.layout.floorPlan ? (
-                    <>
-                        <MapComponent
-                            zoom={-1}
-                            minZoom={-20}
-                            center={mapCenter}
-                            regions={mapRegions}
-                            staticImage={{
-                                url: getImageUrl(selectedFloorData.layout.floorPlan),
-                                width: selectedFloorData.layout.width,
-                                height: selectedFloorData.layout.height
-                            }}
-                            markers={markers}
-                            onMarkerClick={() => { }}
-                            mapUrl=""
-                            onClick={(e) => console.log("Map clicked", e)}
-                        />
-
-                        {selectedSpace && (
-                            <div className="toolbar">
-                                {!isEditingRegion && (
-                                    <Button
-                                        title="Edit Coordinates"
-                                        onClick={() => setIsEditingRegion(true)}
-                                        className="edit-coordinated-btn"
-                                    />
-                                )}
-
-                                {isEditingRegion && (
-                                    <div className="coordinates-list">
-                                        <div className="coordinates-list-header">
-                                            Coordinates
-                                        </div>
-                                        <div className="coordinates-list-body">
-                                            <table>
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th>X</th>
-                                                        <th>Y</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {region.map((coord, index) => (
-                                                        <tr key={index} className="coordinate-container">
-                                                            <td>{index + 1}</td>
-                                                            <td>
-                                                                <Input
-                                                                    type="number"
-                                                                    value={coord.x.toString()}
-                                                                    onChange={(value) => handleCoordinateChange(index, 'x', value)}
-                                                                    placeholder="X"
-                                                                    className="coordinate-input"
-                                                                />
-                                                            </td>
-                                                            <td>
-                                                                <Input
-                                                                    type="number"
-                                                                    value={coord.y.toString()}
-                                                                    onChange={(value) => handleCoordinateChange(index, 'y', value)}
-                                                                    placeholder="Y"
-                                                                    className="coordinate-input"
-                                                                />
-                                                            </td>
-                                                            {region.length > 1 && (
-                                                                <td>
-                                                                    <IconButton
-                                                                        type="delete"
-                                                                        size="small"
-                                                                        onClick={() => handleMarkerDelete(index)}
-                                                                    />
-                                                                </td>
-                                                            )}
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div className="coordinate-list-footer">
-                                            {(!isConfirming && !isSaving) && <Button
-                                                title="Add"
-                                                onClick={handleAddCoordinate}
-                                            />}
-                                            {isConfirming ? (
-                                                <AsyncButton
-                                                    title="Confirm"
-                                                    loadingTitle="Saving..."
-                                                    onClick={saveRegionChanges}
-                                                    className="confirm-button"
-                                                />
-                                            ) : (
-                                                <Button
-                                                    title="Save"
-                                                    onClick={() => setIsConfirming(true)}
-                                                    className="confirm-button"
-                                                />
-                                            )}
-                                            {!isSaving && (
-                                                <IconButton
-                                                    type='close'
-                                                    onClick={handleCancelEdit}
-                                                />
-                                            )}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        )}
-                    </>
-                ) : (
-                    <div className="no-map">Select a floor to get started</div>
-                )}
-            </div>
-
-            {isLoading && (
-                <div className="lmui-overlay">
-                    <Loading />
                 </div>
-            )}
 
-            <Modal
-                show={addSpace}
-                onClose={closeForm}
-                title="Add New Space"
-                className="add-space-modal"
-            >
-                <FormField>
-                    <Label>Id</Label>
-                    <Input
-                        value={newSpace?.id || ''}
-                        onChange={v => setNewSpace(prev => ({ ...prev, id: v }))}
-                    />
-                </FormField>
-
-                <FormField>
-                    <Label>Name</Label>
-                    <Input
-                        value={newSpace?.name || ''}
-                        onChange={v => setNewSpace(prev => ({ ...prev, name: v }))}
-                    />
-                </FormField>
-
-                {/* <FormField>
-                    <Label>Color</Label>
-                    <Input
-                        value={newSpace?.color || ''}
-                        onChange={v => setNewSpace(prev => ({ ...prev, color: v }))}
-                    />
-                </FormField>
-
-                <FormField>
-                    <Label>Icon</Label>
-                    <Input
-                        value={newSpace?.icon || ''}
-                        onChange={v => setNewSpace(prev => ({ ...prev, icon: v }))}
-                    />
-                </FormField> */}
-
-                <FormField
-                    className="button-row"
-                >
+                <FormField className="space-editor__button-row">
                     <Button
-                        title="Cancel"
-                        onClick={closeForm}
-                    />
-                    <AsyncButton
-                        title="Submit"
-                        onClick={saveSpace}
-                        className="save-button"
+                        title="Close"
+                        onClick={() => setShowConfigModal(false)}
+                        className="space-editor__button space-editor__button--primary"
                     />
                 </FormField>
             </Modal>
-        </div>
+        </div >
     );
 };
 
