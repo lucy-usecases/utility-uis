@@ -309,32 +309,32 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (
     loadTypes();
   }, [loadTypes]);
 
-React.useEffect(() => {
-  let filtered = allSpaceRegions || [];
+  React.useEffect(() => {
+    let filtered = allSpaceRegions || [];
 
-  // search
-  if (query.trim()) {
-    const q = query.toLowerCase();
-    filtered = filtered.filter((s) => {
-      const nameHit = s.space.name?.toLowerCase().includes(q);
-      const idHit = s.space.id?.toLowerCase().includes(q);
-      return nameHit || idHit;
-    });
-  }
-
-  // multi type filter
-  if (config?.enableFilterByType) {
-    const activeTypes = selectedTypes.includes("") ? [] : selectedTypes; // "" == All Types
-    if (activeTypes.length) {
+    // search
+    if (query.trim()) {
+      const q = query.toLowerCase();
       filtered = filtered.filter((s) => {
-        const t = s.space.type ?? "";
-        return activeTypes.includes(t);
+        const nameHit = s.space.name?.toLowerCase().includes(q);
+        const idHit = s.space.id?.toLowerCase().includes(q);
+        return nameHit || idHit;
       });
     }
-  }
 
-  setFilteredSpaceRegions(filtered || []);
-}, [allSpaceRegions, query, selectedTypes, config?.enableFilterByType]);
+    // multi type filter
+    if (config?.enableFilterByType) {
+      const activeTypes = selectedTypes.includes("") ? [] : selectedTypes; // "" == All Types
+      if (activeTypes.length) {
+        filtered = filtered.filter((s) => {
+          const t = s.space.type ?? "";
+          return activeTypes.includes(t);
+        });
+      }
+    }
+
+    setFilteredSpaceRegions(filtered || []);
+  }, [allSpaceRegions, query, selectedTypes, config?.enableFilterByType]);
 
   // Load coordinates when space changes
   React.useEffect(() => {
@@ -440,7 +440,7 @@ React.useEffect(() => {
           coordinates: [],
           color: space?.color || null,
           icon: space?.icon || null,
-          type: "unplaced" as const, 
+          type: "unplaced" as const,
           space,
         }));
 
@@ -1019,8 +1019,8 @@ React.useEffect(() => {
         <div className="space-editor__title">Coordinate Editor</div>
         <div className="space-editor__actions">
           <div className="space-editor__filters">
-            <Select 
-              selected={selectedFloor}            
+            <Select
+              selected={selectedFloor}
               onChange={handleFloorChange}
               options={floors}
               labelField={config?.showIdInsteadOfName ? "id" : "name"}
@@ -1028,8 +1028,8 @@ React.useEffect(() => {
               placeholder="Select a floor"
             />
             {config.enableFilterByType && spaceTypes.length > 0 && (
-              <MultiSelect 
-                selected={selectedTypes}                                   // <-- array
+              <MultiSelect
+                selected={selectedTypes} // <-- array
                 onChange={(values: string[]) => setSelectedTypes(values)}
                 options={[{ id: "", name: "All Types" }, ...spaceTypes]}
                 labelField={config?.showIdInsteadOfName ? "id" : "name"}
