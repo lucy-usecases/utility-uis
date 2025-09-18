@@ -4499,9 +4499,9 @@ function hasValue(value, allowZero, allowNegative) {
     if (!value)
         return false;
     switch (typeof value) {
-        case "string":
+        case 'string':
             return (value === null || value === void 0 ? void 0 : value.trim().length) > 0;
-        case "number":
+        case 'number':
             return value > 0;
         default:
             return true;
@@ -4514,21 +4514,21 @@ const CONFIG_KEY = "space_coordinate_editor_config";
 const SensorSpaceCoordinateEditor = (props) => {
     var _a, _b, _c;
     const [floors, setFloors] = React.useState([]);
-    const [selectedFloor, setSelectedFloor] = React.useState("");
+    const [selectedFloor, setSelectedFloor] = React.useState('');
     const [allSpaceRegions, setAllSpaceRegions] = React.useState([]);
     const [filteredSpaceRegions, setFilteredSpaceRegions] = React.useState([]);
     const [selectedSpace, setSelectedSpace] = React.useState(null);
     const [spaceTypes, setSpaceTypes] = React.useState([]);
-    const [selectedType, setSelectedType] = React.useState("");
     const [selectedTypes, setSelectedTypes] = React.useState([]);
-    const [query, setQuery] = React.useState("");
+    const [selectedType, setSelectedType] = React.useState('');
+    const [query, setQuery] = React.useState('');
     const [config, setConfig] = React.useState({
         floors: { model: "", action: "" },
         spaces: { model: "", action: "" },
         setRegion: { model: "", action: "" },
         enableFilterByType: false,
         getTypes: { model: "", action: "" },
-        showIdInsteadOfName: false,
+        showIdInsteadOfName: false
     });
     const [region, setRegion] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
@@ -4538,7 +4538,7 @@ const SensorSpaceCoordinateEditor = (props) => {
     const [showConfigModal, setShowConfigModal] = React.useState(false);
     const [configState, setConfigState] = React.useState({
         isLoaded: false,
-        hasValidConfig: false,
+        hasValidConfig: false
     });
     const [isConfigSaving, setIsConfigSaving] = React.useState(false);
     const toast = (0, components_1.useToast)();
@@ -4588,7 +4588,7 @@ const SensorSpaceCoordinateEditor = (props) => {
             setIsConfigSaving(true);
             yield ((_e = props.uxpContext) === null || _e === void 0 ? void 0 : _e.executeAction(CONFIG_MODEL, "SaveConfig", {
                 id: CONFIG_KEY,
-                value: JSON.stringify(configToSave),
+                value: JSON.stringify(configToSave)
             }, { json: true }));
             setConfig(configToSave);
             setConfigState({ isLoaded: true, hasValidConfig: true });
@@ -4613,30 +4613,23 @@ const SensorSpaceCoordinateEditor = (props) => {
         const regionAction = params.get("uca");
         const spaceTypeModel = params.get("stm");
         const spaceTypeAction = params.get("sta");
-        const enableFilterByType = params.get("ebt") == "1";
-        const showId = params.get("showId") == "1";
-        if (floorModel &&
-            floorAction &&
-            spaceModel &&
-            spaceAction &&
-            regionModel &&
-            regionAction) {
+        const enableFilterByType = params.get("ebt") == '1';
+        const showId = params.get("showId") == '1';
+        if (floorModel && floorAction && spaceModel && spaceAction && regionModel && regionAction) {
             return {
                 floors: { model: floorModel, action: floorAction },
                 spaces: { model: spaceModel, action: spaceAction },
                 setRegion: { model: regionModel, action: regionAction },
                 getTypes: { model: spaceTypeModel, action: spaceTypeAction },
                 enableFilterByType: enableFilterByType || false,
-                showIdInsteadOfName: showId || false,
+                showIdInsteadOfName: showId || false
             };
         }
         return null;
     }, []);
     const loadTypes = React.useCallback(() => __awaiter(void 0, void 0, void 0, function* () {
         var _f, _g, _h;
-        if (!config.enableFilterByType ||
-            !((_f = config.getTypes) === null || _f === void 0 ? void 0 : _f.model) ||
-            !((_g = config.getTypes) === null || _g === void 0 ? void 0 : _g.action)) {
+        if (!config.enableFilterByType || !((_f = config.getTypes) === null || _f === void 0 ? void 0 : _f.model) || !((_g = config.getTypes) === null || _g === void 0 ? void 0 : _g.action)) {
             setSpaceTypes([]);
             return;
         }
@@ -4676,6 +4669,7 @@ const SensorSpaceCoordinateEditor = (props) => {
     React.useEffect(() => {
         loadTypes();
     }, [loadTypes]);
+    // Filter spaces based on search query and type filter
     React.useEffect(() => {
         let filtered = allSpaceRegions || [];
         // search
@@ -4708,23 +4702,16 @@ const SensorSpaceCoordinateEditor = (props) => {
         }
     }, [selectedSpace]);
     React.useEffect(() => {
-        console.log("SPACES___", allSpaceRegions, filteredSpaceRegions, query, selectedType, config === null || config === void 0 ? void 0 : config.enableFilterByType);
-    }, [
-        allSpaceRegions,
-        filteredSpaceRegions,
-        query,
-        selectedType,
-        config === null || config === void 0 ? void 0 : config.enableFilterByType,
-        ,
-    ]);
+        console.log('SPACES___', allSpaceRegions, filteredSpaceRegions, query, selectedType, config === null || config === void 0 ? void 0 : config.enableFilterByType);
+    }, [allSpaceRegions, filteredSpaceRegions, query, selectedType, config === null || config === void 0 ? void 0 : config.enableFilterByType, ,]);
     // Helper functions
     const getCenterCoords = React.useCallback(() => {
-        const floorData = floors.find((f) => f.id === selectedFloor);
+        const floorData = floors.find(f => f.id === selectedFloor);
         if (!floorData)
             return { x: 0, y: 0 };
         return {
             x: floorData.layout.width * 0.5,
-            y: floorData.layout.height * 0.5,
+            y: floorData.layout.height * 0.5
         };
     }, [floors, selectedFloor]);
     const loadCoordinates = React.useCallback(() => {
@@ -4810,11 +4797,9 @@ const SensorSpaceCoordinateEditor = (props) => {
             const params = {
                 id: selectedSpace.id,
                 coordinates: JSON.stringify(region),
-                floor: selectedFloor,
+                floor: selectedFloor
             };
-            yield ((_l = props.uxpContext) === null || _l === void 0 ? void 0 : _l.executeAction(model, action, params, {
-                json: true,
-            }));
+            yield ((_l = props.uxpContext) === null || _l === void 0 ? void 0 : _l.executeAction(model, action, params, { json: true }));
             yield loadSpaces();
             setIsEditingRegion(false);
             setIsConfirming(false);
@@ -4827,16 +4812,7 @@ const SensorSpaceCoordinateEditor = (props) => {
         finally {
             setIsSaving(false);
         }
-    }), [
-        selectedSpace,
-        isSaving,
-        config.setRegion,
-        region,
-        selectedFloor,
-        props.uxpContext,
-        loadSpaces,
-        toast,
-    ]);
+    }), [selectedSpace, isSaving, config.setRegion, region, selectedFloor, props.uxpContext, loadSpaces, toast]);
     // Event handlers
     const handleSpaceSelect = React.useCallback((space) => {
         setSelectedSpace(space);
@@ -4850,13 +4826,13 @@ const SensorSpaceCoordinateEditor = (props) => {
         setIsConfirming(false);
     }, []);
     const handleRegionUpdate = React.useCallback((index, newPosition) => {
-        setRegion((prev) => prev.map((pos, i) => (i === index ? newPosition : pos)));
+        setRegion(prev => prev.map((pos, i) => i === index ? newPosition : pos));
     }, []);
     const handleMarkerDelete = React.useCallback((index) => {
-        setRegion((prev) => prev.filter((_, i) => i !== index));
+        setRegion(prev => prev.filter((_, i) => i !== index));
     }, []);
     const handleMarkerDuplicate = React.useCallback((index) => {
-        setRegion((prev) => {
+        setRegion(prev => {
             const newRegion = [...prev];
             const pos = prev[index];
             newRegion.splice(index + 1, 0, { x: pos.x + 10, y: pos.y + 10 });
@@ -4864,7 +4840,7 @@ const SensorSpaceCoordinateEditor = (props) => {
         });
     }, []);
     const handleAddCoordinate = React.useCallback(() => {
-        setRegion((prev) => {
+        setRegion(prev => {
             const last = prev[prev.length - 1] || getCenterCoords();
             return [...prev, { x: last.x + 10, y: last.y + 10 }];
         });
@@ -4877,30 +4853,30 @@ const SensorSpaceCoordinateEditor = (props) => {
     const handleCoordinateChange = React.useCallback((index, field, value) => {
         const numValue = parseFloat(value);
         if (!isNaN(numValue)) {
-            setRegion((prev) => prev.map((pos, i) => i === index ? Object.assign(Object.assign({}, pos), { [field]: numValue }) : pos));
+            setRegion(prev => prev.map((pos, i) => i === index ? Object.assign(Object.assign({}, pos), { [field]: numValue }) : pos));
         }
     }, []);
     const getImageUrl = React.useCallback((imagePath) => {
         var _a;
         if (!imagePath)
-            return "";
-        if (imagePath.startsWith("/")) {
-            const lucyUrl = trimSlash(((_a = props.uxpContext) === null || _a === void 0 ? void 0 : _a.lucyUrl) || "/");
+            return '';
+        if (imagePath.startsWith('/')) {
+            const lucyUrl = trimSlash(((_a = props.uxpContext) === null || _a === void 0 ? void 0 : _a.lucyUrl) || '/');
             return `${lucyUrl}${imagePath}`;
         }
         return imagePath;
     }, [(_a = props.uxpContext) === null || _a === void 0 ? void 0 : _a.lucyUrl]);
     // Computed values
-    const selectedFloorData = React.useMemo(() => floors.find((f) => f.id === selectedFloor), [floors, selectedFloor]);
+    const selectedFloorData = React.useMemo(() => floors.find(f => f.id === selectedFloor), [floors, selectedFloor]);
     const mapCenter = React.useMemo(() => {
         if (!selectedFloorData)
             return null;
         return {
             position: {
                 latitude: selectedFloorData.layout.width * 0.5,
-                longitude: selectedFloorData.layout.height * 0.5,
+                longitude: selectedFloorData.layout.height * 0.5
             },
-            renderMarker: false,
+            renderMarker: false
         };
     }, [selectedFloorData]);
     const markers = React.useMemo(() => {
@@ -4909,20 +4885,22 @@ const SensorSpaceCoordinateEditor = (props) => {
             return [];
         const allMarkers = [];
         const createCustomHTMLMarker = (isSelected, isEditing, color, icon) => {
-            const defaultMarker = `<div class='space-editor__default-marker ${isSelected ? "space-editor__default-marker--selected" : ""}' style="border-color: ${color}; background-color: ${color}33;">
+            const defaultMarker = `<div class='space-editor__default-marker ${isSelected ? 'space-editor__default-marker--selected' : ''}' style="border-color: ${color}; background-color: ${color}33;">
                                 <div div class="space-editor__default-marker-icon" style="background-color: ${color};"></div>
                             </div>`;
-            const customMarker = `<div class="space-editor__icon-marker ${isSelected ? "space-editor__icon-marker--selected" : ""}" style="background-color: ${color}; border-color: ${color}">
+            const customMarker = `<div class="space-editor__icon-marker ${isSelected ? 'space-editor__icon-marker--selected' : ''}" style="background-color: ${color}; border-color: ${color}">
                                 <div class="space-editor__icon-marker-icon" style="background-image: url('${icon}')"></div>
                             </div>`;
             return {
                 className: `space-editor__marker`,
-                html: !!icon && !isEditing ? customMarker : defaultMarker,
+                html: (!!icon && !isEditing)
+                    ? customMarker
+                    : defaultMarker
             };
         };
         // Helper function to generate markers
         const createMarkers = (type, icon, isEditing) => {
-            const color = "#f09936";
+            const color = '#f09936';
             return region.map((pos, index) => {
                 const popup = isEditingRegion
                     ? {
@@ -4930,7 +4908,7 @@ const SensorSpaceCoordinateEditor = (props) => {
                             React.createElement("button", { className: "space-editor__marker-actionbutton space-editor__marker-actionbutton-copy", onClick: () => handleMarkerDuplicate(index) },
                                 React.createElement("i", { className: "fas fa-copy" })),
                             React.createElement("button", { className: "space-editor__marker-actionbutton space-editor__marker-actionbutton-delete", onClick: () => handleMarkerDelete(index) },
-                                React.createElement("i", { className: "fas fa-trash" })))),
+                                React.createElement("i", { className: "fas fa-trash" }))))
                     }
                     : null;
                 const m = {
@@ -4941,10 +4919,10 @@ const SensorSpaceCoordinateEditor = (props) => {
                         const { lat, lng } = e.target._latlng;
                         handleRegionUpdate(index, {
                             x: Number(lng),
-                            y: Number(selectedFloorData.layout.height - lat),
+                            y: Number(selectedFloorData.layout.height - lat)
                         });
                     },
-                    customHTMLIcon: createCustomHTMLMarker(true, isEditing || false, color, type == "marker" ? icon : null),
+                    customHTMLIcon: createCustomHTMLMarker(true, isEditing || false, color, type == 'marker' ? icon : null)
                 };
                 if (popup)
                     m.renderPopup = popup;
@@ -4953,22 +4931,21 @@ const SensorSpaceCoordinateEditor = (props) => {
         };
         // Show editing markers when in edit mode
         if (selectedSpace) {
-            const selectedKind = (_a = filteredSpaceRegions.find((s) => s.spaceId === selectedSpace.id)) === null || _a === void 0 ? void 0 : _a.type;
-            const isMarker = selectedKind === "marker" || selectedKind === "unplaced";
+            const isMarker = ((_a = filteredSpaceRegions.find(s => s.spaceId === selectedSpace.id)) === null || _a === void 0 ? void 0 : _a.type) === 'marker';
             if (isMarker) {
-                allMarkers.push(...createMarkers("marker", selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.icon, isEditingRegion));
+                allMarkers.push(...createMarkers('marker', selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.icon, isEditingRegion));
             }
             else if (isEditingRegion) {
-                allMarkers.push(...createMarkers("region", null, isEditingRegion));
+                allMarkers.push(...createMarkers('region', null, isEditingRegion));
             }
         }
         // Show space markers (only for non-editing spaces)
         const spaceMarkers = filteredSpaceRegions
-            .filter((item) => item.type === "marker" &&
-            (!selectedSpace || selectedSpace.id !== item.spaceId))
-            .map((item) => {
+            .filter(item => (item.type === 'marker'
+            && (!selectedSpace || selectedSpace.id !== item.spaceId)))
+            .map(item => {
             const pos = item.coordinates[0];
-            const color = item.color || "#3C82F6";
+            const color = item.color || '#3C82F6';
             return {
                 latitude: selectedFloorData.layout.height - pos.y,
                 longitude: pos.x,
@@ -4979,41 +4956,32 @@ const SensorSpaceCoordinateEditor = (props) => {
         });
         allMarkers.push(...spaceMarkers);
         return allMarkers;
-    }, [
-        selectedFloorData,
-        region,
-        isEditingRegion,
-        filteredSpaceRegions,
-        selectedSpace,
-        handleRegionUpdate,
-        handleMarkerDuplicate,
-        handleMarkerDelete,
-    ]);
+    }, [selectedFloorData, region, isEditingRegion, filteredSpaceRegions, selectedSpace, handleRegionUpdate, handleMarkerDuplicate, handleMarkerDelete]);
     const mapRegions = React.useMemo(() => {
         const regions = [];
         // Add all space regions (non-selected in default colors)
         filteredSpaceRegions
-            .filter((item) => item.type === "region" && (selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) !== item.spaceId)
-            .forEach((spaceRegion) => {
-            const color = (spaceRegion === null || spaceRegion === void 0 ? void 0 : spaceRegion.color) || "#3C82F6";
+            .filter(item => item.type === 'region' && (selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) !== item.spaceId)
+            .forEach(spaceRegion => {
+            const color = (spaceRegion === null || spaceRegion === void 0 ? void 0 : spaceRegion.color) || '#3C82F6';
             regions.push({
-                type: "polygon",
+                type: 'polygon',
                 color: color,
                 fillColor: color,
-                bounds: spaceRegion.coordinates.map((c) => [c.x, c.y]),
+                bounds: spaceRegion.coordinates.map(c => [c.x, c.y]),
                 imageCoordinates: true,
-                data: spaceRegion.space,
+                data: spaceRegion.space
             });
         });
         // Add selected space region
         if (selectedSpace && region.length > 0) {
-            const color = "#f09936";
-            console.log("selected_region_color", color);
+            const color = '#f09936';
+            console.log('selected_region_color', color);
             regions.push({
-                type: "polygon",
+                type: 'polygon',
                 color: color,
                 fillColor: color,
-                bounds: region.map((c) => [c.x, c.y]),
+                bounds: region.map(c => [c.x, c.y]),
                 imageCoordinates: true,
             });
         }
@@ -5045,12 +5013,9 @@ const SensorSpaceCoordinateEditor = (props) => {
         });
         const validateConfig = () => {
             var _a, _b;
-            const basicValid = tempConfig.floors.model &&
-                tempConfig.floors.action &&
-                tempConfig.spaces.model &&
-                tempConfig.spaces.action &&
-                tempConfig.setRegion.model &&
-                tempConfig.setRegion.action;
+            const basicValid = tempConfig.floors.model && tempConfig.floors.action &&
+                tempConfig.spaces.model && tempConfig.spaces.action &&
+                tempConfig.setRegion.model && tempConfig.setRegion.action;
             if (!basicValid)
                 return false;
             // If type filtering is enabled, getTypes model and action must be provided
@@ -5064,29 +5029,29 @@ const SensorSpaceCoordinateEditor = (props) => {
                 React.createElement(components_1.FormField, null,
                     React.createElement(components_1.Label, null, "Get Floors"),
                     React.createElement("div", { className: "space-editor__config-row" },
-                        React.createElement(components_1.Input, { value: tempConfig.floors.model, onChange: (model) => setTempConfig((prev) => (Object.assign(Object.assign({}, prev), { floors: Object.assign(Object.assign({}, prev.floors), { model }) }))), placeholder: "Model name" }),
-                        React.createElement(components_1.Input, { value: tempConfig.floors.action, onChange: (action) => setTempConfig((prev) => (Object.assign(Object.assign({}, prev), { floors: Object.assign(Object.assign({}, prev.floors), { action }) }))), placeholder: "Action name" }))),
+                        React.createElement(components_1.Input, { value: tempConfig.floors.model, onChange: (model) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { floors: Object.assign(Object.assign({}, prev.floors), { model }) }))), placeholder: "Model name" }),
+                        React.createElement(components_1.Input, { value: tempConfig.floors.action, onChange: (action) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { floors: Object.assign(Object.assign({}, prev.floors), { action }) }))), placeholder: "Action name" }))),
                 React.createElement(components_1.FormField, null,
                     React.createElement(components_1.Label, null, "Get Spaces"),
                     React.createElement("div", { className: "space-editor__config-row" },
-                        React.createElement(components_1.Input, { value: tempConfig.spaces.model, onChange: (model) => setTempConfig((prev) => (Object.assign(Object.assign({}, prev), { spaces: Object.assign(Object.assign({}, prev.spaces), { model }) }))), placeholder: "Model name" }),
-                        React.createElement(components_1.Input, { value: tempConfig.spaces.action, onChange: (action) => setTempConfig((prev) => (Object.assign(Object.assign({}, prev), { spaces: Object.assign(Object.assign({}, prev.spaces), { action }) }))), placeholder: "Action name" }))),
+                        React.createElement(components_1.Input, { value: tempConfig.spaces.model, onChange: (model) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { spaces: Object.assign(Object.assign({}, prev.spaces), { model }) }))), placeholder: "Model name" }),
+                        React.createElement(components_1.Input, { value: tempConfig.spaces.action, onChange: (action) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { spaces: Object.assign(Object.assign({}, prev.spaces), { action }) }))), placeholder: "Action name" }))),
                 React.createElement(components_1.FormField, null,
                     React.createElement(components_1.Label, null, "Set Coordinates"),
                     React.createElement("div", { className: "space-editor__config-row" },
-                        React.createElement(components_1.Input, { value: tempConfig.setRegion.model, onChange: (model) => setTempConfig((prev) => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { model }) }))), placeholder: "Model name" }),
-                        React.createElement(components_1.Input, { value: tempConfig.setRegion.action, onChange: (action) => setTempConfig((prev) => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { action }) }))), placeholder: "Action name" }))),
+                        React.createElement(components_1.Input, { value: tempConfig.setRegion.model, onChange: (model) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { model }) }))), placeholder: "Model name" }),
+                        React.createElement(components_1.Input, { value: tempConfig.setRegion.action, onChange: (action) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { setRegion: Object.assign(Object.assign({}, prev.setRegion), { action }) }))), placeholder: "Action name" }))),
                 React.createElement(components_1.FormField, null,
                     React.createElement(components_1.Label, null,
-                        React.createElement(components_1.Checkbox, { checked: tempConfig.enableFilterByType, onChange: (v) => setTempConfig((prev) => (Object.assign(Object.assign({}, prev), { enableFilterByType: v, getTypes: prev.getTypes || { model: "", action: "" } }))), type: "bordered", label: "Enable Filter by Type" }))),
+                        React.createElement(components_1.Checkbox, { checked: tempConfig.enableFilterByType, onChange: (v) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { enableFilterByType: v, getTypes: prev.getTypes || { model: "", action: "" } }))), type: 'bordered', label: "Enable Filter by Type" }))),
                 tempConfig.enableFilterByType && (React.createElement(components_1.FormField, null,
                     React.createElement(components_1.Label, null, "Get Types"),
                     React.createElement("div", { className: "space-editor__config-row" },
-                        React.createElement(components_1.Input, { value: ((_a = tempConfig.getTypes) === null || _a === void 0 ? void 0 : _a.model) || "", onChange: (model) => setTempConfig((prev) => (Object.assign(Object.assign({}, prev), { getTypes: Object.assign(Object.assign({}, prev.getTypes), { model }) }))), placeholder: "Model name" }),
-                        React.createElement(components_1.Input, { value: ((_b = tempConfig.getTypes) === null || _b === void 0 ? void 0 : _b.action) || "", onChange: (action) => setTempConfig((prev) => (Object.assign(Object.assign({}, prev), { getTypes: Object.assign(Object.assign({}, prev.getTypes), { action }) }))), placeholder: "Action name" })))),
+                        React.createElement(components_1.Input, { value: ((_a = tempConfig.getTypes) === null || _a === void 0 ? void 0 : _a.model) || '', onChange: (model) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { getTypes: Object.assign(Object.assign({}, prev.getTypes), { model }) }))), placeholder: "Model name" }),
+                        React.createElement(components_1.Input, { value: ((_b = tempConfig.getTypes) === null || _b === void 0 ? void 0 : _b.action) || '', onChange: (action) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { getTypes: Object.assign(Object.assign({}, prev.getTypes), { action }) }))), placeholder: "Action name" })))),
                 React.createElement(components_1.FormField, null,
                     React.createElement(components_1.Label, null,
-                        React.createElement(components_1.Checkbox, { checked: tempConfig === null || tempConfig === void 0 ? void 0 : tempConfig.showIdInsteadOfName, onChange: (v) => setTempConfig((prev) => (Object.assign(Object.assign({}, prev), { showIdInsteadOfName: v }))), type: "bordered", label: "Show Id instead of of name for Floors, Types and Spaces" })))),
+                        React.createElement(components_1.Checkbox, { checked: tempConfig === null || tempConfig === void 0 ? void 0 : tempConfig.showIdInsteadOfName, onChange: (v) => setTempConfig(prev => (Object.assign(Object.assign({}, prev), { showIdInsteadOfName: v }))), type: 'bordered', label: "Show Id instead of of name for Floors, Types and Spaces" })))),
             React.createElement(components_1.FormField, { className: "space-editor__button-row" },
                 React.createElement(components_1.Button, { icon: "fas times", title: "Cancel", onClick: () => setShowConfigModal(false) }),
                 React.createElement(components_1.AsyncButton, { icon: "fas save", title: "Save Configuration", loadingTitle: "Saving...", onClick: handleSaveConfig, className: "space-editor__button space-editor__button--edit", 
@@ -5101,10 +5066,10 @@ const SensorSpaceCoordinateEditor = (props) => {
                 React.createElement("div", { className: "space-editor__actions" },
                     React.createElement("div", { className: "space-editor__settings" },
                         React.createElement("div", { className: "space-editor__settings-button", onClick: () => setShowConfigModal(true) },
-                            React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: ["fas", "tools"] }))))),
+                            React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: ['fas', 'tools'] }))))),
             React.createElement("div", { className: "space-editor__configuration-needed" },
                 React.createElement("div", { className: "space-editor__configuration-needed-icon" },
-                    React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: ["fas", "cogs"] })),
+                    React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: ['fas', 'cogs'] })),
                 React.createElement("div", { className: "space-editor__configuration-needed-title" }, "Configuration Required"),
                 React.createElement("div", { className: "space-editor__configuration-needed-message" }, "Please configure the data models and actions to get started with the coordinate editor."),
                 React.createElement(components_1.Button, { icon: "fas tools", title: "Open Configuration", className: "space-editor__configuration-needed-button", onClick: () => setShowConfigModal(true) })),
@@ -5126,28 +5091,27 @@ const SensorSpaceCoordinateEditor = (props) => {
                     config.enableFilterByType && spaceTypes.length > 0 && (React.createElement(components_1.MultiSelect, { selected: selectedTypes, onChange: (values) => setSelectedTypes(values), options: [{ id: "", name: "All Types" }, ...spaceTypes], labelField: (config === null || config === void 0 ? void 0 : config.showIdInsteadOfName) ? "id" : "name", valueField: "id", placeholder: "Filter by type" }))),
                 React.createElement("div", { className: "space-editor__settings" },
                     React.createElement("div", { className: "space-editor__settings-button", onClick: () => setShowConfigModal(true) },
-                        React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: ["fas", "tools"] }))))),
-        React.createElement("div", { className: `space-editor__body ${selectedSpace ? "space-editor__body--editing" : ""}` },
+                        React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: ['fas', 'tools'] }))))),
+        React.createElement("div", { className: `space-editor__body ${selectedSpace ? 'space-editor__body--editing' : ''}` },
             React.createElement("div", { className: "space-editor__sidebar" },
                 React.createElement("div", { className: "space-editor__search" },
                     React.createElement(components_1.SearchBox, { value: query, onChange: setQuery })),
                 React.createElement("div", { className: "space-editor__list" },
-                    filteredSpaceRegions.map((space, index) => (React.createElement("div", { key: space.space.id, className: `space-editor__space ${(selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) === space.space.id
-                            ? "space-editor__space--active"
-                            : ""}`, onClick: () => handleSpaceSelect(space.space) }, (config === null || config === void 0 ? void 0 : config.showIdInsteadOfName)
-                        ? space.space.id
-                        : space.space.name))),
-                    (filteredSpaceRegions === null || filteredSpaceRegions === void 0 ? void 0 : filteredSpaceRegions.length) == 0 && (React.createElement("div", { className: "space-editor__list--empty" }, "No spaces found")))),
-            React.createElement("div", { className: "space-editor__map-container" }, ((_b = selectedFloorData === null || selectedFloorData === void 0 ? void 0 : selectedFloorData.layout) === null || _b === void 0 ? void 0 : _b.floorPlan) ? (React.createElement(components_1.MapComponent, { zoom: -1, minZoom: -20, center: mapCenter, regions: mapRegions, staticImage: {
-                    url: getImageUrl(selectedFloorData.layout.floorPlan),
-                    width: selectedFloorData.layout.width,
-                    height: selectedFloorData.layout.height,
-                }, markers: markers, onMarkerClick: (el, data) => {
-                    updateSelectedSpace(data);
-                }, onRegionClick: (el, data) => {
-                    updateSelectedSpace(data);
-                }, mapUrl: "", onClick: (e) => console.log("Map clicked", e) })) : (React.createElement("div", { className: "space-editor__no-map" }, "Select a floor to get started"))),
-            ((_c = selectedFloorData === null || selectedFloorData === void 0 ? void 0 : selectedFloorData.layout) === null || _c === void 0 ? void 0 : _c.floorPlan) && selectedSpace && (React.createElement("div", { className: "space-editor__map-toolbar" },
+                    filteredSpaceRegions.map((space, index) => (React.createElement("div", { key: space.space.id, className: `space-editor__space ${(selectedSpace === null || selectedSpace === void 0 ? void 0 : selectedSpace.id) === space.space.id ? 'space-editor__space--active' : ''}`, onClick: () => handleSpaceSelect(space.space) }, (config === null || config === void 0 ? void 0 : config.showIdInsteadOfName) ? space.space.id : space.space.name))),
+                    (filteredSpaceRegions === null || filteredSpaceRegions === void 0 ? void 0 : filteredSpaceRegions.length) == 0 &&
+                        React.createElement("div", { className: "space-editor__list--empty" }, "No spaces found"))),
+            React.createElement("div", { className: "space-editor__map-container" }, ((_b = selectedFloorData === null || selectedFloorData === void 0 ? void 0 : selectedFloorData.layout) === null || _b === void 0 ? void 0 : _b.floorPlan)
+                ? React.createElement(components_1.MapComponent, { zoom: -1, minZoom: -20, center: mapCenter, regions: mapRegions, staticImage: {
+                        url: getImageUrl(selectedFloorData.layout.floorPlan),
+                        width: selectedFloorData.layout.width,
+                        height: selectedFloorData.layout.height
+                    }, markers: markers, onMarkerClick: (el, data) => {
+                        updateSelectedSpace(data);
+                    }, onRegionClick: (el, data) => {
+                        updateSelectedSpace(data);
+                    }, mapUrl: "", onClick: (e) => console.log("Map clicked", e) })
+                : React.createElement("div", { className: "space-editor__no-map" }, "Select a floor to get started")),
+            ((_c = selectedFloorData === null || selectedFloorData === void 0 ? void 0 : selectedFloorData.layout) === null || _c === void 0 ? void 0 : _c.floorPlan) && selectedSpace && React.createElement("div", { className: "space-editor__map-toolbar" },
                 React.createElement("div", { className: "space-editor__map-toolbar-header" },
                     React.createElement("div", { className: "space-editor__map-toolbar-title" }, "Coordinates"),
                     React.createElement("div", { className: "space-editor__map-toolbar-button", onClick: () => {
@@ -5156,7 +5120,7 @@ const SensorSpaceCoordinateEditor = (props) => {
                             setIsEditingRegion(false);
                             setSelectedSpace(null);
                         } },
-                        React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: ["fas", "times"] }))),
+                        React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: ['fas', 'times'] }))),
                 React.createElement("div", { className: "space-editor__map-toolbar-body" },
                     React.createElement("table", { className: "space-editor__coordinates-table" },
                         React.createElement("thead", null,
@@ -5168,19 +5132,21 @@ const SensorSpaceCoordinateEditor = (props) => {
                         React.createElement("tbody", null, region.map((coord, index) => (React.createElement("tr", { key: index, className: "space-editor__coordinate-row" },
                             React.createElement("td", null, index + 1),
                             React.createElement("td", null,
-                                React.createElement(components_1.Input, { type: "number", value: coord.x.toString(), onChange: (value) => handleCoordinateChange(index, "x", value), placeholder: "X", className: "space-editor__coordinate-input", inputAttr: {
-                                        disabled: !isEditingRegion,
+                                React.createElement(components_1.Input, { type: "number", value: coord.x.toString(), onChange: (value) => handleCoordinateChange(index, 'x', value), placeholder: "X", className: "space-editor__coordinate-input", inputAttr: {
+                                        disabled: !isEditingRegion
                                     } })),
                             React.createElement("td", null,
-                                React.createElement(components_1.Input, { type: "number", value: coord.y.toString(), onChange: (value) => handleCoordinateChange(index, "y", value), placeholder: "Y", className: "space-editor__coordinate-input", inputAttr: {
-                                        disabled: !isEditingRegion,
+                                React.createElement(components_1.Input, { type: "number", value: coord.y.toString(), onChange: (value) => handleCoordinateChange(index, 'y', value), placeholder: "Y", className: "space-editor__coordinate-input", inputAttr: {
+                                        disabled: !isEditingRegion
                                     } })),
                             region.length > 1 && (React.createElement("td", null,
                                 React.createElement(components_1.IconButton, { type: "delete", size: "small", onClick: () => handleMarkerDelete(index) }))))))))),
-                React.createElement("div", { className: "space-editor__map-toolbar-footer" }, isEditingRegion ? (React.createElement(React.Fragment, null,
-                    !isConfirming && !isSaving && (React.createElement(components_1.Button, { icon: "fas plus", title: "Add", onClick: handleAddCoordinate, className: "space-editor__button" })),
-                    isConfirming ? (React.createElement(components_1.AsyncButton, { icon: "fas check", title: "Confirm", loadingTitle: "Saving...", onClick: saveRegionChanges, className: "space-editor__button space-editor__button--confirm" })) : (React.createElement(components_1.Button, { icon: "fas save", title: "Save", onClick: () => setIsConfirming(true), className: "space-editor__button space-editor__button--confirm" })),
-                    !isSaving && (React.createElement(components_1.Button, { icon: "fas times", title: "Cancel", onClick: handleCancelEdit })))) : (React.createElement(components_1.Button, { icon: "fas pencil", title: "Edit Coordinates", onClick: () => setIsEditingRegion(true), className: "space-editor__button space-editor__button--edit" })))))),
+                React.createElement("div", { className: "space-editor__map-toolbar-footer" }, isEditingRegion
+                    ? React.createElement(React.Fragment, null,
+                        (!isConfirming && !isSaving) && React.createElement(components_1.Button, { icon: "fas plus", title: "Add", onClick: handleAddCoordinate, className: "space-editor__button" }),
+                        isConfirming ? (React.createElement(components_1.AsyncButton, { icon: "fas check", title: "Confirm", loadingTitle: "Saving...", onClick: saveRegionChanges, className: "space-editor__button space-editor__button--confirm" })) : (React.createElement(components_1.Button, { icon: "fas save", title: "Save", onClick: () => setIsConfirming(true), className: "space-editor__button space-editor__button--confirm" })),
+                        !isSaving && (React.createElement(components_1.Button, { icon: "fas times", title: 'Cancel', onClick: handleCancelEdit })))
+                    : React.createElement(components_1.Button, { icon: "fas pencil", title: "Edit Coordinates", onClick: () => setIsEditingRegion(true), className: "space-editor__button space-editor__button--edit" })))),
         isLoading && (React.createElement("div", { className: "space-editor__overlay" },
             React.createElement(components_1.Loading, null))),
         React.createElement(components_1.Modal, { show: showConfigModal, onClose: () => setShowConfigModal(false), title: "Configuration Settings", className: "space-editor__modal space-editor__modal--config" },
@@ -5189,7 +5155,7 @@ const SensorSpaceCoordinateEditor = (props) => {
 (0, uxp_1.registerUI)({
     id: "sensor-space-coordinate-editor",
     component: SensorSpaceCoordinateEditor,
-    showDefaultHeader: false,
+    showDefaultHeader: false
 });
 
 
