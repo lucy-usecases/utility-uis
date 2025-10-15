@@ -1,6 +1,6 @@
 import * as React from "react";
 import { registerUI, IContextProvider } from './uxp';
-import { FormField, Select, Label, Input, MapComponent, IMarker, IconButton, Button, AsyncButton, Loading, useToast, SearchBox, Modal, Checkbox } from "uxp/components";
+import { FormField, Select, Label, Input, MapComponent, IMarker, IconButton, Button, AsyncButton, Loading, useToast, SearchBox, Modal, Checkbox, MultiSelect } from "uxp/components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './styles.scss';
 
@@ -84,7 +84,7 @@ interface SpaceRegion {
     coordinates: IRegion[],
     color?: string,
     icon?: string,
-    type: 'region' | 'marker',
+    type: "region" | "marker" | "unplaced";
     space: ISpace
 }
 
@@ -97,6 +97,7 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
     const [filteredSpaceRegions, setFilteredSpaceRegions] = React.useState<SpaceRegion[]>([]);
     const [selectedSpace, setSelectedSpace] = React.useState<ISpace | null>(null);
     const [spaceTypes, setSpaceTypes] = React.useState<ISpaceType[]>([]);
+    const [selectedTypes, setSelectedTypes] = React.useState<string[]>([]);
     const [selectedType, setSelectedType] = React.useState<string>('');
     const [query, setQuery] = React.useState('');
 
@@ -272,20 +273,31 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
 
     // Filter spaces based on search query and type filter
     React.useEffect(() => {
-        let filtered = allSpaceRegions || [];
+    let filtered = allSpaceRegions || [];
 
-        // Filter by search query
-        if (query.trim()) {
-            filtered = filtered.filter(s => s.space.name.toLowerCase().includes(query.toLowerCase()));
-        }
+    // search
+    if (query.trim()) {
+      const q = query.toLowerCase();
+      filtered = filtered.filter((s) => {
+        const nameHit = s.space.name?.toLowerCase().includes(q);
+        const idHit = s.space.id?.toLowerCase().includes(q);
+        return nameHit || idHit;
+      });
+    }
 
-        // Filter by type if enabled and selected
-        if (config?.enableFilterByType && selectedType) {
-            filtered = filtered.filter(s => s.space.type === selectedType);
-        }
+    // multi type filter
+    if (config?.enableFilterByType) {
+      const activeTypes = selectedTypes.includes("") ? [] : selectedTypes; // "" == All Types
+      if (activeTypes.length) {
+        filtered = filtered.filter((s) => {
+          const t = s.space.type ?? "";
+          return activeTypes.includes(t);
+        });
+      }
+    }
 
-        setFilteredSpaceRegions(filtered || []);
-    }, [allSpaceRegions, query, selectedType, config?.enableFilterByType]);
+    setFilteredSpaceRegions(filtered || []);
+  }, [allSpaceRegions, query, selectedTypes, config?.enableFilterByType]);
 
     // Load coordinates when space changes
     React.useEffect(() => {
@@ -331,48 +343,60 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
         }
     }, [config.floors, props.uxpContext]);
 
-    const loadSpaces = React.useCallback(async () => {
-        try {
-            setIsLoading(true);
-            const { model, action } = config.spaces;
-            const res = await props.uxpContext?.executeAction(
-                model,
-                action,
-                { floorId: selectedFloor },
-                { json: true }
-            );
-            const spacesData: ISpace[] = res?.spaces || [];
+  const loadSpaces = React.useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const { model, action } = config.spaces;
+      const res = await props.uxpContext?.executeAction(
+        model,
+        action,
+        { floorId: selectedFloor },
+        { json: true }
+      );
+      const spacesData: ISpace[] = res?.spaces || [];
 
-            // Extract all space regions and markers for map display
-            const regions = spacesData
-                .filter(space => space.coordinates && space.coordinates.length > 1)
-                .map(space => ({
-                    spaceId: space.id,
-                    coordinates: space.coordinates,
-                    color: space?.color || null,
-                    type: 'region' as const,
-                    space: space,
-                }));
+      // Extract all space regions and markers for map display
+      const regions = spacesData
+        .filter((space) => space.coordinates && space.coordinates.length > 1)
+        .map((space) => ({
+          spaceId: space.id,
+          coordinates: space.coordinates,
+          color: space?.color || null,
+          type: "region" as const,
+          space: space,
+        }));
 
-            const markers = spacesData
-                .filter(space => space.coordinates && space.coordinates.length === 1)
-                .map(space => ({
-                    spaceId: space.id,
-                    coordinates: space.coordinates,
-                    color: space?.color || null,
-                    icon: space?.icon || null,
-                    type: 'marker' as const,
-                    space: space,
-                }));
+      const markers = spacesData
+        .filter((space) => space.coordinates && space.coordinates.length === 1)
+        .map((space) => ({
+          spaceId: space.id,
+          coordinates: space.coordinates || [],
+          color: space?.color || null,
+          icon: space?.icon || null,
+          type: "marker" as const,
+          space: space,
+        }));
 
-            setAllSpaceRegions([...regions, ...markers]);
-        } catch (error) {
-            console.error("Failed to load spaces:", error);
-            setAllSpaceRegions([]);
-        } finally {
-            setIsLoading(false);
-        }
-    }, [config.spaces, selectedFloor, props.uxpContext]);
+      const unplaced = spacesData
+        .filter((space) => !space.coordinates || space.coordinates.length === 0)
+        .map((space) => ({
+          spaceId: space.id,
+          coordinates: [],
+          color: space?.color || null,
+          icon: space?.icon || null,
+          type: "unplaced" as const,
+          space,
+        }));
+
+      setAllSpaceRegions([...regions, ...markers, ...unplaced]);
+      
+    } catch (error) {
+      console.error("Failed to load spaces:", error);
+      setAllSpaceRegions([]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [config.spaces, selectedFloor, props.uxpContext]);
 
     const saveRegionChanges = React.useCallback(async () => {
         if (!selectedSpace || isSaving) return;
@@ -864,14 +888,14 @@ const SensorSpaceCoordinateEditor: React.FunctionComponent<IWidgetProps> = (prop
                             placeholder="Select a floor"
                         />
                         {config.enableFilterByType && spaceTypes.length > 0 && (
-                            <Select
-                                selected={selectedType}
-                                onChange={setSelectedType}
-                                options={[{ id: '', name: 'All Types' }, ...spaceTypes]}
-                                labelField={config?.showIdInsteadOfName ? "id" : "name"}
-                                valueField="id"
-                                placeholder="Filter by type"
-                            />
+                                      <MultiSelect
+                                        selected={selectedTypes} // <-- array
+                                        onChange={(values: string[]) => setSelectedTypes(values)}
+                                        options={[{ id: "", name: "All Types" }, ...spaceTypes]}
+                                        labelField={config?.showIdInsteadOfName ? "id" : "name"}
+                                        valueField="id"
+                                        placeholder="Filter by type"
+                                      />
                         )}
                     </div>
                     <div className="space-editor__settings">
